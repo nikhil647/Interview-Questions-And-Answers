@@ -109,6 +109,13 @@ let numbers = [1, 2, 3, 4];
 numbers.reverse();
 console.log(numbers); // Output: [4, 3, 2, 1]
 ```
+```
+splice
+The splice() method allows you to modify the contents of an array by removing, replacing, or adding elements at a specific index.
+let array = [1, 2, 3, 4, 5];
+array.splice(2, 1, 'a', 'b'); // Replaces 1 element at index 2 with 'a' and 'b'
+console.log(array); // Output: [1, 2, 'a', 'b', 4, 5]
+```
 
 ```
 typeof - type of operand
@@ -528,3 +535,64 @@ b.y.z = 1;
 console.log(a)
 ```
 ***
+**28)Closure**
+```
+Function along with it's lexical scope bundle together that forms a closure
+
+Closures allow a function to access and manipulate variables from an outer function, even after the outer function has finished executing.
+
+function x() {
+  var a = 7;
+  function y() {
+    console.log(a);
+  }
+  return y;
+}
+let p = x();
+p();
+```
+```
+Usage: Currying, memoize, setTimeout
+```
+***
+**29)Event Loop**
+```
+JS is synchronouse and single threaded language can do 1 thing at a time.
+
+Event loop is secret behind JS asynchronouse programming.
+
+JS execute all opearation on a single thread but using a smart data structure it gives illuision of multithreading.
+
+## Event Loop
+- Monitors the Call Stack and Callback Queue.
+- Manages the flow of the program, ensuring asynchronous operations are handled.
+
+## Call Stack
+- A stack data structure that keeps track of function calls in the program.
+- Functions are pushed onto the stack when called and popped off when they complete execution.
+
+### Call Stack Operations
+1. Function Calls (Pushed onto the stack)
+2. Function Execution (Popped off the stack)
+
+## Callback Queue
+- A queue data structure that holds callback functions from asynchronous operations.
+- Callbacks are moved to the Call Stack when the Call Stack is empty and the Event Loop is active.
+
+```
+
+# 30)
+async Attribute:
+When you include the async attribute in a <script> tag, it tells the browser to download the script asynchronously while continuing to parse the HTML document.
+Scripts with async attributes don't block the rendering of the page.
+
+defer Attribute:
+ it tells the browser to download the script asynchronously while continuing to parse the HTML document.
+The script will be executed in order after the HTML parsing is complete.
+right before the DOMContentLoaded event is fired.
+
+Rendering Blocking:
+
+Both async and defer: Scripts with these attributes do not block the rendering of the page.
+
+![alt text](https://i.stack.imgur.com/pI1Wn.png)

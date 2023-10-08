@@ -224,6 +224,24 @@ function binary_search(arr,searchElement,startPos,endPos) {
     }
 }
 ```
+## what is output ?
+```
+for (var i = 1;i<= 5;i++) {
+    setTimeout(function() {
+        console.log(i);
+    }, 100);
+}
+Output --> 6, 6, 6, 6, 6
+```
+```
+for (let i = 1;i<= 5;i++) {
+    setTimeout(function() {
+        console.log(i);
+    }, 100);
+}
+Output --> 1, 2, 3, 4, 5
+```
+***
 
 ## React: Create Stopwatch (sandbox)
 ```
