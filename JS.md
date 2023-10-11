@@ -596,3 +596,6 @@ Rendering Blocking:
 Both async and defer: Scripts with these attributes do not block the rendering of the page.
 
 ![alt text](https://i.stack.imgur.com/pI1Wn.png)
+
+// to do
+Cookies what httpOnly flag, secure flag, sameSiteFlag?
