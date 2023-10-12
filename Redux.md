@@ -1,4 +1,4 @@
-# React Js inteview Preparation  
+# Redux inteview Preparation  
 
 **1) What is Redux ?**
 ```
