@@ -135,8 +135,7 @@ export default ToggleButton;
 ***
 
 ```
-useEffect - It allows you to add state management to functional components in React
-            Side effects can include data fetching, subscriptions, manually changing the DOM, and more. It is a replacement for lifecycle methods like componentDidMount, componentDidUpdate, and componentWillUnmount in class components.
+useEffect -  Side effects can include data fetching, subscriptions, manually changing the DOM, and more. It is a replacement for lifecycle methods like componentDidMount, componentDidUpdate, and componentWillUnmount in class components.
 
 import React, { useState } from 'react';
 const ToggleButton = () => {
