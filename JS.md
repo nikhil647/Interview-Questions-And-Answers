@@ -182,7 +182,10 @@ window and document are both objects in JavaScript.
 ```
 Window Object:
 The window object represents the browser window or a tab in a web browser.
- It is serves as the global object for JavaScript in a web page.
+It is serves as the global object for JavaScript in a web page.
+
+window.location, window.localStorage / window.sessionStorage, window.console
+
 ```
 
 ```
