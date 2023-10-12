@@ -137,17 +137,17 @@ export default ToggleButton;
 ```
 useEffect -  Side effects can include data fetching, subscriptions, manually changing the DOM, and more. It is a replacement for lifecycle methods like componentDidMount, componentDidUpdate, and componentWillUnmount in class components.
 
-import React, { useState } from 'react';
-const ToggleButton = () => {
-  const [isVisible, setIsVisible] = useState(true);
-  return (
-    <div>
-      {isVisible && <button>Click me!</button>}
-      <button onClick={() => setIsVisible(!isVisible)}>Toggle</button>
-    </div>
-  );
-};
-export default ToggleButton;
+import React, { useState, useEffect } from 'react';
+
+function MyComponent() {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetchData().then(result => setData(result));
+    return () => {/* Cleanup code */};
+  }, []);
+  return <div>{data ? <p>Data: {data}</p> : <p>Loading...</p>}</div>;
+}
+export default MyComponent;
 ```
 
 ```
