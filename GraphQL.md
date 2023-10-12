@@ -2,8 +2,7 @@
 
 **1) What is GraphQL ?**
 ```
- GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data.
- It was developed by Facebook in 2012 and later open-sourced.
+ GraphQL is a query language for APIs that was developed by Facebook in 2012 and released as an open-source project in 2015. It was originally created to address limitation and shortcomings of REST
 
   Key characteristics and concepts associated with GraphQL
 
