@@ -243,6 +243,8 @@ Output --> 1, 2, 3, 4, 5
 ```
 ***
 
+Local & Global Scope Question
+
 ## React: Create Stopwatch (sandbox)
 ```
 https://codesandbox.io/s/elastic-hoover-dq6dxx?file=/src/App.js

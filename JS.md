@@ -182,7 +182,10 @@ window and document are both objects in JavaScript.
 ```
 Window Object:
 The window object represents the browser window or a tab in a web browser.
- It is serves as the global object for JavaScript in a web page.
+It is serves as the global object for JavaScript in a web page.
+
+window.location, window.localStorage / window.sessionStorage, window.console
+
 ```
 
 ```
@@ -581,6 +584,33 @@ JS execute all opearation on a single thread but using a smart data structure it
 
 ```
 
+**29) Promise  **
+```
+Promises are used to handle asynchronous operations in a more comfortable manner than using callbacks and events.
+
+Promise states:
+
+Pending: The initial state. The Promise is neither fulfilled nor rejected.
+Fulfilled (Resolved): The operation completed successfully, and the Promise has a resulting value.
+Rejected: The operation failed, and the Promise has a reason for the failure.
+
+let myPromise = new Promise((resolve, reject) => {
+    // Asynchronous operation (e.g., fetching data from an API)
+    let success = true; // Simulating a successful operation
+    if (success) {
+        resolve("Operation completed successfully!"); // Resolve the Promise with a value
+    } else {
+        reject("Operation failed!"); // Reject the Promise with a reason
+    }
+});
+
+myPromise.then((successMessage) => {
+    console.log(successMessage); // Output: Operation completed successfully!
+}).catch((errorMessage) => {
+    console.error(errorMessage); // Output: Operation failed!
+});
+```
+
 # 30)
 async Attribute:
 When you include the async attribute in a <script> tag, it tells the browser to download the script asynchronously while continuing to parse the HTML document.
@@ -596,3 +626,6 @@ Rendering Blocking:
 Both async and defer: Scripts with these attributes do not block the rendering of the page.
 
 ![alt text](https://i.stack.imgur.com/pI1Wn.png)
+
+// to do
+Cookies what httpOnly flag, secure flag, sameSiteFlag?
