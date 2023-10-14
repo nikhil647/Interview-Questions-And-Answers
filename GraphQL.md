@@ -2,8 +2,7 @@
 
 **1) What is GraphQL ?**
 ```
- GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data.
- It was developed by Facebook in 2012 and later open-sourced.
+ GraphQL is a query language for APIs that was developed by Facebook in 2012 and released as an open-source project in 2015. It was originally created to address limitation and shortcomings of REST
 
   Key characteristics and concepts associated with GraphQL
 
@@ -14,8 +13,6 @@
 
   Hierarchical Structure: GraphQL queries are hierarchical in nature, mirroring the structure of the data you want to retrieve.This makes it easy to understand and work with.
 
-  Strongly Typed: GraphQL APIs are strongly typed, meaning they define a schema that specifies the types of data that can be queried.
-
   Real-time Data: GraphQL can be used for real-time applications as it supports subscriptions
 
   Batched Requests: Clients can send multiple queries in a single request to avoid over-fetching or making multiple round trips to the server.
@@ -25,6 +22,8 @@
   Validation and Type Checking: GraphQL queries are validated and type-checked by the server before execution, helping to prevent runtime errors and ensuring data consistency
 
   Versioning: GraphQL can eliminate the need for API versioning, as clients can request only the fields they are interested in, and the schema can evolve without breaking existing clients.
+
+  Strongly Typed: GraphQL APIs are strongly typed, meaning they define a schema that specifies the types of data that can be queried.
 
 GraphQL has gained popularity in recent years because of its flexibility and efficiency, especially in scenarios where clients have diverse data requirements
 
