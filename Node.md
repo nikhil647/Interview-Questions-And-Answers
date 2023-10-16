@@ -228,7 +228,19 @@ console.log(myModule.greet('Alice'));
 
 **What is the event loop in Node.js?**
 ```
+for managing the execution of asynchronous code and I/O operations in a non-blocking, efficient, and single-threaded manner
 
+ This allows Node.js to handle a large number of concurrent connections and perform I/O-bound tasks without creating a new thread for each operation.
+
+The Node.js event loop is customized for handling I/O operations, such as reading files, making network requests, and handling concurrent connection.
+
+Node.js's event loop includes additional phases like "Timers," "Pending Callbacks," "Poll," "Check," and "Close Callbacks" to handle various asynchronous operations efficiently.
+
+Timers: Execute callbacks scheduled with setTimeout() or setInterval().
+Pending Callbacks: Execute I/O callbacks that were deferred in the previous cycle.
+Poll: Retrieve new I/O events and execute their callbacks. This is where most of the time is spent.
+Check: Execute setImmediate() callbacks.
+Close Callbacks: Execute close event callbacks, e.g., when a socket or a file is closed.
 ```
 ***
 **How does Node.js handle I/O operations ?**
