@@ -140,13 +140,73 @@ myEmitter.emit('customEvent', 'example argument');
 ```
 ***
 
+**How do you use callbacks?**
+```
+functions that are passed as arguments to other functions and are executed at a later time 
+```
+***
 
--     
-    How do you create and use custom events?
--   How do you use callbacks?
--   What are promises?
--   How do you use promises?
--   What are streams?
+** fundamental feature in JavaScript for handling asynchronous operations.**
+```
+ Design pattern used to manage asynchronous tasks and handle the results of those tasks.
+Promises have three states:
+Pending
+Fulfilled 
+Rejected
+
+```
+***
+**What are streams?**
+```
+In Node.js, streams are a key feature that allows you to work with data in a sequential and efficient manner, especially when dealing with large datasets or performing I/O operations
+```
+***
+
+**What are streams?**
+```
+In Node.js, streams are a key feature that allows you to work with data in a sequential and efficient manner, especially when dealing with large datasets or performing I/O operations.
+Streams in Node.js are an implementation of the stream interface, which is an abstract interface for working with data sequences in a variety of ways.
+
+several types
+Readable, Writable, Duplex, and Transform.
+
+Readable Streams: Readable streams are used for reading data from a source
+const fs = require('fs');
+const readableStream = fs.createReadStream('example.txt');
+readableStream.on('data', (chunk) => {
+  console.log(chunk.toString());
+});
+
+Writable Stream:  Writable streams are used for writing data to a destination. 
+You can write data chunk by chunk to a writable stream. 
+Common destinations for writable streams include files, HTTP responses, or network sockets. 
+
+const fs = require('fs');
+const writableStream = fs.createWriteStream('output.txt');
+writableStream.write('Hello, world!\n');
+writableStream.end('Stream ended.');
+
+Duplex Streams:
+Duplex streams are bidirectional, allowing both reading and writing. 
+
+Transform Streams:
+Transform streams are a type of duplex stream that allows you to modify or transform data as it flows from the source to the destination. 
+
+Streams in Node.js are designed to be memory-efficient because they process data in small chunks (buffers) rather than loading the entire data set into memory.
+You can pipe streams together to create powerful data processing pipelines
+
+const fs = require('fs');
+
+const readStream = fs.createReadStream('input.txt');
+const transformStream = myTransformFunction();
+const writeStream = fs.createWriteStream('output.txt');
+
+readStream.pipe(transformStream).pipe(writeStream);
+
+```
+***
+
+
 -   How do you use streams?
 -   What are modules?
 -   How do you use modules?
