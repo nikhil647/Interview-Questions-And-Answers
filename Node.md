@@ -202,19 +202,33 @@ const transformStream = myTransformFunction();
 const writeStream = fs.createWriteStream('output.txt');
 
 readStream.pipe(transformStream).pipe(writeStream);
+```
+***
+
+**What are modules?**
+```
+Blocks of encapsulated code that talk to other programs or apps based on their related functionality.
+
+Built-in modules.
+Local modules.
+Third-party modules.
+
+Local Module -->
+const greet = name => {
+  return `Hello, ${name}!`;
+};
+module.exports = { greet };
+
+
+const myModule = require('./myModule');
+console.log(myModule.greet('Alice'));
 
 ```
 ***
 
-
--   How do you use streams?
--   What are modules?
--   How do you use modules?
--   What are the different types of modules?
--   How do you create your own modules?
-
 **What is the event loop in Node.js?**
 ```
+
 ```
 ***
 **How does Node.js handle I/O operations ?**
