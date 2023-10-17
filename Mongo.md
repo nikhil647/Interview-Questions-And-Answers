@@ -16,6 +16,20 @@ MongoDB basically uses JavaScript objects in place of procedures.
 MongoDB support primary and secondary index on any fields.
 ```
 ***
+**What is the maximum document size in MongoDB?**
+```
+16 MB
+```
+***
+
+**What is the maximum Collection size in MongoDB?**
+```
+Practically speaking, the maximum collection size is determined by the available storage space on the MongoDB server and the limitations of the storage system.
+If a collection's size exceeds the available storage space or the BSON document size limit, you would need to consider strategies such as sharding or archiving to manage your data effectively.
+```
+***
+
+
 **What is the Mongo Shell?**
 ```
 It is a JavaScript shell that allows interaction with a MongoDB instance from the command line.
