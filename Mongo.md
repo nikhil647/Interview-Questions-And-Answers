@@ -141,6 +141,33 @@ Sharding allows MongoDB to distribute data evenly across multiple servers.
 ***
 **types of index in mongo db with example**
 ```
+1. Single Field Index: A single field index is the most basic type of index. It indexes a single field of a document.
+db.collection.createIndex({ fieldName: 1 });
+
+2. Compound Index:
+A compound index indexes multiple fields of a document together.
+db.collection.createIndex({ field1: 1, field2: -1 });
+
+3. Multikey Index:
+A multikey index is used to index arrays.
+db.collection.createIndex({ tags: 1 });
+
+4 Text Index
+A text index is used for text search operations.
+db.collection.createIndex({ content: "text" });
+
+5 Geospatial Index
+A geospatial index is used for geospatial queries.
+
+6 Hashed Index
+A hashed index is useful for equality queries but not range queries.
+
+7 Wildcard Index:
+A wildcard index is used to index all fields in a document.
+
+8) Time-to-Live (TTL) Index:
+A TTL index allows documents to expire after a specified amount of time, which can be useful for data that has a limited lifespan, such as session data or temporary cache
+
 ```
 ***
 
