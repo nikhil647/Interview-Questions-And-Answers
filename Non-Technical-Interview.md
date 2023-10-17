@@ -65,7 +65,9 @@ one of them was when the team encountered technical challenges, I facilitated di
 and other was I consistently demonstrated a strong work ethic by meeting deadlines and going the extra mile when necessary. This set a standard for professionalism and dedication that other team members followed.
 ```
 ***
-**This Section is How Do You Work**
+
+# This Section is How Do You Work
+
 **How do you preserve the information you obtain (Eg. Requirement from client, expectation from your manager?**
 ```
 As far as protecting the information is concerned, I do not share the information with any one. I always keep my system password protected. For storing the information, I store all the project related information in separate folders on secure servers. I also keep my personal notes in my diary. Additionally, we maintain the updates about progress and timelines on tools like jira. That's how I preserve the information I obtain.
