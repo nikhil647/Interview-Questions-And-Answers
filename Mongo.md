@@ -9,7 +9,7 @@ MongoDB is a NoSQL database that uses a document-oriented data model. It's popul
 ****
 **What is a BSON in MongoDB**
 ```
-BSON (Binary JSON) is a binary serialization format used by MongoDB to store documents in a binary-encoded format. It supports data types not typically supported by JSON, making it suitable for efficient storage and retrieval of data.
+BSON (Binary JSON) is a binary serialization format used by MongoDB to store documents in a binary-encoded format. It supports data types not typically supported by JSON (Binary data, ObjectId, Regular Expression, JavaScript Code), making it suitable for efficient storage and retrieval of data.
 ```
 
 ***
