@@ -79,6 +79,21 @@ When designing your MongoDB schema, consider factors like query patterns, write 
 ```
 ***
 
+** Types of Relationship with example and how to implement ? **
+```
+One to One: (Patient -  Disease), (Person -  Passports)
+    Embed (Most of the time) - Refrence (also possible Person - Car).
+
+One to Many: (Question - Answers), (City - Citizen) 
+            Embed (if nested douments are less and can not grow in huge numbers)
+            Refrence
+
+Many to Many: (Customer - Product) 
+         Create another collenction to represent relation (create Order table in this case).
+         Embed document to 1 of the entity.  
+```
+***
+
 **Explain the term "replica set" in MongoDB.**
 ```
 A replica set in MongoDB is a group of MongoDB servers that maintain the same data set. It provides high availability and fault tolerance by ensuring that if one server fails, data can still be retrieved from another server within the set
@@ -104,3 +119,9 @@ Sharding is a technique used to distribute data across multiple servers or clust
 
 Sharding allows MongoDB to distribute data evenly across multiple servers.
 ```
+***
+
+**How can you ensure data consistency when using denormalized data in MongoDB?**
+```
+```
+***
