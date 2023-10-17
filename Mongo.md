@@ -139,3 +139,12 @@ Sharding allows MongoDB to distribute data evenly across multiple servers.
 ```
 ```
 ***
+**types of index in mongo db with example**
+```
+```
+***
+
+**diffrence between Partial Filters index and compound index?**
+```
+```
+***
