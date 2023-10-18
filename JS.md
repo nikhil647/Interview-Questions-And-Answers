@@ -425,7 +425,7 @@ console.log(curriedAdd); // Output: 6
 ***
 **24)Promise.all() and Promise.allSettled()**
 ```
-are both methods in JavaScript used with Promises, but they behave differently in how they handle the resolution of multiple promises.
+are both methods in JavaScript used with Promises, but they behave differently in how they handle the resolving  of multiple promises.
 
 Promise.all() -->
 Promise.all() is a method that takes an array of promises and returns a new promise that resolves to an array of the results when all of the input promises are resolved. If any of the input promises are rejected, the Promise.all() method immediately rejects with the reason of the first rejected promise.
@@ -586,6 +586,7 @@ JS execute all opearation on a single thread but using a smart data structure it
 
 **29) Promise  **
 ```
+Promise is an object representing the eventual completion (or failure) of an asynchronous operation.
 Promises are used to handle asynchronous operations in a more comfortable manner than using callbacks and events.
 
 Promise states:
