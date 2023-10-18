@@ -173,5 +173,17 @@ A TTL index allows documents to expire after a specified amount of time, which c
 
 **diffrence between Partial Filters index and compound index?**
 ```
+Partial Index:
+A partial index is an index that only includes documents in the index that meet a specified filter expression. It allows you to create an index on a subset of documents in a collection, based on a specific condition. Partial indexes can improve query performance and reduce the index size by excluding unnecessary documents from the index.
+
+db.collection.createIndex(
+  { fieldName: 1 },
+  { partialFilterExpression: { status: "active" } }
+);
+
+Compound Index:
+A compound index is an index that includes multiple fields. It allows you to create an index that covers queries involving multiple fields in the filter criteria. Compound indexes can be beneficial when your queries include more than one field in the query conditions.
+
+db.collection.createIndex({ field1: 1, field2: -1 });
 ```
 ***
