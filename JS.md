@@ -166,7 +166,7 @@ function getCookie(name) {
 ***
 ***6)== && === Operator***
 ```
-== only Checks the value
+== only Checks the value and also does type coercion before comparing
 === Chekcs the type and value
 ```
 ***
