@@ -265,9 +265,9 @@ Type coercion is the process of converting value from one type to another.
   "foo" + + "bar"       // Result: "fooNaN" (The first + is a unary plus, attempting to convert "bar" to a number, which results in NaN)
   'true' == true        // Result: false ('true' is a string, true is a boolean, different types are not equal)
   false == 'false'      // Result: false (false is a boolean, 'false' is a string, different types are not equal)
-  null == ''            // null == ''
+  null == ''            // Result: false, null == '' 
   !!"false" == !!"true" // Result: true (Both !! convert strings to true, so true == true)
-  ['x'] == 'x'          //  == operator converts non primitive to primitive by applying toString methods on it.
+  ['x'] == 'x'          // Result: true,  == operator converts non primitive to primitive by applying toString methods on it.
   [] + null + 1         // Result: "null1" (Empty array is converted to an empty string, then null is converted to "null", and finally 1 is concatenated as a string)
   [1,2,3] == [1,2,3]    // Result: false (Arrays are objects, and objects are compared by reference, these two arrays are different objects)
   {}+[]+{}+[1]          // Result: "0[object Object]1" (Explanation: {} is interpreted as an empty code block, then +[] evaluates to 0. +{} evaluates to [object Object]. [1] is converted to the string "1". The concatenation works from left to right)
