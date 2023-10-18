@@ -98,7 +98,26 @@ With Js Inbuilt Methods.
 const str = 'radar';
 console.log(str.split('').reverse().join('') === str);
 ```
-
+## Reverse the string (Recursion)
+Normal array method
+```
+const string = 'AnyString'
+const revString = string.split('').reverse().join('')
+```
+Recursion Method
+```
+function reverse(str){
+    if(str.length === 0 || str.length === 1 ) {
+        return str
+    }
+    
+    const lastChar = str.slice(-1)
+    const remainingStr = str.slice(0,-1)
+    return lastChar + reverse(remainingStr)
+}
+const revStr = reverse(string) // gnirtSynA
+```
+***
 ## factorial of a given number.
 With Recursion
 ```
