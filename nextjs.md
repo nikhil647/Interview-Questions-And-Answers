@@ -145,16 +145,59 @@ The _app.js file is used to wrap the entire application and provides global styl
 ```
 ***
 
-**19) What is the purpose of the _app.js file in Next.js?**
+**19)How do you implement authentication in a Next.js application?**
 ```
-
-
+Next.js provides several options for implementing authentication, including JSON Web Tokens (JWT), OAuth, and third-party libraries like NextAuth.js. You can also use server-side rendering and session management to implement server-side authentication.
 ```
 ***
 
 **20) What is the purpose of the _app.js file in Next.js?**
 ```
 The _app.js file is used to wrap the entire application and provides global styles, layout components, and context providers. This file is called on every page request and can be used to add common functionality to your application.
+```
+***
+
+**20) What is the purpose of the _app.js file in Next.js?**
+```
+The _app.js file is used to wrap the entire application and provides global styles, layout components, and context providers. This file is called on every page request and can be used to add common functionality to your application.
+```
+***
+
+
+**21)Next.js application involves managing both client-side and server-side errors.**
+```
+Next.js application involves managing both client-side and server-side errors.
+Client-Side Errors: Form Validation & Error Boundaries
+Server-Side Errors: API Route Error Handling, Error Pages: Define custom error pages in Next.js to provide a consistent user experience for various HTTP error statuses
+```
+***
+
+
+**22How do you implement internationalization (i18n) in a Next.js application?**
+```
+Next.js provides built-in support for i18n through the next-i18next library.```
+***
+
+**How do you implement serverless functions in a Next.js application?**
+```
+You can create a serverless function by creating a file in the pages/api directory with the desired endpoint name and implementing the server-side logic.
+```
+***
+
+**How do you implement serverless functions in a Next.js application?**
+```
+You can create a serverless function by creating a file in the pages/api directory with the desired endpoint name and implementing the server-side logic.
+```
+***
+
+**How do you implement testing and continuous integration in a Next.js application?**
+```
+Select a testing framework to write and run tests for your Next.js application. Some popular choices include Jest, Mocha, and Ava. Jest is a common choice for Next.js 
+Write tests for your application. You can create test files for individual components, pages, or APIs. Next.js automatically supports testing using Jest for your project.
+
+You'll need to create a configuration file for your chosen CI platform.
+we need to create YAML file and conect to CI platform
+
 ```
 ***
 
