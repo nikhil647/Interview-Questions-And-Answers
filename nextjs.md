@@ -59,3 +59,108 @@ SSR can be more resource-intensive because it involves running code on the serve
 ```
 ***
 
+**7) What is static site generation, and how does it differ from server-side rendering?**
+```
+Static Site Generation: In SSG, the web pages are pre-rendered at build time. This means that the content is generated and HTML files are created before they are served to the client. The generated HTML files are static and do not change for different users.
+
+for eg. we can have pages like about us, contact us , privacy policy as SSG.
+
+Server-Side Rendering (SSR):  In SSR, web pages are generated dynamically on the server in response to a user's request.
+SSR can be more resource-intensive because it involves running code on the server for each user request
+
+```
+***
+
+
+**8) How do you configure routing in a Next.js application?**
+```
+write file name under pages dir and that's it route created eg.to create /about route create pages/about.js.
+```
+***
+
+** 9) What is the purpose of the getStaticProps function in Next.js?**
+```
+The getStaticProps function is used to fetch data at build time for static site generation. This function is called during the build process and can be used to fetch data from an external API or database.
+```
+
+**10) How do you pass data between pages in a Next.js application?**
+```
+query parameters, the Router API, and state management libraries like Redux or React Context.
+```
+***
+
+**11) How do you deploy a Next.js application? **
+```
+Next.js applications can be deployed to a variety of platforms, including cloud services like AWS, Google Cloud Platform, and Microsoft Azure, as well as platforms like Vercel and Netlify. 
+```
+***
+
+Difficulty Level: Intermediate
+
+**12) What is serverless architecture, and how does it relate to Next.js? **
+```
+Serverless architecture is a cloud computing model where the cloud provider manages the infrastructure and automatically scales the resources based on demand.
+Next.js can be used with serverless architecture by deploying the application to a serverless platform like AWS Lambda or Google Cloud Functions.
+```
+***
+
+**13) What is the purpose of the getStaticPaths function in Next.js**
+```
+It allows you to specify dynamic routes for your pages during Static Site Generation (SSG).
+It's commonly used with "getStaticProps" to fetch data for those dynamic routes.
+```
+***
+
+**14) What is the purpose of the getStaticPaths function in Next.js**
+```
+It allows you to specify dynamic routes for your pages during Static Site Generation (SSG).
+It's commonly used with "getStaticProps" to fetch data for those dynamic routes.
+```
+***
+
+**15)How do you configure dynamic routes in a Next.js application?**
+```
+Next.js uses square brackets [] to denote dynamic segments in a URL path.
+For example, to create a dynamic route for blog posts with the URL path /blog/[slug]. you would create a file called [slug].js
+```
+***
+
+
+**16) How does Next.js handle code splitting, and why is it important?**
+```
+Next.js automatically splits your code into smaller chunks that can be loaded on demand when the user navigates to a new page. This helps to reduce the initial page load time and improve the performance of your application.
+```
+***
+
+
+**17) How does Next.js handle code splitting, and why is it important?**
+```
+Next.js automatically splits your code into smaller chunks that can be loaded on demand when the user navigates to a new page. This helps to reduce the initial page load time and improve the performance of your application.
+```
+***
+
+**18) What is the purpose of the _app.js file in Next.js?**
+```
+The _app.js file is used to wrap the entire application and provides global styles, layout components, and context providers. This file is called on every page request and can be used to add common functionality to your application.
+```
+***
+
+**19) What is the purpose of the _app.js file in Next.js?**
+```
+
+
+```
+***
+
+**20) What is the purpose of the _app.js file in Next.js?**
+```
+The _app.js file is used to wrap the entire application and provides global styles, layout components, and context providers. This file is called on every page request and can be used to add common functionality to your application.
+```
+***
+
+
+
+
+
+
+
