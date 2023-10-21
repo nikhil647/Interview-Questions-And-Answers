@@ -202,6 +202,47 @@ we need to create YAML file and conect to CI platform
 ```
 ***
 
+**26)New Next 13 Features**
+```
+
+App Router built on top of React Server Components with support for layouts, nested routing, loading states, error handling, and more.
+
+Name Should be page.js to render the page. (index.js)
+layout.tsx - UI that serves entire app. good for writing things like global navbar. we can have layouts in subdir too when we have layout in subdir it will be only applicable to that route.
+
+slug is same as page router.
+Next.js 13 now gives you the ability to control component states very easily and at a very granular level.
+[alt text](https://miro.medium.com/v2/resize:fit:1400/1*Kc3K73j16s1teZUt60sD4w.jpeg)
+
+by default every component is server component (pre-genarated on server) and for client we need to specify 'use client'
+
+
+getServerSideProps for real-time data and getStaticProps for cached data.
+Next.js 13 has removed these functions and replaced them with the fetching formats listed below:
+
+Fetch with Cached Data
+
+This request would be cached until manually invalidated. 
+//Similar to 'getStaticProps'
+fetch(API_URL, { cache: 'force-cache' })
+
+Fetch with Dynamic Data
+// This request should be refetched on every request.
+// Similar to 'getServerSideProps'
+fetch(API_URL, { cache: 'no-store' })
+
+
+Fetch with Revalidating Data
+We can achieve a mix between Dynamic Data and Cached Data if we use the revalidate flag:
+// This request should be cached with a lifetime of 10 seconds.
+// Similar to 'getStaticProps' with the 'revalidate' option.
+fetch(API_URL, { next: { revalidate: 10 } });
+
+
+Server Action ?
+
+```
+***
 
 
 
