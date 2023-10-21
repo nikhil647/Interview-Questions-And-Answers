@@ -173,24 +173,25 @@ Server-Side Errors: API Route Error Handling, Error Pages: Define custom error p
 ***
 
 
-**22How do you implement internationalization (i18n) in a Next.js application?**
+**22) How do you implement internationalization (i18n) in a Next.js application?**
 ```
-Next.js provides built-in support for i18n through the next-i18next library.```
+Next.js provides built-in support for i18n through the next-i18next library.
+```
 ***
 
-**How do you implement serverless functions in a Next.js application?**
+**23) How do you implement serverless functions in a Next.js application?**
 ```
 You can create a serverless function by creating a file in the pages/api directory with the desired endpoint name and implementing the server-side logic.
 ```
 ***
 
-**How do you implement serverless functions in a Next.js application?**
+**24) How do you implement serverless functions in a Next.js application?**
 ```
 You can create a serverless function by creating a file in the pages/api directory with the desired endpoint name and implementing the server-side logic.
 ```
 ***
 
-**How do you implement testing and continuous integration in a Next.js application?**
+**25) How do you implement testing and continuous integration in a Next.js application?**
 ```
 Select a testing framework to write and run tests for your Next.js application. Some popular choices include Jest, Mocha, and Ava. Jest is a common choice for Next.js 
 Write tests for your application. You can create test files for individual components, pages, or APIs. Next.js automatically supports testing using Jest for your project.
