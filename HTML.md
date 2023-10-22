@@ -29,7 +29,7 @@ HTML tags are used to create HTML documents and render their properties
 ```
 ***
 
-**5) Does a <!DOCTYPE html> tag is a HTML tag?**
+**5) Does a <! DOCTYPE html> tag is a HTML tag?**
 ```
 No, the <!DOCTYPE html> declaration is not an HTML tag. There are many type of HTML e.g. HTML 4.01 Strict, HTML 4.01 Transitional, HTML 4.01 Frameset, XHTML 1.0 Strict, XHTML 1.0 Transitional, XHTML 1.0 Frameset, XHTML 1.1 etc. So, <!DOCTYPE html> is used to instruct the web browser about the HTML page
 ```
