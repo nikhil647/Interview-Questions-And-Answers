@@ -10,7 +10,8 @@ It provides a set of tags and attributes that are used to structure content on t
 
 **2) What is HTML tags?**
 ```
-HTML tags are used to create HTML documents and render their properties. Each HTML tags have different properties.
+HTML tags are used to create HTML documents and render their properties
+ Each HTML tags have different properties.
 ```
 ***
 
