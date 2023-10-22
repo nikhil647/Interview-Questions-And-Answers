@@ -2,11 +2,13 @@
 
 **1) What is HTML?**
 ```
-HTML, which stands for HyperText Markup Language, is the standard language used to create and design websites and webpages. It provides a set of tags and attributes that are used to structure content on the web.
+HTML, which stands for HyperText Markup Language,
+is the standard language used to create and design websites and webpages.
+It provides a set of tags and attributes that are used to structure content on the web.
 ```
 ***
 
-**2) What is HTML?**
+**2) What is HTML tags?**
 ```
 HTML tags are used to create HTML documents and render their properties. Each HTML tags have different properties.
 ```
