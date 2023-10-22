@@ -40,7 +40,7 @@ SVG stands for Scalable Vector Graphics. It is a standard XML-based file format 
 ```
 ***
 
-**7) What is the difference between <div> and <span> elements?**
+**7) What is the difference between < div> and < span> elements?**
 ```
 <div> is a block-level element and <span> is an inline element used for grouping content.
 ```
