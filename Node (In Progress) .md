@@ -245,10 +245,26 @@ Close Callbacks: Execute close event callbacks, e.g., when a socket or a file is
 ***
 **How does Node.js handle I/O operations ?**
 ```
+Node.js handles I/O operations using an event-driven, non-blocking I/O model. This means that Node.js does not block the main thread while waiting for I/O operations to complete. Instead, it uses an event loop to monitor I/O operations and execute callbacks when they are complete.
+
+When a Node.js application performs an I/O operation, the event loop schedules a callback function to be executed when the operation is complete. The callback function is typically defined by the developer and contains the code that should be executed when the I/O operation is complete.
 ```
 ***
 
 **How does Node.js manage concurrency?**
 ```
+Node.js manages concurrency using an event loop. The event loop is a single thread that is responsible for executing all JavaScript code in Node.js, as well as monitoring all I/O operations and executing callbacks when they are complete.
 ```
 ***
+
+**What is clustering? in node js**
+```
+Clustering in Node.js is a technique that allows you to run multiple instances of your application on the same machine. This can be useful for improving performance and scalability, as well as for providing redundancy.
+
+To create a clustered Node.js application, you use the cluster module. The cluster module provides a number of APIs for managing and communicating with worker processes.
+
+When you start a clustered Node.js application, the parent process creates a number of child processes, called worker processes. The worker processes are responsible for handling requests from clients.
+
+The parent process is responsible for managing the worker processes, such as starting and stopping them, and distributing requests to them.
+```
+
