@@ -158,7 +158,7 @@ Rejected
 ***
 **What are streams?**
 ```
-In Node.js, streams are a key feature that allows you to work with data in a sequential and efficient manner, especially when dealing with large datasets or performing I/O operations
+It is way to handle data efficiently. They allow you to read and write data in chunks, instead of having to load the entire dataset into memory at once. This is especially useful for working with large datasets, or datasets that are constantly being updated.
 ```
 ***
 
