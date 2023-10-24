@@ -74,6 +74,17 @@ If your application allows file uploads, validate file types, restrict file size
 ```
 ***
 
+**What is the use of middleware in Node.js**
+```
+A middleware is a simple function that has the ability to handle incoming requests and outbound response objects. Middleware is used primarily for the following tasks:
+
+Execution of code (of any type)
+Updating request and response objects
+Completion of request-response iterations
+Calling the next middleware
+```
+***
+
 **How can I optimize Node.js applications?**
 ```
 Use Latest Node.js Version
