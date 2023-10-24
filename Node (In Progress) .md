@@ -278,4 +278,15 @@ When you start a clustered Node.js application, the parent process creates a num
 
 The parent process is responsible for managing the worker processes, such as starting and stopping them, and distributing requests to them.
 ```
+***
 
+**PM2 in node js**
+```
+PM2 is a daemon process manager that will help you manage and keep your application online. It can be used to start, stop, monitor, and restart your Node.js applications. PM2 also provides a number of other features, such as:
+
+Load balancing: PM2 can distribute traffic across multiple instances of your application, which can improve performance and scalability.
+Clustering: PM2 can start multiple instances of your application on the same machine, which can also improve performance and scalability.
+Logging: PM2 can collect and aggregate logs from your application, which can help you to troubleshoot and debug problems.
+Monitoring: PM2 can monitor your application's performance and health, and alert you to any problems.
+```
+***
