@@ -61,7 +61,48 @@ In MongoDB, a document is a single unit of data and is roughly equivalent to a r
 In MongoDB, the primary key is known as the "_id" field. It's unique for each document within a collection.
 ```
 ***
-//CRUD Question section missing.
+
+**mongo db crud**
+```
+Create (Insert) Operations: How do you insert a document into a MongoDB collection?
+
+The insertOne() method is used to insert a single document into a MongoDB collection.
+The insertMany() method is used to insert multiple documents into a MongoDB collection.
+
+retrieve all documents.
+find() - to retrieve documents from a collection.
+findOne() - It returns the first document that satisfies the query condition
+
+Inside condition we can add Comparison Operators Logical Operator, Array Filtering, Regular Expressions , Projection.
+
+Update Operations:
+update() , updateOne() and updateMany()
+update() --> operation to update an existing document 
+updateOne() & updateMany() ---> update a field in a MongoDB document
+replaceOne() ---> The replaceOne() method is used to replace the first document that matches
+                  a specified filter criteria with a new document.
+                  The entire document is replaced by the new document you provide.
+
+eg: db.users.updateOne({ "_id": 1 }, { $set: { "age": 31 } });
+db.collection.replaceOne(
+    { "field": "value" }, // Filter: Identify the document to replace
+    { "newField": "updatedValue", "anotherField": "anotherValue" } // Replacement Document
+)
+
+ Remove a document from a MongoDB collection:
+ deleteOne() and deleteMany() for deleting documents.
+db.collectionName.deleteOne({ "field": "value" })
+
+drop a collection in MongoDB:
+db.users.drop()
+
+drop() method is used to remove an entire collection, including all of its documents and indexes
+
+
+
+```
+***
+
 ***
 **In MongoDB, how do you represent relationships between data?**
 ```
@@ -273,4 +314,5 @@ try {
     console.error('Transaction aborted due to an error:', error);
   }
 ```
+***
 
