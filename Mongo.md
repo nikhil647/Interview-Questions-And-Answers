@@ -230,3 +230,47 @@ Field-Level Encryption in MongoDB is a security feature that allows you to encry
 MongoDB provides auditing capabilities that allow you to log various types of events, such as authentication attempts, authorization successes and failures, and other important actions. Enable MongoDB auditing by configuring the auditLog settings in the MongoDB configuration file.
 ```
 ***
+
+**how do you handle data leaks in mongo db?**
+```
+1) Prevention:
+
+Access Control: Implement strong authentication and authorization mechanisms. Use role-based access control to ensure users have the minimum necessary privileges.
+Encryption: Enable encryption at rest and in transit. This ensures that even if unauthorized users gain access to the data files, the data remains encrypted.
+Secure Configuration: Follow MongoDB's security best practices. This includes binding MongoDB to localhost, enabling authentication, disabling unnecessary network protocols, and more.
+Regular Auditing: Enable MongoDB’s auditing features to log all the operations and access attempts. Regularly review these logs for any suspicious activities.
+
+2. Proactive Monitoring:
+Set Up Alerts: Establish alerts for unusual activities such as multiple failed login attempts, unexpected spikes in traffic, or unauthorized access attempts.
+Real-Time Monitoring: Utilize monitoring tools to keep an eye on the system's performance and security in real time. This can help you detect any abnormal behavior promptly.
+```
+***
+
+**what is transaction in mongo db with syntax ?**
+```
+ Transactions in MongoDB allow you to perform multiple operations on multiple documents, and these operations either complete entirely or have no effect at all.  (kind of automacity for multiple opeartions)
+
+const session = client.startSession();
+session.startTransaction();
+
+try {
+
+    const database = client.db('yourDatabaseName');
+    const collection = database.collection('yourCollectionName');
+
+    // Perform operations within the transaction
+    await collection.insertOne({ key: 'value' }, { session });
+    await collection.updateOne({ key: 'value' }, { $set: { key: 'updatedValue' } }, { session });
+    await collection.deleteOne({ key: 'value' }, { session });
+
+     await session.commitTransaction();
+    session.endSession();
+   }
+} catch (error) {
+    // Abort the transaction if an error occurs
+    await session.abortTransaction();
+    session.endSession();
+    console.error('Transaction aborted due to an error:', error);
+  }
+```
+
