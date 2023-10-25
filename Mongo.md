@@ -187,3 +187,46 @@ A compound index is an index that includes multiple fields. It allows you to cre
 db.collection.createIndex({ field1: 1, field2: -1 });
 ```
 ***
+
+**What is Authentication and Authorization in MongoDB?**
+```
+Authentication - Identify valid users of db.
+Authorization - Identify what user can do in db.
+```
+***
+
+
+**Explain Role-Based Access Control in MongoDB ?**
+```
+Role-Based Access Control (RBAC) in MongoDB is a security feature that allows you to control a user's access to specific resources and actions within the MongoDB database. 
+ the principle of least privilege, where users are granted only the minimum level of access required to perform their duties, reducing the potential impact of security breaches.
+
+MongoDB provides both built-in roles (read, readWrite, dbAdmin, and userAdmin) and user-defined roles.
+
+Examples:
+Admin Role - only dbAdmin, and userAdmin - no need to read records and writed data.
+Developer Role - read, readWrite - no need to manage other user and db activity
+Data Scientist - read - only collecting data no need to create any new rec.
+```
+***
+
+**Explain SSL Encryption in MongoDB.**
+```
+SSL (Secure Sockets Layer) encryption in MongoDB is a method of securing the data transmitted between MongoDB clients and servers. It ensures that the data exchanged between the client and the server is encrypted, making it difficult for unauthorized parties to intercept and understand the information being transmitted.
+
+SSL certificates are used to establish the identity of MongoDB servers and clients during the SSL handshake process.
+configuration needs to be added which is done by DBA.
+```
+***
+
+**What is Field-Level Encryption in MongoDB?**
+```
+Field-Level Encryption in MongoDB is a security feature that allows you to encrypt specific fields within documents in a MongoDB collection.
+```
+***
+
+**How Do You Monitor and Audit MongoDB for Security?**
+```
+MongoDB provides auditing capabilities that allow you to log various types of events, such as authentication attempts, authorization successes and failures, and other important actions. Enable MongoDB auditing by configuring the auditLog settings in the MongoDB configuration file.
+```
+***
