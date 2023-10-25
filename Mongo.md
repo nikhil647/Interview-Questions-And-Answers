@@ -1,13 +1,14 @@
 # Mongo Db (Mongoose) Interview Questions
 
   
-**What is MongoDB, and why is it popular?**
+**1)What is MongoDB, and why is it popular?**
 
 ```
 MongoDB is a NoSQL database that uses a document-oriented data model. It's popular because it's flexible, scalable, and can handle large volumes of unstructured data.
 ```
 ****
-**What are some of the advantages of MongoDB?**
+
+**2)What are some of the advantages of MongoDB?**
 ```
 MongoDB is very easy to scale up or down
 MongoDB uses a dynamic database schema
@@ -16,21 +17,20 @@ MongoDB basically uses JavaScript objects in place of procedures.
 MongoDB support primary and secondary index on any fields.
 ```
 ***
-**What is the maximum document size in MongoDB?**
+**3)What is the maximum document size in MongoDB?**
 ```
 16 MB
 ```
 ***
 
-**What is the maximum Collection size in MongoDB?**
+**4)What is the maximum Collection size in MongoDB?**
 ```
 Practically speaking, the maximum collection size is determined by the available storage space on the MongoDB server and the limitations of the storage system.
 If a collection's size exceeds the available storage space or the BSON document size limit, you would need to consider strategies such as sharding or archiving to manage your data effectively.
 ```
 ***
 
-
-**What is the Mongo Shell?**
+**5)What is the Mongo Shell?**
 ```
 It is a JavaScript shell that allows interaction with a MongoDB instance from the command line.
 With that one can perform administrative functions, inspecting an instance, or exploring MongoDB. 
@@ -39,30 +39,29 @@ $ mongo
 MongoDB shell version: 4.2.0
 >
 
-
 ```
 ***
 
-**What is a BSON in MongoDB**
+**6)What is a BSON in MongoDB**
 ```
 BSON (Binary JSON) is a binary serialization format used by MongoDB to store documents in a binary-encoded format. It supports data types not typically supported by JSON (Binary data, ObjectId, Regular Expression, JavaScript Code), making it suitable for efficient storage and retrieval of data.
 ```
 
 ***
 
-**Explain the difference between a collection and a document in MongoDB**
+**7)Explain the difference between a collection and a document in MongoDB**
 ```
 In MongoDB, a document is a single unit of data and is roughly equivalent to a row in a relational database. A collection is a group of documents and is similar to a table in a relational database.
 ```
 ***
 
-**In MongoDB, the primary key is known as the "_id" field. It's unique for each document within a collection**
+**8)In MongoDB, the primary key is known as the "_id" field. It's unique for each document within a collection**
 ```
 In MongoDB, the primary key is known as the "_id" field. It's unique for each document within a collection.
 ```
 ***
 
-**mongo db crud**
+**9)mongo db crud**
 ```
 Create (Insert) Operations: How do you insert a document into a MongoDB collection?
 
@@ -104,7 +103,7 @@ drop() method is used to remove an entire collection, including all of its docum
 ***
 
 ***
-**In MongoDB, how do you represent relationships between data?**
+**10)In MongoDB, how do you represent relationships between data?**
 ```
 Common ways to represent relationships.
 1) Embedding - In embedding, you store related data within a single document. This is suitable for one-to-one and one-to-many relationships.
@@ -134,7 +133,7 @@ When designing your MongoDB schema, consider factors like query patterns, write 
 ```
 ***
 
-** Types of Relationship with example and how to implement ? **
+**11)Types of Relationship with example and how to implement ? **
 ```
 One to One: (Patient -  Disease), (Person -  Passports)
     Embed (Most of the time) - Refrence (also possible Person - Car).
@@ -149,26 +148,26 @@ Many to Many: (Customer - Product)
 ```
 ***
 
-**Explain the term "replica set" in MongoDB.**
+**12)Explain the term "replica set" in MongoDB.**
 ```
 A replica set in MongoDB is a group of MongoDB servers that maintain the same data set. It provides high availability and fault tolerance by ensuring that if one server fails, data can still be retrieved from another server within the set
 ```
 ***
 
-**Explain the aggregation framework in MongoDB.**
+**13)Explain the aggregation framework in MongoDB.**
 ```
 The aggregation framework is a powerful feature in MongoDB that allows you to perform data transformations and calculations on your data
 ```
 ***
 
-**What is the purpose of an index in MongoDB, and how can you create one?**
+**14)What is the purpose of an index in MongoDB, and how can you create one?**
 ```
 used to improve query performance.
 You can create an index on one or more fields in a collection to speed up data retrieval.
 you can use the `createIndex()` method or specify an index in the document's schema when creating a collection.
 ```
 
-**What is sharding in MongoDB, and why is it important?**
+**15)What is sharding in MongoDB, and why is it important?**
 ```
 Sharding is a technique used to distribute data across multiple servers or clusters to improve performance and scalability.
 
@@ -176,11 +175,11 @@ Sharding allows MongoDB to distribute data evenly across multiple servers.
 ```
 ***
 
-**How can you ensure data consistency when using denormalized data in MongoDB?**
+**16)How can you ensure data consistency when using denormalized data in MongoDB?**
 ```
 ```
 ***
-**types of index in mongo db with example**
+**17)types of index in mongo db with example**
 ```
 1. Single Field Index: A single field index is the most basic type of index. It indexes a single field of a document.
 db.collection.createIndex({ fieldName: 1 });
@@ -212,7 +211,7 @@ A TTL index allows documents to expire after a specified amount of time, which c
 ```
 ***
 
-**diffrence between Partial Filters index and compound index?**
+**18)diffrence between Partial Filters index and compound index?**
 ```
 Partial Index:
 A partial index is an index that only includes documents in the index that meet a specified filter expression. It allows you to create an index on a subset of documents in a collection, based on a specific condition. Partial indexes can improve query performance and reduce the index size by excluding unnecessary documents from the index.
@@ -229,7 +228,7 @@ db.collection.createIndex({ field1: 1, field2: -1 });
 ```
 ***
 
-**What is Authentication and Authorization in MongoDB?**
+**19)What is Authentication and Authorization in MongoDB?**
 ```
 Authentication - Identify valid users of db.
 Authorization - Identify what user can do in db.
@@ -237,7 +236,7 @@ Authorization - Identify what user can do in db.
 ***
 
 
-**Explain Role-Based Access Control in MongoDB ?**
+**20)Explain Role-Based Access Control in MongoDB ?**
 ```
 Role-Based Access Control (RBAC) in MongoDB is a security feature that allows you to control a user's access to specific resources and actions within the MongoDB database. 
  the principle of least privilege, where users are granted only the minimum level of access required to perform their duties, reducing the potential impact of security breaches.
@@ -251,7 +250,7 @@ Data Scientist - read - only collecting data no need to create any new rec.
 ```
 ***
 
-**Explain SSL Encryption in MongoDB.**
+**21)Explain SSL Encryption in MongoDB.**
 ```
 SSL (Secure Sockets Layer) encryption in MongoDB is a method of securing the data transmitted between MongoDB clients and servers. It ensures that the data exchanged between the client and the server is encrypted, making it difficult for unauthorized parties to intercept and understand the information being transmitted.
 
@@ -260,19 +259,19 @@ configuration needs to be added which is done by DBA.
 ```
 ***
 
-**What is Field-Level Encryption in MongoDB?**
+**22)What is Field-Level Encryption in MongoDB?**
 ```
 Field-Level Encryption in MongoDB is a security feature that allows you to encrypt specific fields within documents in a MongoDB collection.
 ```
 ***
 
-**How Do You Monitor and Audit MongoDB for Security?**
+**23)How Do You Monitor and Audit MongoDB for Security?**
 ```
 MongoDB provides auditing capabilities that allow you to log various types of events, such as authentication attempts, authorization successes and failures, and other important actions. Enable MongoDB auditing by configuring the auditLog settings in the MongoDB configuration file.
 ```
 ***
 
-**how do you handle data leaks in mongo db?**
+**24)how do you handle data leaks in mongo db?**
 ```
 1) Prevention:
 
@@ -287,7 +286,7 @@ Real-Time Monitoring: Utilize monitoring tools to keep an eye on the system's pe
 ```
 ***
 
-**what is transaction in mongo db with syntax ?**
+**25)what is transaction in mongo db with syntax ?**
 ```
  Transactions in MongoDB allow you to perform multiple operations on multiple documents, and these operations either complete entirely or have no effect at all.  (kind of automacity for multiple opeartions)
 
