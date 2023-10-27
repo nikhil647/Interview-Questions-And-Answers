@@ -1,4 +1,4 @@
-# React Js inteview Preparation  
+# GraphQL inteview Preparation  
 
 **1) What is GraphQL ?**
 ```
