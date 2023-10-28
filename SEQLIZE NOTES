@@ -1,0 +1,719 @@
+start sqlize project -->
+
+1) Starting SQLize
+
+
+2) creating models (tables)
+sequelize model:generate --name Airplane --attributes planeModel:string,totalSeats:integer
+sequelize model:generate --name Customer --attributes name:string,email:string
+sequelize model:generate --name FlightSchedule --attributes originAirport:string,destinationAirport:string,departureTime:date
+sequelize model:generate --name BoardingTicket --attributes seat:string
+
+
+3) Migration (table creation and it's schema)
+sequelize db:migrate
+
+4) Seed the the table (db)
+sequelize db:seed:all
+
+to revert seed data. --> sequelize db:seed:undo:all
+
+Now if you do select * from airplane; // (data present in table)
+
+Sequelize data types
+STRING - The STRING data type refers to a Variable Character Field (VARCHAR) column type, which is a non-fixed character column. The maximum storage for this column type varies depending on the DBMS (Posgres, MySql)
+To call VARCHAR with a fixed paging length. --->  DataTypes.STRING(100)
+
+CHAR - 	The CHAR data type is similar to the STRING data type, except that it references the CHAR column type. Traditionally, a DBMS will cap the length of a CHAR column to 255 characters.
+A VARCHAR type will allow you to go over the specified paging size without an error or an exception.
+CHAR(20) would cap the data to 20 characters defined by the table’s collation).
+
+TEXT/TINYTEXT/MEDIUMTEXT/LONGTEXT - Database designers understand that sometimes, our text data requires a considerable amount of space or needs to be associated with rows larger than 65,535 bytes (a MySQL VARCHAR limitation). In this case, we would use a TEXT column type.
+
+TINYTEXT: 255 bytes
+TEXT: 64 kilobytes (KB)
+MEDIUMTEXT: 16 megabytes (MB)
+LONGTEXT: 4 gigabytes (GB)
+
+DataTypes.TEXT('TINY'), DataTypes.TEXT('MEDIUM'), or DataTypes.TEXT('LONG')
+
+CITEXT - CITEXT stands for Case-Insensitive Text.which is a column that preserves the data’s casing except for comparison operations.
+
+NUMBER - the NUMBER data type is an abstraction for more than an explicit type, depending on its configuration settings
+ This abstract data type could help organize your code if you use the same precision and scale values throughout your database.
+
+// INT(4)
+var unsignedInteger = DataTypes.NUMBER({
+    length: 4,
+    zerofill: false,
+    unsigned: true,
+});
+// FLOAT(5,4)
+var specificFloat = DataTypes.NUMBER({
+    length: 5,
+    zerofill: false,
+    unsigned: false,
+    decimals: 4
+});
+ 
+INTEGER/TINYINT/SMALLINT/MEDIUMINT/BIGINT - 
+To declare your model’s attribute as an unsigned value, we can attach the UNSIGNED 
+DataTypes.INTEGER(21).UNSIGNED
+
+FLOAT/REAL -  equelize handles FLOAT, REAL, and DOUBLE in the same way. There is a small float validation performed for the FLOAT type explicitly, but otherwise, Sequelize will translate the column type directly to the DBMS.
+
+DECIMAL/DOUBLE - DataTypes.DECIMAL(6, 4) will give us a decimal column with a precision of 6 and a scale of 4.
+example value for this column could be 38.3411.
+
+BOOLEAN - There are many ways to express a Boolean. Sometimes, the Boolean value will be stored as a string such as true, false, t, or f. 
+DataTypes.BOOLEAN
+
+DATE/DATEONLY/TIME - The DATE data type references the DATETIME column types for MySQL, MariaDB, and SQLite
+
+NOW -It is a special type within Sequelize. It is not to be used as the column’s type but as the attribute’s value and is traditionally set as the attribute’s defaultValue option
+eg.
+Receipt.init({
+    total: DataTypes.DECIMAL(10,2),
+    tax: DataTypes.DECIMAL(10,2),
+    dateOfPurchase: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+    }
+}, {
+    sequelize,
+    modelName: 'Receipt'
+});
+
+HSTORE - HSTORE is for Postgres only. This data type is used for mapped key-value types but is often replaced by JSON or JSON Binary (JSONB)
+
+npm install --save sequelize pg pg-hstore
+MyModel.find({
+  where: {
+    myHstoreColumn: {
+      someFieldKey: 'value',
+    }
+  }
+});
+
+
+JSON -  you can query information similar to how the HSTORE type is queried, with the exception of having the ability to deeply nest your search clause.
+
+MyModel.find({
+    where: {
+        myJsonColumn: {
+            someKey: { deeply: { nested: true } }
+        }
+    }
+});
+
+JSONB - The JSONB data type is reserved for Postgres only.If you are using a JSON column for storage, it is recommended to use the JSON column type, and if you are using comparison operators on the column, it is recommended to use the JSONB column type.
+MyModel.find({
+  where: {
+    "someKey.deeply.nested": {
+      [Op.eq]: true
+    }
+  }
+});
+
+BLOB - Several databases, including MySQL, offer a range of binary large object (BLOB) types.
+Regardless of the input for the BLOB attribute type, Postgres will always be converted into a bytea (byte array) column type.
+This data type is useful for storing anything binary-related, such as images, documents, or serialized data
+
+DataTypes.BLOB // BLOB
+DataTypes.BLOB('tiny') // TINYBLOB
+DataTypes.BLOB('medium') // MEDIUMBLOB
+DataTypes.BLOB('long') // LONGBLOB
+
+TINYBLOB   1 byte    2^8 - 1    255 bytes
+
+BLOB       2 bytes   2^16 - 1   64 kilobytes.
+
+MEDIUMBLOB 3 bytes   2^24-1     16 MB
+
+LONGBLOB   4 bytes   2^32 - 1    4 GB
+
+
+RANGE - RANGE data types are reserved for Postgres only. INTEGER, BIGINT, DATE, DATEONLY, and DECIMAL
+myRangeColumn: DataTypes.RANGE(DataTypes.INTEGER)
+
+UUID/UUIDV1/UUIDV4 - A universally unique identifier (UUID) is a 128-bit label with some sort of constraints and stipulations for uniqueness and near to no chance of a collision with other values.
+
+sequelize.define('MyModel', {
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+    }
+});
+
+VIRTUAL - The VIRTUAL attribute type is a special type that will hydrate the data within Sequelize but will not populate the data into the database
+The VIRTUAL field could be used for organizing code, validations, and extending Sequelize to any protocol or framework that requires nested typing
+
+sequelize.define('MyModel', {
+    envelope: DataTypes.STRING,
+    message: {
+        type: DataTypes.VIRTUAL,
+        set: function(val) {
+            // the following line is optional
+            // but required if you wish to use the
+               validation associated with the attribute
+            this.setDataValue('message', val);
+            this.setDataValue('envelope', 
+                               encryptTheMessage(val));
+        },
+        validate: {
+            noDadJokes: function(val) {
+                if (val === "knock knock") {
+                    throw new Error("Who is there? Not this 
+                                     message")
+                }
+            }
+        }
+    }
+});
+
+ENUM - Sequelize has a DataTypes.ENUM attribute type for enumerated columns.
+DataTypes.ENUM('a', 'b')
+
+
+ARRAY - ARRAY attribute types are supported for Postgres only at the moment. This type requires a parameter of an applicable data type.
+DataTypes.ARRAY(DataTypes.STRING) // text[]
+DataTypes.ARRAY(DataTypes.DECIMAL) // double precision[]
+
+GEOMETRY , GEOGRAPHY, CIDR/INET/MACADDR, TSVECTOR
+
+
+Reading data: 
+
+findAll—Use this when you want to use the where clause in your query and retrieve more than one row.
+findOne—Similar to the findAll function, except that this function will return a single row.
+findByPk—A function that returns a single row using the model’s defined PK.
+findOrCreate—This function will return a single instance of the row that was either found or instantiated from the database. Sequelize will compose the attributes defined within the where and defaults key.
+
+Complex querying
+
+and/or—Logical AND and logical OR. These values contain an array of where clause objects.
+eq/ne—Equal (=) or Not Equal (!=).
+gte/gt—Greater-Than-or-Equal (>=) and Greater-Than (>).
+lte/lt—Lesser-Than-or-Equal (<=) and Lesser-Than (<).
+is/not—IS NULL and IS NOT TRUE, respectively.
+in/notIn—IN and NOT IN operators of any array with values.
+any/all/values—ANY (Postgres only), ALL, and VALUES operators respectively.
+col—Converts column string values into identifiers (IDs) specified by the database/dialect.
+placeholder—Internal operator used by Sequelize.
+join—Used internally by Sequelize.
+match—Match operator used for text searching (Postgres only).
+like/notLike—LIKE and NOT LIKE, respectively.
+iLike/notILike—Case-insensitive version of LIKE and NOT LIKE (Postgres only).
+startsWith/endsWith—Shorthand for the LIKE '%...' and LIKE '...%' expressions.
+substring—Shorthand expression for LIKE '%...%'.
+regexp/notRegexp—REGEXP and NOT REGEXP for MySQL and Postgres only.
+between/notBetween—BETWEEN x AND y and NOT BETWEEN x AND y.
+overlap—Postgres-only range operator for overlap (&&).
+contains/contained—Postgres-only range operator for @> and <@, respectively.
+Adjacent—Postgres-only range operator for adjacent querying (-|-).
+strictLeft/strictRight—Strict operators for Postgres ranges (<< and >>).
+noExtendRight/noExtendLeft—No extension range operators for Postgres (&< and &>).
+
+
+Deleting data -
+var record = MyModel.findOne({ where: { /* ... */ } });
+await record.destroy();
+
+To delete multiple rows at once, execute the following code:
+MyModel.destroy({ where: { name: 'Bob' }});
+
+
+Updating and saving data: 
+
+await MyModel.update({ name: "John" }, {
+  where: { name: null }
+});
+
+var record = MyModel.findOne();
+record.name = "John";
+await record.save();
+
+reload() - your workflow requires you to reset the record’s data back to the original values.
+
+var record = MyModel.findOne({ where: { name: 'John' } });
+record.name = "Bob";
+record.reload();
+// the record.name attribute's value is now back to John
+
+Creating data - await MyModel.create({ firstName: 'Bob' }, { ... });
+The second parameter accepts the following options for create():
+
+bulkCreate - Bulk-inserting data is very similar to creating a single row with Sequelize.
+await MyModel.bulkCreate([
+    { firstName: 'Bob' },
+    { firstName: 'William' }
+], {...});
+
+Ordering and grouping - 
+you can order (or group) your columns like so
+
+MyModel.findAll({
+    where: { name: 'Bob' },
+    order: [
+        ['name', 'DESC']
+    ]
+});
+
+group by eg with aggregate function - 
+const airplanes = await models.Airplane.findAll({
+        group: ['totalSeats'],
+        attributes: ['totalSeats', [Sequelize.fn('COUNT', 'totalSeats'), 'seatCount']],
+    });
+
+Limits and pagination - We can simply use the offset and limit key values for our finder methods, like so:
+MyModel.findAll({ offset: 5, limit: 10 });
+			
+
+Validating Models: It is important to maintain consistency and integrity within databases. Typically, these constraints consist of checking for a range of values, such as minimum string length, uniqueness, or existence.
+Sequelize offers built-in validation for various data types to help with the ergonomics of a project.
+
+Two Types: 
+We can execute validations across the entire record involving multiple attributes
+We can invoke validations for each specific attribute.
+
+allowNull : The default value is true. The allowNull option will determine whether to apply NOT NULL to the definitions of columns for the databas.
+age: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+    // if the age value is null then this will be ignored
+    validate: {
+      min: 1
+    }
+  }
+
+You can customize NOT NULL error message by adjusting the notNull parameter in the validate config.
+ email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notNull: {
+        msg: 'Please enter your e-mail address'
+      }
+    }
+ }
+
+unique: Sequelize build a unique constraint on the applicable column within the database 
+ email: {
+    type: DataTypes.STRING,
+    // by default allowNull is true
+    allowNull: false,
+    unique: true
+  }
+
+Built-in validations
+is (regex), not (notRegex) : 
+
+The is and not validation parameters can either be a literal regular expression or an array, with the first entry as a string literal for the regular expression and the second entry for regular expression flags.
+
+foo: {
+    type: DataTypes.STRING,
+    validate: {
+      is: /^[a-z]+$/i
+      // can also be written as:
+      // is: ['^[a-z]+$', 'i']
+    }
+  },
+  bar: {
+    type: DataTypes.STRING,
+    validate: {
+      not: /^[a-z]+$/i
+      // can also be written as:
+      // not: ['^[a-z]+$', 'i']
+    } 
+  }
+
+equals - The equals parameter is a string value that performs a strict comparison check for exact matching.
+foobar: {
+    type: DataTypes.STRING,
+    validate: {
+      // ensure 'foobar' is always equaled to 'static
+         value'
+      equals: 'static value'
+    }
+  }
+
+isEmail - This validation will ensure that the attribute’s value matches the rules of email. (https://datatracker.ietf.org/doc/html/rfc2822)
+isUrl - This will validate whether the attribute’s value is an actual URL with various protocols, hostnames (IP and FQDN), and a maximum length
+
+isIP, isIPv4, or isIPv6 - 
+The isIP validation accepts both v4 and v6 formats.
+This validates whether the attribute’s value matches how an IP value should look.
+
+isAlphanumeric, isNumeric, isInt, isFloat, and isDecimal
+All inputs for validations are sent to the validator.js library as a literal string. These validators will ensure the input can parse into the respective validation.
+
+max or min - These apply to numerical attributes only. They add a maximum or minimum numerical value respectively for the attribute’s validations.
+
+isLowercase or isUppercase - These check to see whether every letter in the attribute’s value uses the proper case.
+
+isNull, notNull, or notEmpty - This validates whether the value is null or not. The notEmpty validator will validate whether there are any spaces, tabs, or newlines within the value.
+
+contains, notContains, isIn, or notIn
+- These contain-related validators will perform a substring check on the value
+
+foo: {
+    type: DataTypes.STRING,
+    validate: {
+      isIn: [['red', 'yellow', 'green']]
+    }
+  }
+
+len - The parameters are for checking the value’s length against a minimum and maximum number respectively
+
+foo: {
+    type: DataTypes.STRING,
+    validate: {
+      len: [1, 40]
+    }
+  }
+
+isUUID - This validator can check whether a value is in accordance with being a unique identifier.
+
+isDate, isAfter, or isBefore -  The isDate validator will determine whether a value is date-like. The isAfter and isBefore validators will perform a temporal comparison against the date that you are trying to validate against.
+
+
+
+Creating custom validation methods:
+Sequelize gives us the ability to create our own validations simply by adding a function to the validate parameter on attributes or within the validate parameter on the model’s options.
+
+password: {
+    type: DataTypes.STRING,
+    validate: {
+      notLiteralPassword(value) {
+        if (value === 'password') {
+          throw new Error("Your password cannot be 
+                           'password'");
+        }
+      }
+    }
+  }
+
+Creating custom attribute validators
+we can initialize our model with attribute definitions that have validations associated with them.
+
+const availableAirports = ['MIA',  'JFK',  'LAX'];
+
+originAirport: {
+      type: DataTypes.STRING,
+      validate: {
+        isIn: {
+          args: [availableAirports],
+          msg: 'Invalid origin airport'
+        }
+      }
+    }
+
+
+Adding a custom model validator
+validDestination() {
+        const hasAirportValues = this.originAirport !== 
+        null && this.destinationAirport !== null;
+        const invalidDestination = this.originAirport === 
+        this.destinationAirport;;
+        if (hasAirportValues && invalidDestination) {
+          throw new Error("The destination airport cannot 
+                           be the same as the origin");
+        }
+      }
+
+
+Executing validations while performing asynchronous operations
+
+Sometimes, your validations will require you to fetch an associated model’s record, call a third-party application, or some other form of request that waits for a response.
+We would use the async and await keywords to help us execute these requests and wait for the responses for validation:
+
+Membership.init({
+  points: {
+    type: DataTypes.INTEGER,
+  }
+}, {
+  sequelize,
+  validate: {
+    async accountIsActive() {
+      const payments = await Payments.find({
+        where: { status: 'complete', expired: false }
+      });
+      if (payments.length < 1) {
+        throw new Error("Invalid membership");
+      }
+    }
+  }
+});
+
+validation functions like accountIsActive() get executed automatically during certain actions, such as when you try to create or update a record using Sequelize methods like create(), update(), or save()
+
+
+Handling validation errors
+
+async function createFlightSchedule() {
+  try {
+    await FlightSchedule.create({
+      originAirport: 'JAX',
+      destinationAirport: 'JFK',
+      departureTime: '2030-01-01T00:00:00.000+00:00'
+    });
+  } catch (err) {
+    if (err instanceof ValidationError) {
+      console.log(err.errors);
+    } else {
+      console.log(err);
+    }
+  }
+}
+
+Associating Models: 
+Databases maintain these relationships by creating foreign key references that hold metadata as to which table and column the foreign key is associated with. This metadata is what maintains integrity for the database.
+we would have to perform a separate query to update all of the rows that contained a reference to the foreign key to its new value
+
+Sequelize offers support for four association patterns:
+HasOne – A one-to-one association where the foreign key references the child model. The attribute is defined on the parent model.
+BelongsTo – A one-to-one association where the foreign key references the parent model. The attribute is defined on the child model.
+HasMany – A one-to-many association where the foreign key references the parent model. The attribute is defined on the child model.
+BelongsToMany -A many-to-many association where a separate model (called a junction table) will store the references of the associated models.
+
+Sequelize will follow a pattern for creating methods on models with associations. Depending on the relationship, there can be get, set, add, create, remove, and count as the prefix for the method’s name following with the association’s name (singular or pluralized wherever applicable).
+
+One-to-One
+The One-to-One relational pattern involves the hasOne and belongsTo associations for the models. 
+
+const A = sequelize.define('A', { … });
+const B = sequelize.define('B', { … });
+A.hasOne(B);
+B.belongsTo(A);
+
+
+onUpdate – Tells the DBMS how to handle updated foreign relationships. Possible values are CASCADE, RESTRICT, NO ACTION, SET DEFAULT, and SET NULL. The default value for this option is CASCADE.
+
+onDelete – Same as onUpdate but for handling deleted foreign relationships. The default for this option is SET NULL.
+
+foreignKey – Accepts a literal string value or an object with the same options as an attribute when defining models (name, allowNull, unique, etc.).
+
+sourceKey – The name of the column, from the source table, to use as identification for the foreign key column’s value. By default, Sequelize will use the source table’s attribute that has a primaryKey: true parameter. If your model contains no explicit primaryKey attribute, then Sequelize will use the default id attribute. Applicable to hasOne and hasMany associations.
+
+targetKey – Similar to sourceKey except this value will reference the column from the target table as opposed to the source table. Applicable to belongsTo associations.
+
+
+Set eg'
+
+Country.hasOne(Capital)
+
+let country, capital;
+
+seqlize.sync().then(() => {
+   return Capital.findOne({ where:  { capitalName:  'Madrid' }})
+}).then((data) => {
+   capital =  data;
+   return Country.findOne({ where: { countryName: 'Spain' }})
+}).then((data) => {
+   country = data;
+   country.setCapital(capital)
+});
+
+getData (Association)
+
+let country, capital;
+
+seqlize.sync().then(() => {
+ return Country.findOne({ where: { countryName: 'Spain' } })
+}).then((data) => {
+    country = data;
+    return country.getCapital();
+}).then((data) => {
+     console.log(data.toJson());   // here we get data from Capital Table  { id: 2, capitalName: 'Madrid',countryId: 1  }
+}) 
+
+
+One-to-Many
+
+Organization.hasMany(Employee);
+Employee.belongsTo(Organization);
+
+This relational pattern will only create a foreign reference column on the belongsTo model. Defining an attribute with the hasMany association helps Sequelize with data retrieval optimization and adding helper functions to the parent model
+
+CREATE TABLE IF NOT EXISTS "Organizations" (
+  /* ... */
+);
+CREATE TABLE IF NOT EXISTS "Employees" (
+  /* ... */
+  "OrganizationId" INTEGER REFERENCES "Organizations" ("id") ON DELETE SET NULL ON UPDATE CASCADE,
+  /* ... */
+);
+eg'
+
+User.hasMany(Post)
+Post.belongsTo(User)
+
+let user, post;
+seqlize.sync().then(() => {
+    return User.findOne({ where:  { username: 'wittcode' } })
+}).then((data) => {
+    user = data;
+   return Post.findAll();
+}).then((data) => {
+    posts= data;
+    user.addPost(posts);   // All post return by query added to user.
+}).catch((err) => {
+     console.log(err)
+});
+
+1 - many   [Remove Data]
+
+User.hasMany(Post)
+Post.belongsTo(User)
+
+let user, post;
+seqlize.sync().then(() => {
+    return User.findOne({ where:  { username: 'wittcode' } })
+}).then((data) => {
+    user = data;
+   return Post.findOne();
+}).then((data) => {
+    posts= data;
+    user.removePost(posts);   // remove post return by above query.
+}).then((data) => {
+  console.log(dat) 
+})
+
+
+Many-to-Many
+This relationship will use an associative entity to keep references between two models.
+Sequelize will automatically create a junction model for you, but we still have the option of defining our own junction table for situations where we want to add more attributes, constraints, life cycle events, and so on.
+
+Many-to-Many offers a parameter called uniqueKey, which will allow you to name a reference column. By default, Sequelize will create the junction table with a unique key composed of both referencing columns (employeeId and taskId). If you wish to change this behavior, you may set the unique attribute parameter to false in the junction model’s definition.
+
+Many to Many (Customer to Products)
+
+const Customer = seqlize.define('customer', {
+   customerName: {
+      type:  DataTypes.String
+   }
+});
+
+const Product = seqlize.define('product', {
+   productName: {
+      type:  DataTypes.String
+   }
+});
+
+Customer.belongsToMany(Product, throught: 'customerproduct' });
+Product .belongsToMany(Customer, throught: 'customerproduct' });
+
+*******************
+
+Eager Loading in Sequelize:
+Eager loading is a technique where the related data is loaded from the database along with the main data, in a single query. In other words, when you fetch an object from the database, all of its associations or related entities are loaded immediately.
+
+Eager loading in Sequelize is achieved by specifying the include option when querying for a model.
+
+const User = sequelize.define('User', {/* user model definition */});
+const Post = sequelize.define('Post', {/* post model definition */});
+
+User.hasMany(Post);
+
+// Eager loading User with associated Posts
+User.findOne({
+  where: { id: 1 },
+  include: [Post]
+}).then(user => {
+  console.log(user);
+});
+
+
+Lazy Loading in Sequelize.
+
+Lazy loading, on the other hand, is a technique where the related data is loaded from the database only when it's explicitly requested.
+
+// Assuming 'user' is a Sequelize User instance
+user.getPosts().then(posts => {
+  console.log(posts);
+});
+
+
+5) Adding Hooks and Lifecycle Events to Your Models
+
+these methods have a temporal prefix (for example, before and after) preceding an event’s name.
+
+beforeCreate(instance, options)
+beforeDestroy(instance, options)
+beforeRestore(instance, options)
+beforeUpdate(instance, options)
+beforeSave(instance, options)
+beforeUpsert(values, options)
+
+afterCreate(instance, options)
+afterDestroy(instance, options)
+afterRestore(instance, options)
+afterUpdate(instance, options)
+afterSave(instance, options)
+afterUpsert(created, options)
+
+
+
+// Before Create Hook
+User.beforeCreate((user, options) => {
+  // You can manipulate the user data before it is saved
+  user.username = user.username.toLowerCase(); // Convert username to lowercase
+});
+
+// After Update Hook
+User.afterUpdate((user, options) => {
+  // Perform actions after the user instance is updated
+  console.log(`User ${user.username} has been updated.`);
+});
+
+
+6 Implementing Transactions with Sequelize
+
+Databases offer a way to atomicize integrity using transactions.
+Transactions are used for ensuring a process has been completed without interruptions such as a connection failure or the power abruptly failing.
+
+Managed transactions are transactions that are automatically committed or rolled back by Sequeliz
+
+const sequelize = new Sequelize('database', 'username', 'password');
+// Start a managed transaction.
+sequelize.transaction(async (t) => {
+  // Do some database operations inside the transaction.
+  await User.create({ name: 'John Doe' }, { transaction: t });
+  await Product.create({ name: 'My Product' }, { transaction: t });
+});
+
+
+Unmanaged transaction
+
+Unmanaged transactions are transactions that are not automatically committed or rolled back by Sequelize. You must manually commit or rollback the transaction using the commit() and rollback() methods, respectively.
+
+const sequelize = new Sequelize('database', 'username', 'password');
+
+// Start an unmanaged transaction.
+const transaction = await sequelize.transaction();
+
+try {
+  // Do some database operations inside the transaction.
+  await User.create({ name: 'John Doe' }, { transaction });
+  await Product.create({ name: 'My Product' }, { transaction });
+  // Commit the transaction if everything was successful.
+  await transaction.commit();
+} catch (error) {
+  // Rollback the transaction if an error occurred.
+  await transaction.rollback();
+}
+
+
+Running transactions concurrently with Sequelize
+
+sequelize.transaction((tx1) => {
+    return sequelize.transaction((tx2) => {
+    return Promise.all([
+            Account.create({ id: 1 }, { transaction: null }),
+            Account.create({ id: 2 }, { transaction: tx1 }),
+            Account.create({ id: 3 }, { transaction: tx2 }),
+        ]);
+    });
+});
