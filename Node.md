@@ -326,3 +326,15 @@ Middleware has a wide range of applications in Node.js and web development in ge
 Request Logging, Authentication and Authorization, Data Validation, Error Handling, CORS, Request Parsing, Rate Limiting and Security
 ```
 ***
+
+**how to improve speed of node js application ?**
+```
+Caching - use Redis, Memcache
+Asynchronous Programming - if we use sync for file it will block event loop.
+Load Balancing - distribute incoming traffic across multiple server instances
+Code Optimization - optimize your JavaScript code for bottlenecks, such as tight loops, unnecessary function calls, and inefficient data structures.
+Minimize Dependencies - Fewer dependencies can lead to faster installation and startup times
+Parallel Processing - Take advantage of multi-core processors by utilizing the cluster module to create multiple Node.js processes that can handle requests concurrently.
+GZIP Compression - Enable GZIP compression for HTTP responses to reduce data transfer size.
+```
+***
