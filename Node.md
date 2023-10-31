@@ -239,9 +239,6 @@ console.log(myModule.greet('Alice'));
 
 **What is the event loop in Node.js?**
 ```
-for managing the execution of asynchronous code and I/O operations in a non-blocking, efficient, and single-threaded manner
-
- This allows Node.js to handle a large number of concurrent connections and perform I/O-bound tasks without creating a new thread for each operation.
 
 The Node.js event loop is customized for handling I/O operations, such as reading files, making network requests, and handling concurrent connection.
 
