@@ -318,3 +318,11 @@ setImmediate callback
 It is used for working with events, event-driven programming, and creating custom event-driven APIs. The EventEmitter module allows you to emit named events and register event listeners to respond to those events
 ```
 ***
+
+**Explain the concept of middleware in Node.js?**
+```
+ It refers to a set of functions that are executed sequentially during the processing of an HTTP request or response.
+Middleware has a wide range of applications in Node.js and web development in general
+Request Logging, Authentication and Authorization, Data Validation, Error Handling, CORS, Request Parsing, Rate Limiting and Security
+```
+***
