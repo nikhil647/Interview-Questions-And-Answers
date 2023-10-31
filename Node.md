@@ -312,3 +312,9 @@ process.nextTick callback
 setImmediate callback
 ```
 ***
+
+**What is an EventEmitter in Node.js?**
+```
+It is used for working with events, event-driven programming, and creating custom event-driven APIs. The EventEmitter module allows you to emit named events and register event listeners to respond to those events
+```
+***
