@@ -287,3 +287,28 @@ Logging: PM2 can collect and aggregate logs from your application, which can hel
 Monitoring: PM2 can monitor your application's performance and health, and alert you to any problems.
 ```
 ***
+
+**Differentiate between process.nextTick() and setImmediate()?**
+```
+The process.nextTick callback is executed immediately after the current operations (before End),
+while the setImmediate callback is executed in the next event loop iteration, after the current operations have completed.
+
+console.log('Start');
+
+process.nextTick(() => {
+  console.log('process.nextTick callback');
+});
+
+setImmediate(() => {
+  console.log('setImmediate callback');
+});
+
+console.log('End');
+
+O/p:
+Start
+End
+process.nextTick callback
+setImmediate callback
+```
+***
