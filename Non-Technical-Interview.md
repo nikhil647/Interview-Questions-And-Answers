@@ -1,7 +1,3 @@
-# Below testing library notes are taken from Codevaluation Youtube channel (React-Testing library playlist)
-**If you want to explore more please checkout above playlist, link below**
-***
-**https://www.youtube.com/watch?v=T2sv8jXoP4s&list=PLC3y8-rFHvwirqe1KHFCHJ0RqNuN61SJd&index=1**   
 # Non-Technical-Interview
 
 **Could you please give us a brief description of yourself?**
