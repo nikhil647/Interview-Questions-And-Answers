@@ -390,6 +390,10 @@ An IIFE is function that runs as soon as it is defined
 })();
 console.log(c);
 
+Making variables and functions private
+Avoiding conflict of variable names between libraries and programs
+Allowing public access to methods while retaining privacy for variables defined within the function.
+
 ```
 ***
 
