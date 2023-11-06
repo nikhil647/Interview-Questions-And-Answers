@@ -222,7 +222,6 @@ Write tests for your application. You can create test files for individual compo
 
 You'll need to create a configuration file for your chosen CI platform.
 we need to create YAML file and conect to CI platform
-
 ```
 ***
 
