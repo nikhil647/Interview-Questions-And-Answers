@@ -51,6 +51,14 @@ mapDispatchToProps - The mapDispatchToProps() method is used to render the actio
 ```
 ***
 
+**useSelector & useDispatch**
+```
+useSelector - Allows access to the state stored in a Redux store. It takes in a function argument that returns the part of the state that you want.
+
+useDispatch - Enables dispatching of actions to the store. It returns a copy of the dispatch() function of the Redux store.
+```
+***
+
 # Redux toolikit inteview Preparation  
 
 **1)what is redux toolkit ?**
