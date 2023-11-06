@@ -109,7 +109,15 @@ Next.js can be used with serverless architecture by deploying the application to
 It allows you to specify dynamic routes for your pages during Static Site Generation (SSG).
 It's commonly used with "getStaticProps" to fetch data for those dynamic routes.
 
-It allows you to specify which paths should be pre-rendered at build time
+It allows you to specify which paths should be pre-rendered at build time.
+
+return {
+    paths,
+    fallback: true, // or false if you want to return a 404 page for non-matching paths
+};
+
+
+
 ```
 ***
 
@@ -119,6 +127,20 @@ It allows you to specify dynamic routes for your pages during Static Site Genera
 It's commonly used with "getStaticProps" to fetch data for those dynamic routes.
 ```
 ***
+
+**14. 1) fallback inside getStaticPath **
+```
+getStaticPaths function determines how to handle paths that were not generated at build time.
+fallback: false -->  it means that any paths not returned by the getStaticPaths function will result in a 404 page.
+                     In other words, if a user tries to access a path that wasn't pre-rendered at build time, they will see a "Not Found" page.
+
+fallback: true -->   This shell will contain basic HTML and JavaScript, allowing the page to be rendered on the client-side.
+                      Meanwhile, Next.js will start generating the static page in the background. Once the static page is generated, subsequent requests to the same path will serve the fully generated static page.
+
+fallback: 'blocking --> it means that Next.js will server-render the page on-demand for the paths that were not pre-rendered at build time. The server will generate the page and cache it for future requests, providing a fully static page to the use
+```
+***
+
 
 **15)How do you configure dynamic routes in a Next.js application?**
 ```
