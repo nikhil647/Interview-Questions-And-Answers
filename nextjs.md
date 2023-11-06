@@ -108,6 +108,8 @@ Next.js can be used with serverless architecture by deploying the application to
 ```
 It allows you to specify dynamic routes for your pages during Static Site Generation (SSG).
 It's commonly used with "getStaticProps" to fetch data for those dynamic routes.
+
+It allows you to specify which paths should be pre-rendered at build time
 ```
 ***
 
