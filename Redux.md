@@ -73,7 +73,6 @@ useDispatch - Enables dispatching of actions to the store. It returns a copy of 
 
 **2)Redux Toolkit Query**
 ```
-Purpose: Redux Toolkit Query (RTK Query) is an additional library built on top of Redux Toolkit. It simplifies the process of making API requests and managing the resulting data in Redux stores.
-//Personal notes --> only use if we use lot's of data that needs to store in redux store and lot's of manipulation present at many pages of application. (it's rare scenation most of the time we store auth data in redux store and if any other data if required)
+RTK Query is built on top of the Redux Toolkit and uses Redux internally for its architecture. It takes inspiration from many other libraries like React Query and Apollo
 ```
 ***
