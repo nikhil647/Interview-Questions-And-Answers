@@ -1,0 +1,74 @@
+# SQL Interview Question
+
+** What is Database?**
+```
+A database is a structured collection of data that is organized and stored in a computer system.
+It is designed to efficiently manage, store, and retrieve information.
+
+types of databases
+including relational databases (such as MySQL, PostgreSQL, and Oracle),
+NoSQL databases (such as MongoDB and Cassandra)
+```
+***
+
+**What is DBMS?**
+```
+DBMS stands for Database Management System. DBMS is a system software responsible for the creation, retrieval, updation, and management of the database
+
+It ensures that our data is consistent, organized, and is easily accessible by serving as an interface between the database and its end-users or application software
+```
+***
+
+**What is SQL?**
+```
+SQL stands for Structured Query Language. It is the standard language for relational database management systems
+```
+***
+
+**What are Tables and Fields?**
+```
+A table is an organized collection of data stored in the form of rows and columns.
+Columns can be categorized as vertical and rows as horizontal.
+The columns in a table are called fields while the rows can be referred to as records
+```
+***
+
+** What are Constraints in SQL **
+```
+Constraints are used to specify the rules concerning data in the table
+
+Primary Key Constraint:  Ensures that a column (or a group of columns) uniquely identifies each record in a table.
+It implies that the column cannot contain NULL values and must have unique values within the table.
+eg: StudentID INT PRIMARY KEY
+
+Foreign Key Constraint: Establishes a link between data in two tables,
+where the foreign key column in one table refers to the primary key column in another table.
+eg: OrderID INT PRIMARY KEY
+FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
+
+Unique Constraint: Ensures that all values in a column (or a group of columns) are unique, except for NULL values
+eg:  SSN VARCHAR(11) UNIQUE
+
+Check Constraint: Defines a condition that the data in a column must satisfy. 
+eg: Price DECIMAL(10, 2),
+    Quantity INT,
+    CHECK (Price > 0 AND Quantity >= 0)
+
+Not Null Constraint: Ensures that a column cannot contain NULL values.
+eg:     Name VARCHAR(255) NOT NULL
+
+Default: DEFAULT constraint is used to provide a default value.
+    column1 datatype DEFAULT default_value,
+```
+***
+
+**What is a Join? List its different types**
+```
+The SQL Join clause is used to combine records (rows) from two or more tables in a SQL database based on a related column between the two.
+
+There are four different types of JOINs in SQL:
+(INNER) JOIN: Retrieves records that have matching values in both tables involved in the join. This is the widely used join for queries.
+
+
+```
+***
