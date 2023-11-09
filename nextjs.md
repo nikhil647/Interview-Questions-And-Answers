@@ -1,5 +1,9 @@
 # NEXT Js inteview Preparation  
 
+**If you want to explore more please checkout below Nexjs 13 playlist, link below**
+***
+**[https://www.youtube.com/watch?v=T2sv8jXoP4s&list=PLC3y8-rFHvwirqe1KHFCHJ0RqNuN61SJd&index=1](https://www.youtube.com/watch?v=y0ecd_bGKb4&list=PL8p2I9GklV44sj_Ikp8jQSvwD-m9htnHT&index=2)**
+
 12.0 and below Questions 13.0 is at end.
 
 ** 1) What is Next.js, and how is it different from React? **
