@@ -261,11 +261,37 @@ for (let i = 1;i<= 5;i++) {
 Output --> 1, 2, 3, 4, 5
 ```
 ***
-
 Local & Global Scope Question
+
+# Count Vowel
+```
+function countVowel(str) {
+    const length = str.match(/[aioue]/gi).length;
+    return length;
+}
+
+const string = prompt('Enter a string: ');
+const result = countVowel(string);
+console.log('result -->', result);
+```
+
+# Find Duplicate Elements 
+```
+function findDuplicateEle(arr) {
+    let obj = {};
+    arr.forEach(ele => {
+        if(obj[ele]) {
+            console.log(ele);
+        }
+        else {
+            obj[ele] = ele;    
+        }
+    })
+}
+findDuplicateEle([1,2,3,5,3,1,9]);
+```
 
 ## React: Create Stopwatch (sandbox)
 ```
 https://codesandbox.io/s/elastic-hoover-dq6dxx?file=/src/App.js
 ```
-
