@@ -280,15 +280,14 @@ console.log('result -->', result);
 function findDuplicateEle(arr) {
     let obj = {};
     arr.forEach(ele => {
-        if(obj[ele]) {
-            console.log(ele);
-        }
-        else {
             obj[ele] = ele;    
-        }
-    })
+    });
+    for(const ele in obj) {
+        console.log(ele);
+    }
 }
-findDuplicateEle([1,2,3,5,3,1,9]);
+
+findDuplicateEle([1,2,3,5,3,1,9, 1]);
 ```
 
 ## React: Create Stopwatch (sandbox)
