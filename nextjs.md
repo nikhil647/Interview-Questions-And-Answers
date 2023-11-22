@@ -310,6 +310,35 @@ async function serveAction2(){
     //async code to execute (eg. fetching data, creating data etc)
 }
 
+But to execute server action in client component we need to use below methods
+
+import { editSnippet } from '@/actions'
+import {startTransition} from 'react // if we use inbuild react function 
+export default function SnippetEditForm({snippet} : SnippetEditFormProps) {
+  const [code, setCode] = useState(snippet.code)
+
+  const handleEditorChange = (value: string = '' )=>{
+    setCode(value)
+  }
+  const edit = editSnippet.bind(null, snippet.id, code)// this is server action
+  const edit2 = () =>{
+    startTransition(async()=>{
+        await editSnippet(snippet.id, code)
+    })
+} 
+  
+  return (
+    <div>
+    // code...
+        <form action={edit}>
+            <button type='submit'>Save</button>
+        </form>
+        or
+        <button onClick={edit2}>Save</button>
+    </div>
+  )
+} 
+
 
 
 Dynamic Routes
