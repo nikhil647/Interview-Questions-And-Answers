@@ -273,7 +273,55 @@ Server Action ?
 
 ```
 ***
+***
 
+**26)New Next 14 Features**
+```
+Below is the notes for next Js 14
+
+All the components are server components by default, we use 'use client' string top of our component to make it client component.
+even though we use 'use client' string and make it client component, the component get's render on server one time, that is important to keep in mind.
+
+For creating server compnenet, we need to make component async componenet
+export default async function ServerComponent(){
+    // Your Jsx code
+}
+ 
+In server component we can't use event handlers, hooks etc of conventional react features. 
+
+Server Actions: 
+In server component to make a function run on server we use 'use server' string in that top of function, those function are also known as server actions.
+
+async function serveAction(){
+    'use server'
+    //async code to execute (eg. fetching data, creating data etc)
+}
+
+Server actions (functions that run in server) can't be define in client component, but there are two ways we can use server actions in client component
+1) We can pass server actions in client component through props if parent component is a server component
+2) We write multiple server actions in separate file and then import it
+eg actions.ts file
+
+'use server'
+async function serveAction(){
+    //async code to execute (eg. fetching data, creating data etc)
+}
+async function serveAction2(){
+    //async code to execute (eg. fetching data, creating data etc)
+}
+
+
+
+Dynamic Routes
+In case of server components, to access the route params, we can use props passed to that component.
+export default async function ServerComponent(props){
+    console.log(props) // { params: { id: '2' }, searchParams: {} }
+    // Your Jsx code
+}
+
+File names which we can create
+page.tsx, layout.tsx, not-found.tsx, loading.tsx, error.tsx, route.tsx
+```
 
 
 
