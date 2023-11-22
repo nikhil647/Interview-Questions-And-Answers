@@ -223,5 +223,16 @@ WHERE department = 'IT';
 
 ** What are the TRUNCATE, DELETE and DROP statements? **
 ```
+DELETE statement is used to delete rows from a table.
 
+DELETE FROM Candidates
+WHERE CandidateId > 1000;
+
+TRUNCATE command is used to delete all the rows from the table and free the space containing the table.
+
+TRUNCATE TABLE Candidates;
+
+DROP command is used to remove an object from the database. If you drop a table, all the rows in the table are deleted and the table structure is removed from the database.
+
+DROP TABLE Candidates;
 ```
