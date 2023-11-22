@@ -616,6 +616,86 @@ myPromise.then((successMessage) => {
 });
 ```
 
+** Variables declared with var are function-scoped **
+```
+var:
+
+Variables declared with var are function-scoped. They are not block-scoped like let and const.
+var variables are hoisted to the top of their function or global scope. This means you can use a variable before it's declared, but it will have an initial value of undefined.
+
+let: Variables declared with let are block-scoped. They exist only within the block, statement, or expression on which they are defined.
+let variables are also hoisted to the top of their block scope, but they are not initialized until the actual declaration is encountered during the code execution.
+Unlike var, redeclaring a variable with let in the same scope is not allowed.
+
+const:
+Variables declared with const are block-scoped, like let.
+The key difference is that const variables cannot be reassigned after they are initialized. 
+
+const variables must be initialized at the time of declaration.
+```
+** diff between re-rendering & mounting **
+```
+Mounting refers to the process of creating an instance of a React component and inserting it into the DOM (Document Object Model).
+
+Re-rendering occurs when a component's state or props change, and React needs to update the UI to reflect those changes.
+Re-rendering doesn't involve creating a new instance of the component;
+```
+###
+
+** Lifting State Up **
+```
+ It refers to the practice of moving the state of a component higher up in the component hierarchy, making it a shared state that can be accessed by multiple components.
+```
+###
+
+**  how to avoid re-rendering of child component in react **
+```
+Pure Components or React.memo:
+
+Use React.memo to memoize functional components. This prevents a functional component from re-rendering if its props have not changed.
+
+Use of useCallback : This can be helpful when passing callbacks or values to child components, preventing unnecessary re-renders.
+```
+###
+
+** React Lifecycle **
+```
+Mounting: These methods are called when an instance of the component is being created and inserted into the DOM.
+
+constructor():
+Called when the component is initialized. You can set up state and bind event handlers here.
+
+static getDerivedStateFromProps(props, state):
+A static method that is called when the component is instantiated as well as when it receives new props. It returns an object to update the state or null to indicate no state updates are necessary.
+
+render():
+The only required method in a class component. It returns the JSX that represents the component's UI.
+
+componentDidMount():
+Called after the component is inserted into the DOM. It is often used for data fetching and subscriptions.
+
+Updating:
+These methods are called when a component is being re-rendered as a result of changes to either its props or state.
+
+static getDerivedStateFromProps(nextProps, nextState):
+    Similar to the mounting phase, this method is also called during updates.
+
+shouldComponentUpdate(nextProps, nextState):
+   Returns a boolean that determines whether the component should re-render
+
+render()
+   Renders the updated UI.
+
+getSnapshotBeforeUpdate(prevProps, prevState):
+    Called right before the changes from the DOM are to be reflected in the UI. It returns a value that is passed to componentDidUpdate.
+
+componentDidUpdate()
+    Called after the component is re-rendered. It can be used for side effects, such as interacting with the DOM or performing network requests
+
+Unmounting:-  This method is called when a component is being removed from the DOM.
+```
+###
+
 # 30)
 async Attribute:
 When you include the async attribute in a <script> tag, it tells the browser to download the script asynchronously while continuing to parse the HTML document.
