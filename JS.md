@@ -697,6 +697,79 @@ Unmounting:-  This method is called when a component is being removed from the D
 ```
 ###
 
+# Q) JavaScript Iterators 
+```
+The iterator protocol defines how to produce a sequence of values from an object.
+
+An object becomes an iterator when it implements a next() method.
+
+The next() method must return an object with two properties:
+
+value (the next value)
+done (true or false)
+
+function fruiteIterator(values) {
+    let nextIndex = 0;
+    return {
+        next: function() {
+            if ( nextIndex < values.length ) {
+                return {
+                    value: values[nextIndex++],
+                    done: false
+                }
+            }
+            else {
+                return {
+                    done: true
+                }
+            }
+        }
+    }
+}
+
+const fruits = ['Mango','Apple','Pine-Apple','KiWi'];
+const fruitsIt = fruiteIterator(fruits);
+console.log(fruitsIt.next().value);
+console.log(fruitsIt.next().value);
+console.log(fruitsIt.next().value);
+console.log(fruitsIt.next().value);
+console.log(fruitsIt.next().value);
+```
+
+# Genrator in JS
+```
+A generator-function is defined like a normal function, but whenever it needs to generate a value, it does so with the yield keyword rather than return
+
+function* numbGen() {
+    let i = 1;
+    
+    while(true) {
+        yield i++;
+    }
+}
+
+const gen = numbGen();
+console.log(gen.next());
+console.log(gen.next());
+console.log(gen.next());
+```
+
+# What is prototype & __proto__
+```
+The __proto__ is an object within every object that points out (references) the prototype that has been set for that object.
+
+var house = {color: "brown",
+            size: "huge",
+            expensive: true}
+
+house.prototype // undefined
+house.__proto__ // {constructor: ƒ, __defineGetter__: ƒ, __defineSet... (__pro
+
+if you try to access proprty in object if it is not present there it will go and find in it's prototype.
+if you assign prototype = another Object. it will find here and if not present in object then it will look into that object's prototype.
+
+```
+
 # 30)
 async Attribute:
 When you include the async attribute in a <script> tag, it tells the browser to download the script asynchronously while continuing to parse the HTML document.
