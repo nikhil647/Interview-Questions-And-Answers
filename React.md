@@ -359,6 +359,27 @@ You can handle "404 Not Found" pages by placing a <Route> component with no path
 ```
 ***
 
+**24) why to use key in listing **
+```
+ The key prop is a special attribute that helps React identify which items have changed, been added, or been removed from a list. It is important for performance and the correct behavior of component
+```
+***
+
+** debugger  **
+```
+In JavaScript, the debugger statement is a powerful tool for debugging your code.
+When the JavaScript interpreter encounters the debugger statement during the execution of your code, it automatically pauses the execution and launches any debugging functionality that is available.
+ 
+```
+** static and dynamic import **
+```
+Static imports are resolved and evaluated during the compile-time.
+ static imports are typically used for importing dependencies.
+
+Dynamic imports allow you to load modules asynchronously during runtime. This is particularly useful when you only need a module under certain conditions or when you want to lazy-load parts of your application.
+```
+
+
 <!-- **24)What is the purpose of the useRouteMatch hook in React Router DOM?**
 ```
 ``` -->
