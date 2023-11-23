@@ -350,7 +350,53 @@ export default async function ServerComponent(props){
 
 File names which we can create
 page.tsx, layout.tsx, not-found.tsx, loading.tsx, error.tsx, route.tsx
+
+Server Side validation with Server Action(Using useFormState hook):
+
+We use useFormState hook to get the errors from server action if any, from submitted form.
+eg.
+import { createSnippet } from '@/actions';
+import { useFormState } from 'react-dom';
+
+export default function SnippetCreatePage() {
+  const [formState, action] = useFormState(createSnippet, {message: ''})
+  // const createSnippetFunc = createSnippet.bind(null)
+  return (
+    <form action={action}>
+        // Form Code
+        {formState && 
+          <div className='my-2 p-2 bg-red-200 border rounded border-red-400'>{formState.message}</div>
+        }
+        <button type="submit" className="rounded p-2 bg-blue-200">
+          Create
+        </button>
+      </div>
+    </form>
+  );
+}
+
+createSnippet Action
+eg.
+export async function createSnippet(formState: {message :string} , formData: FormData) {
+  
+  // Check the user's inputs and make sure they're valid
+  const title = formData.get('title');
+  const code = formData.get('code');
+  
+  if (typeof title !== 'string' || title.length < 3) {
+    return {
+      message: 'Title must be longer',
+    };
+  }
+  if (typeof code !== 'string' || code.length < 10) {
+    return {
+      message: 'Code must be longer',
+    };
+  }
+    // create snippet server code
+}
 ```
+
 
 
 
