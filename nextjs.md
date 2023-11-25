@@ -396,9 +396,124 @@ export async function createSnippet(formState: {message :string} , formData: For
     // create snippet server code
 }
 ```
+***
+
+**26)New Next 14 Features - Caching**
+```
+There are 4 types of caching in next js 14
+Data cache:- Responses from requests made with fetch are stored and used across requests. 
+Ruter cache:- 'Soft' navigation between routes are cached in the browser and reused when a user revisits page. 
+Request memoization:- Make 2 or more 'GET' requests with fetch during a user's request to your server? Only one 'GET' is actually executed.
+Full Route Cache:- At build time, Next decides if your route is static or dynamic. If it is static, page is rendered and result is stored.
+                    In production, users are given this pre-rendered result.     
+
+All the pages are static by default 
+To make page dynamic, we will use below methods
+
+1)Calling a 'dynamic function' or referencing a 'dynamic variable' when your route renders 
+eg. coockies.set() - coockies.delete(), useSearchParams(), searchParams Prop
+
+2) Assignning specific 'route segment config' options
+eg. export const dynamic = 'force-dynamic'
+eg. export const revalidate = 0
+
+//Server Component
+export const dynamic = 'force-dynamic' || export const revalidate = 0 // This is the way we will assign route segment config options
+
+export default function SnippetCreatePage() {
+  return (
+    <form action={action}>
+      <h3 className="font-bold m-3">Create a Snippet</h3>
+        // code for creating
+    </form>
+  );
+}
+
+3) Calling 'fetch' and opting out of caching of response 
+eg. fetch('...url', {next: {revalidate: 0}});
+
+4) Using dynamic route
+eg. /snippets/[id]/page.tsx
+eg. /snippets/[id]/edit/page.tsx 
+
+Three ways to control caching
+Time Based :-
+Using revalidate on top of server comonent
+export const revaildate = 3 // number of seconds after rerender will happen 
+
+On-Demand :-
+Dumping cache for everything in a page
+import {revalidatePath} from 'next/cache'
+// When we think data that the '/snippets' route changed
+revalidatePath('/snippets') 
+
+Disable caching :-
+By defining below exprts in that page
+export const dynamic = 'force-dynamic' ||  export const revalidate = 0
+
+How can we cached dynamic routes for fast render? 
+We can cached dynamic routes using generateStaticParams() function in server component.
+This function should return an array of all possible dynamic routes
+
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { db } from '@/db';
+import { deleteSnippet } from '@/actions';
+
+interface SnippetShowPageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default async function SnippetShowPage(props: SnippetShowPageProps) {
+  await new Promise((r) => setTimeout(r, 2000));
+
+  const snippet = await db.snippet.findFirst({
+    where: { id: parseInt(props.params.id) },
+  });
+
+  if (!snippet) {
+    return notFound();
+  }
+  const deleteSnippetFunc = deleteSnippet.bind(null, snippet.id)
+  return (
+    <div>
+      <div className="flex m-4 justify-between items-center">
+        <h1 className="text-xl font-bold">{snippet.title}</h1>
+        <div className="flex gap-4">
+          <Link
+            href={`/snippets/${snippet.id}/edit`}
+            className="p-2 border rounded"
+          >
+            Edit
+          </Link>
+          <form action={deleteSnippetFunc}>
+            <button className="p-2 border rounded">Delete</button>
+          </form>
+        </div>
+      </div>
+      <pre className="p-3 border rounded bg-gray-200 border-gray-200">
+        <code>{snippet.code}</code>
+      </pre>
+    </div>
+  );
+}
+// This is how we write function, it is somewhat like getStaticPaths from pages router
+// It will pre generate all pages on server.
+export async function generateStaticParams(){
+  const snippets = await db.snippet.findMany()
+  
+  return snippets.map(snippet=>{
+    return {
+      id: snippet.id.toString()
+    }
+  })
+}
+```
+***
 
 
 
 
-
-
+ 
