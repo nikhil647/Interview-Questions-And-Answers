@@ -768,6 +768,16 @@ house.__proto__ // {constructor: ƒ, __defineGetter__: ƒ, __defineSet... (__pro
 if you try to access proprty in object if it is not present there it will go and find in it's prototype.
 if you assign prototype = another Object. it will find here and if not present in object then it will look into that object's prototype.
 
+Add property into prototype.
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+Person.prototype.sayHello = function() {
+  console.log(`Hello, my name is ${this.name} and I'm ${this.age} years old.`);
+};
+
 ```
 
 # 30)
