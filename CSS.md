@@ -176,8 +176,6 @@ for example :link :visited :hover :focus
 ```
 content-box and border-box refer to different CSS box-sizing models, which determine how the width and height of an element are calculated.
 
-content-box:
-
 content-box gives you the default CSS box-sizing behavior. If you set an element's width to 100 pixels, then the element's content box will be 100 pixels wide, and the width of any border or padding will be added to the final rendered width, making the element wider than 100px.
 
 border-box:  If you set an element's width to 100 pixels, that 100 pixels will include any border or padding you added, and the content box will shrink to absorb that extra width.
