@@ -245,9 +245,6 @@ Flexbox is largely a one-dimensional system (either in a column or a row). Flexb
 ```
 ***
 
-* Q) specificity in css
-* Q) Grid ?
-
 **15) How will you fix browser-specific styling issues?**
 ```
 *) At Initial stage use normalize.css -  establish a consistent baseline for all browsers by overriding
@@ -263,5 +260,22 @@ their default styles
   }
 }
 *) 
+```
+***
+
+**) Flexbox Layout module **
+```
+The Flexible Box Layout Module, makes it easier to design flexible responsive layout structure.
+
+2 axis - main axis & cross axis by default main axis is horizontal & cross axis is vertical because flex-direction is row by default.
+if we change the flex direction to column then the main axis operates on the vertical plane and the cross axis operates on horizontal plane.
+
+justify-content: Horizontally aligns the flex items on the main-axis.
+align-items: Vertically aligns the flex items on the cross-axis. (assuminng flex direction is row)
+options for both:  flex-start, center, flex-end, space-between, space-around.
+flex-direction: Specifies the direction of the flexible items inside a flex container.
+flex-wrap: Specifies whether the flex items should wrap or not, if there is not enough room for them on one flex line.
+flex-flow: It is a shorthand property for setting both the flex-direction and flex-wrap properties.
+align-content: The align-content property specifies how flex lines are distributed along the cross axis in a flexbox container.
 ```
 ***
