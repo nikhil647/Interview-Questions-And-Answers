@@ -17,7 +17,9 @@ HTML tags are used to create HTML documents and render their properties
 
 **3) What is semantic HTML?**
 ```
- It involves using appropriate HTML elements to describe the content's meaning and structure accurately. Semantic HTML helps both browsers and developers understand the structure of a web page, making it more accessible, SEO-friendly, and maintainable.
+ It involves using appropriate HTML elements to describe the content's meaning and structure accurately.
+Semantic HTML helps both browsers and developers understand the structure of a web page,
+making it more accessible, SEO-friendly, and maintainable.
 
  Instead of div we can go for these --> header, nav, main, article, section, aside, footer
 ```
@@ -48,12 +50,14 @@ SVG stands for Scalable Vector Graphics. It is a standard XML-based file format 
 
 **8) What is the purpose of the <meta> tag in HTML?**
 ```
-Explanation of how <meta> tags provide metadata about the HTML document, such as character encoding and viewport settings.
+Explanation of how <meta> tags provide metadata about the HTML document,
+such as character encoding and viewport settings.
 ```
 
 **9) How do you link CSS stylesheets to HTML documents?**
 ```
-Explanation of various methods to link external CSS stylesheets to HTML, including <link> and <style> elements.
+Explanation of various methods to link external CSS stylesheets to HTML,
+including <link> and <style> elements.
 ```
 
 **10) Explain the importance of accessibility in HTML**
