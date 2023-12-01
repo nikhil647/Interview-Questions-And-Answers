@@ -277,5 +277,10 @@ flex-direction: Specifies the direction of the flexible items inside a flex cont
 flex-wrap: Specifies whether the flex items should wrap or not, if there is not enough room for them on one flex line.
 flex-flow: It is a shorthand property for setting both the flex-direction and flex-wrap properties.
 align-content: The align-content property specifies how flex lines are distributed along the cross axis in a flexbox container.
+
+align-self: overrides the flex container's align-items property;
+flex: A shorthand property for the flex-grow, flex-shrink, and the flex-basis properties;
+flex-basis : flex-basis property specifies the initial length of a flexible item.
+order: Specify in what order the flex items appear.
 ```
 ***
