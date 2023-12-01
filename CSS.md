@@ -158,8 +158,14 @@ Inline Block Elements: Inline-block elements are similar to inline elements, exc
 
 **8) What are Pseudo elements and Pseudo classes?**
 ```
-Pseudo-elements:  allows us to create items that do not normally exist in the document tree,
-for example ::after. ::before ::first-letter
+Pseudo-elements:  A CSS pseudo-element is used to style specified parts of an element.
+For example, it can be used to:
+Style the first letter, or line, of an element
+
+p::first-line {
+  color: #ff0000;
+  font-variant: small-caps;
+}
 
 Pseudo-classes: select regular elements but under certain conditions like when the user is hovering over the link.
 for example :link :visited :hover :focus
@@ -171,31 +177,10 @@ for example :link :visited :hover :focus
 content-box and border-box refer to different CSS box-sizing models, which determine how the width and height of an element are calculated.
 
 content-box:
-div{
-    width:300px;
-    height:200px;
-    padding:15px;
-    border: 5px solid grey;
-    margin:30px;
-    -moz-box-sizing:content-box;
-    -webkit-box-sizing:content-box;
-    box-sizing:content-box;
-}
-overall_width = width + border + margin + padding
 
-border-box:
-div{
-    width:300px;
-    height:200px;
-    padding:15px;
-    border: 5px solid grey;
-    margin:30px;
-    -moz-box-sizing:border-box;
-    -webkit-box-sizing:border-box;
-    box-sizing:border-box;
-}
-overall_width = content's width + horizontal padding + horizontal border
+content-box gives you the default CSS box-sizing behavior. If you set an element's width to 100 pixels, then the element's content box will be 100 pixels wide, and the width of any border or padding will be added to the final rendered width, making the element wider than 100px.
 
+border-box:  If you set an element's width to 100 pixels, that 100 pixels will include any border or padding you added, and the content box will shrink to absorb that extra width.
 ```
 ***
 
@@ -254,6 +239,9 @@ CSS Grid Layout is a two-dimensional system, meaning it can handle both columns 
 Flexbox is largely a one-dimensional system (either in a column or a row). Flexbox layout is most appropriate to the components of an application.
 ```
 ***
+
+* Q) specificity in css
+* Q) Grid ?
 
 **15) How will you fix browser-specific styling issues?**
 ```
