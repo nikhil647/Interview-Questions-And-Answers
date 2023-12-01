@@ -195,15 +195,22 @@ It provides an easier and cleaner way to align items and distribute space within
 ```
 ***
 
-**12) cascading**
+**12) Specificity & Cascading **
 ```
-Cascading  --> styling rules that help the browser to select what rules have to be applied in times of conflict.
+Specificity: It refers to the rules that determine which style declarations are applied to an element when there are conflicting styles.
+It is a measure of how specific a selector is in targeting an element.
 
-p { color:white; }
-p { color: black; }
-Here, the browser just cascades down to identify what is the most recent and most specific style and applies that.
- if we want to ensure color white is applied to the paragraph, we can define weight to that style by adding !important.
- p { color:white !important; }
+a {
+  color: red;
+}
+
+#header .navigation li a {
+  color: blue; /* This selector has higher specificity */
+}
+Cascading  -->
+
+Cascading refers to the process of determining which styles should be applied to an element based on various factors, including specificity, importance, and source order.
+
 ```
 ***
 
