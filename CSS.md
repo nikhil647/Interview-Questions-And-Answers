@@ -256,6 +256,18 @@ Flexbox is largely a one-dimensional system (either in a column or a row). Flexb
 
 **15) How will you fix browser-specific styling issues?**
 ```
-??
+*) At Initial stage use normalize.css -  establish a consistent baseline for all browsers by overriding
+their default styles
+*) Add vendor prefixes - Many CSS properties require vendor prefixes to work across different browsers.
+-webkit-   -moz-  -o- -ms-
+*) Targeting Specific Browser Features or Versions with Media Queries.
+/* Style for Firefox only */
+@media (-moz-appearance: button) {
+  .button {
+    background-color: #ff9800;
+    border: 1px solid #000;
+  }
+}
+*) 
 ```
 ***
