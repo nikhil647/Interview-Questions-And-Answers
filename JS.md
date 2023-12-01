@@ -587,6 +587,11 @@ JS execute all opearation on a single thread but using a smart data structure it
 - A queue data structure that holds callback functions from asynchronous operations.
 - Callbacks are moved to the Call Stack when the Call Stack is empty and the Event Loop is active.
 
+there are two main types of queues: the Callback Queue (Task Queue) and the Microtask Queue (Job Queue).
+
+Callback Queue (Task Queue): Asynchronous operations, such as setTimeout callbacks or event handlers, are placed in the Callback Queue when they are ready to be executed
+
+Microtask Queue (Job Queue): Promises and certain APIs schedule their callbacks as microtasks. 
 ```
 
 **29) Promise  **
