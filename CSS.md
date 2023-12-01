@@ -141,7 +141,8 @@ Reset CSS: CSS resets aim to remove all built-in browser styling. For example ma
 
 Normalize CSS: Normalize CSS aims to make built-in browser styling consistent across browsers. It also corrects bugs for common browser dependencies.
 
-like bootstrap provide css classes
+Preserve default useful browsers instead of erasing them.
+Standardize styles for a wide variety of HTML elements.
 ```
 ***
 **7)What is the difference between inline, inline-block, and block?**
