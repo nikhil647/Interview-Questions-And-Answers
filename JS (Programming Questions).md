@@ -290,6 +290,23 @@ function findDuplicateEle(arr) {
 findDuplicateEle([1,2,3,5,3,1,9, 1]);
 ```
 
+# given charactor set genrate Randome String.
+```
+function returnRandomeString(charaterSet, expectedlength) {
+    let randomString = '';
+    while(randomString.length < expectedlength) {
+        const randomeNumber = Math.floor(Math.random() * charaterSet.length);
+        randomString+= charaterSet[randomeNumber]
+    }
+    return randomString;
+}
+
+const charaterSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const expectedlength = 8;
+
+console.log(returnRandomeString(charaterSet,expectedlength));
+```
+
 ## React: Create Stopwatch (sandbox)
 ```
 https://codesandbox.io/s/elastic-hoover-dq6dxx?file=/src/App.js
