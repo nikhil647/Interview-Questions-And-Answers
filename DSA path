@@ -1,0 +1,45 @@
+Arrays:
+Rotate an array by k positions. (Specify left or right rotation)
+Given an array of integers, move all zeros to the end of the array in-place.
+Write a function to find the minimum and maximum element in an array.
+Print all sub-arrays of a given array
+Given an array of characters, count the occurrences of each character.
+Find the missing number in an array of consecutive integers.
+Given an array of strings, check if they are all anagrams of each other.
+Find the duplicate element in an array with constant space complexity
+Implement the Kadane's algorithm to find the maximum subarray sum.
+Given an array of intervals, find the overlapping intervals.
+Check if a given sequence of numbers can be represented as a valid parentheses string.
+Find the longest increasing subsequence in an array.
+Given an array of coins and a target amount, find the minimum number of coins needed to make the amount.
+Find the equilibrium point in an array (index where the sum of elements on both sides is equal).
+Find the largest contiguous sum subarray in an array with negative and positive elements.
+
+Implement a circular buffer using an array
+Design a data structure to efficiently push and pop elements from both ends of the array
+
+2D Aray
+Spiral order traversal of a two-dimensional array.
+Merge two sorted arrays into a single sorted array.
+
+Sorting:
+Implement bubble sort, selection sort, or insertion sort, QuickSort algorithm.
+Calculate the number of inversions in an array
+
+Searching:
+Find the kth largest element in an array.
+Implement binary search on a sorted array.
+Find the first occurrence of a target element in an unsorted array.
+
+Linked Lists:
+Stacks and Queues
+Recursion
+Trees
+Graphs
+Hashing
+Sorting and Searching Algorithms
+Greedy Algorithms
+Dynamic Programming
+Heap and Priority Queue
+Trie - DS
+Advanced Topics (optinal) AVL trees, Red-Black trees, and advanced graph algorithms.
