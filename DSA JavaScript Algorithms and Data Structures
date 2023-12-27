@@ -1,3 +1,113 @@
+Algorithm - set of well defined instructions to solve a perticular problem.
+
+The absolute running time of an algorithm can not be predicted, since it depend on a number of  factors.
+
+1) programming language used.
+2) The computer the program runs
+3) Other programs running at the same time
+4) Quality of OS
+
+Not a valid params because it varries machine to machine.
+
+we evaluate the performance of an algorithm in terms of it's input size.
+
+Time Complexity: Amount of time taken by algo to run, as a function of input size.
+Space Complexit: Amount of memory taken by an algo to run, as a function of input size.
+
+these are more approprate.
+
+If your app needs to be very quick and has plenty of memmory to work with, you don't have to worry about space complexity.
+if you have very littile memmoy to work with you, you should pick a solution that is relatively slower. but needs less space.
+
+Represent Complexity ?
+we use Asymptotic Notation 
+- Mathematical tools to represent time & Space Complexity.
+
+Asymptotic Notations:
+Mathematical tools to repesent time & space complexity.
+1) Big-O Notation (O - notations) - Worst case complexity.  <--- Only care about this.
+2) Omega Notation (Ω - notations) - Best Case Complexity.
+3) Theta Notation (θ - notations) - Average Case Complexity.
+
+
+Big O calculation.
+
+function summation() {
+	let sum=0;
+	for(let i=1;i<=n;i++) {
+		sum +=i;
+	}
+	return sum;
+}
+
+this will take O(n) - Linear
+
+
+Another Aproach-
+function summation(n) {
+	return (n * (n+1)) /2;
+}
+this will take O(1) - Constant.
+
+
+Now Quadratic O(n^2)
+for(i=1;i<=n;i++) {
+	for(j=1;j<= i;j++) {
+		
+	}
+}
+
+Now Cubic O(n^3)
+for(i=1;i<=n;i++) {
+	for(j=1;j<= i;j++) {
+		for(j=1;j<= i;j++) {
+		
+		}
+	}
+}
+
+Space Complexity: Algorith doesnt need extra size or it doesn't depend on input size is constant.
+O(1) - Constant
+O(n) - Linear
+O(log n) - Logarthmic
+
+Object is collection of keys values pair.
+
+Insert = O(1)
+Remove = O(1)
+Access = O(1)
+Search = O(n)
+Object.keys = O(n)
+Object.values = O(n)
+
+
+Array  Big-O
+An array is an ordered collection of values.
+Insert/remove at end O(n)
+Insert/remove at beg O(n)
+Access - O(1)
+Search - O(n)
+Push/Pop - O(1)
+Shift/unshift/Concat/Slice/Splice - O(n)
+forEach/map/filter/reduce - O(n)
+
+Math Algorithm:
+Fibo, Factorial of Number, Prime Number, Power of Two, recursion
+
+Fibo Problem: Given a number 'n' find the first 'n' elements of the fibonacci sequence.
+
+function fibo(n) {
+     const array = [0,1];
+     for(let i=2;i<n;i++) {
+         array[i] = array[i-1]+array[i-2];
+     }
+     return array;
+}
+
+console.log(fibo(6))
+Time Complexity - O(n)
+
+
 Arrays:
 Rotate an array by k positions. (Specify left or right rotation)
 Given an array of integers, move all zeros to the end of the array in-place.
