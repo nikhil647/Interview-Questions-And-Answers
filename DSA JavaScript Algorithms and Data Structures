@@ -155,7 +155,26 @@ Integer larger than the square root do not need to checked because whenever n = 
 One of the two factor
 
 n = 24, a = 6, b= 4 
-square root of 24 = 4.89 
+square root of 24 = 4.89
+
+Power of Two:
+
+function isPowerOfTwo(n) {
+    if(n == 0) {
+        return false;
+    }
+    let isPrimeOfTwo = true;
+    while(n > 1) {
+        if(n % 2 !== 0) {
+            return false
+        }
+        n=n/2;
+    }
+    return true;
+}
+
+console.log(isPowerOfTwo(8)) --> true   2^3 === 8 
+console.log(isPowerOfTwo(6)) --> false
 
 
 
