@@ -107,6 +107,29 @@ function fibo(n) {
 console.log(fibo(6))
 Time Complexity - O(n)
 
+Factorial:
+
+Factorial: factorial of that integer
+product of all positive integer less than or equal to n.
+
+factorial of (0) - 1
+fact(4) - 4*3*2*1 =24;
+
+function fact(n) {
+    let fact =1
+        for(let i=n;i > 0;i--) {
+            fact = n * fact;
+            n--;
+        }
+        console.log(fact)
+}
+fact(3);
+
+TC - O(n)
+SC = O(1)
+
+
+
 
 Arrays:
 Rotate an array by k positions. (Specify left or right rotation)
