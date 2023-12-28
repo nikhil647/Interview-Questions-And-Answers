@@ -128,6 +128,36 @@ fact(3);
 TC - O(n)
 SC = O(1)
 
+Prime Number:  whole number greater than 1 that cannot be exactly divided by any whole number other than itself.
+
+
+function isPrime(n) {
+    let isPrime = true;
+    if(n == 0 || n ==1) {
+        isPrime = false
+        return isPrime
+    }
+    else {
+    for(let i=2;i < Math.sqrt(n) ; i++) {
+        if(n % i === 0) {
+            isPrime = false;
+        }
+    }
+    return isPrime;
+    }
+}
+
+console.log(isPrime(8))  // false
+console.log(isPrime(5))  // true
+
+why  i < Math.sqrt(n) ??  
+Integer larger than the square root do not need to checked because whenever n = a * b.
+One of the two factor
+
+n = 24, a = 6, b= 4 
+square root of 24 = 4.89 
+
+
 
 
 
