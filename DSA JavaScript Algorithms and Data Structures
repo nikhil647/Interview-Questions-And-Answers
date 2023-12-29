@@ -262,6 +262,8 @@ function BinarySearch(sortedArray, element, startIndex, endIndex) {
 const sortedArray = [10,20,30,40,50];
 console.log(BinarySearch(sortedArray, 10 ,0, sortedArray.length-1 ));
 
+TC - O(log n)
+
 
 
 
