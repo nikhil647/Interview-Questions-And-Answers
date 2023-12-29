@@ -224,15 +224,43 @@ function BinarySearch(array, element) {
         else if(array[middleIndex] > element) {
             rightIndex = middleIndex - 1
         }
-    } 
-    
+    }
+    return -1;
 }
+
+const sortedArray = [10,20,30,40,50];
+console.log(BinarySearch(sortedArray, 50));
+
 
 const sortedArray = [10,20,30,40,50];
 console.log(BinarySearch(sortedArray, 100));
 
 Time Complexity - O(log n)
 
+
+Recursinve Approach:
+
+function BinarySearch(sortedArray, element, startIndex, endIndex) {
+    
+    let mid = Math.floor((startIndex + endIndex) / 2);
+            if(startIndex <= endIndex) {
+                if (sortedArray[mid] === element) {
+            return mid;
+            }
+            else if(sortedArray[mid] < element) {
+                return BinarySearch(sortedArray,element, mid+1, endIndex );
+            }
+            else {
+                return BinarySearch(sortedArray,element, startIndex , mid );
+            }   
+        }
+        else {
+            return -1;
+        }
+}
+
+const sortedArray = [10,20,30,40,50];
+console.log(BinarySearch(sortedArray, 10 ,0, sortedArray.length-1 ));
 
 
 
