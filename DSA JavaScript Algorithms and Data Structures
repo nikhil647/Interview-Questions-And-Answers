@@ -91,6 +91,11 @@ Push/Pop - O(1)
 Shift/unshift/Concat/Slice/Splice - O(n)
 forEach/map/filter/reduce - O(n)
 
+loop - O(n)
+nested loop - O(n^2)
+Input Size Reduced by half - O (log N)
+loop - O(n)
+
 Math Algorithm:
 Fibo, Factorial of Number, Prime Number, Power of Two, recursion
 
@@ -129,7 +134,6 @@ TC - O(n)
 SC = O(1)
 
 Prime Number:  whole number greater than 1 that cannot be exactly divided by any whole number other than itself.
-
 
 function isPrime(n) {
     let isPrime = true;
@@ -186,6 +190,48 @@ function factorial(n) {
 console.log(factorial(3));
 TC - O(n)
 
+
+Linear Search
+
+function linearSearch(array, n) {
+    for(let i = 0;i<array.length; i++) {
+        if(array[i] === n) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+let array = [34,2,45,6,10];
+
+console.log(linearSearch(array, 10));
+TC- O(n);
+
+
+//  Binary Search Solution'
+function BinarySearch(array, element) {
+    let leftIndex = 0;
+    let rightIndex = array.length-1;
+    
+    while(leftIndex <= rightIndex) {
+        let middleIndex = Math.floor((leftIndex + rightIndex) / 2);
+        if(array[middleIndex] === element) {
+            return middleIndex;
+        }
+        else if(array[middleIndex] < element) {
+            leftIndex = middleIndex + 1
+        }
+        else if(array[middleIndex] > element) {
+            rightIndex = middleIndex - 1
+        }
+    } 
+    
+}
+
+const sortedArray = [10,20,30,40,50];
+console.log(BinarySearch(sortedArray, 100));
+
+Time Complexity - O(log n)
 
 
 
