@@ -1,0 +1,827 @@
+Docket Notes from stephern grider course.
+we will see --> what is docker ? why use docker ? 
+
+Installing Software Steps:
+
+1) Download Installer.
+2) Run Installer.
+3) Get an error message during installation.
+4) Trobleshoot issue.
+5) rerun installer.
+6) Get another error.
+
+7) Evantually Successs
+
+this is what docker is trying to solve. install & run software in any given machine.
+Not just your computer but any web server or any cloude based computing platform.
+
+Redis eg.
+
+Steps to install Redis.
+1) wget http:/download.redis.io/release/redis-4.0.11.tar.gz
+2) tar xzf redis-4.0.11.tar.gz
+3) cd redis-4.0.11
+4) make
+
+therotically only 4 steps and boom redis installed. but when will try and install practically
+for very first step
+$wget http:/download.redis.io/release/redis-4.0.11.tar.gz
+
+zsh: command not found: wget 
+
+this was just example you can solve this easily but this is the point
+endless troubleshooting cycle.
+
+so we will see how redis installation is easy if you are using docker.
+
+$docker run -it redis
+
+boom --> redis instance running.
+
+Now we understood why use docker ? now let's understand what is docker ?
+
+Docker Ecosystem includes
+Docket Client, Docker Server, Docker Machine, Docker Image, Docker Hub, Docker Compose
+
+Docker is platform or ecosystem around creating and running containers.
+
+Image --> Single File with all the dependency and config required to run a program.
+Container  --> Instance of an Image runs a program.
+
+yes yet dont know what is docker.
+
+Docker Client (Docker CLI) --> Tool that we are going to issue command to.
+Docker Server(Docker Daemon) --> Tool that is responsible for creating images running containers etc.
+
+docker login -u nikhil647  
+dckr_pat_bFuXslcMSwenCbNWLSZRe4RChD8  //Genrated token by https://hub.docker.com/
+
+
+Hello world in docker worlds -->
+
+docker run hello-world 
+
+when we hit this, that starts up docker client or docker cli.
+this communicating to docker server, docker server is incharge of heavy lifting.
+
+docker server sees we are trying to run image called hello-world.
+
+docker server looked into something called image cache. but we just install docker so cache is empty.
+docker server reach out to free service docker-hub.
+
+:docker-hub:
+
+hello-world
+redis
+busybox
+other image A, other image B
+
+docker server downloaded this hello-world file.
+
+Output of running continer hello-world -->
+
+Hello from Docker! 
+This message shows that your installation appears to be working correctly.
+
+some knowledge about OS -->
+
+Kernel --> Running software process that governs access between all the programs that are running in the computer and
+all the physical hardware that is connected to your computer as well.
+
+process running   ----->                                             Chrome nodejs terminal
+makes request to kernal to interact with piece of hardware --->      System Call
+                                                                     Kernel
+                                                                  CPU   Memmory  Hard Disk
+One concept from OS
+Namespacing --> Isolating resources per process (or group of process).
+It can be done on hardware (process, hard drive, network, Users)
+
+Control Groups ---> similar concepts but done of software 
+it limit amount of resouces used per process (memmory, CPU usage, HD I/O Network Bandwidth)
+
+
+Container --> so this two feature put toghether can be used to really kind of isolate a single process.
+and limit the amount of resouces it can talk to and amount of badwidth it can use of.
+
+
+what is relation between docker container and docker image ?
+
+Docker image -->
+
+An image is a lightweight, standalone, and executable package that includes everything needed to run a piece of software, including the code, runtime, libraries, and system tools.
+Docker images are essentially a snapshot or a template of a file system and the parameters needed for running a container.
+
+
+Docker Container -->
+A container is a running instance of a Docker image.
+Containers provide a consistent and reproducible environment for applications, ensuring that they run consistently across different environments.
+
+
+Namespacing and control groups are feature of linux OS not windows not mac
+so how are we running docker on windows/mac ?
+
+--> wsl ( windows subsystem for linux - linux virtual machine).
+
+
+2) Manipulating containers with docker containers.
+
+Creating and running a container from an image.
+docker run <image name>
+
+another way (purpose is override default command)
+docker run <image name> command 
+
+command - default override command.
+
+docker run busybox echo hi there
+docker run busybox ls
+
+busybox  has some default file system snapshot and some presumly default command.
+busybox image has folders of bin, dev, home, proc, root and so on.
+
+so when we create a new container out of that image we take this file system snapshot we stick it in as folder for that container and command we execute is ls.
+
+why not??
+docker run hello-world echo hi there   ?? why this will not work
+
+because busy box has ls and echo inside of this folder system (ls, echo are executable).
+
+Listing running containers
+docker ps 
+
+at present we don't have running containers inside table. why our previous containers are running very quickly and then shutting down.
+
+docker run busybox ping google.com
+
+this command will continously ping google.com
+
+open another terminal and run > docker ps
+
+CONTAINER ID   IMAGE     COMMAND             CREATED              STATUS              PORTS     NAMES
+c58ff2ec9a68   busybox   "ping google.com"   About a minute ago   Up About a minute             sleepy_galois    
+
+press control 'C' to stop running container.
+
+ docker ps --all - prints all the containers which are ever started on the machine. 
+
+why does it get shutdown? what happen when it get shutdown ?
+
+lifecycle of containers:
+creating and running containers are actually two seprate process.
+
+docker create -> setting up this file system snapshot to be used to create the container.
+docker start -> to actually start the container, we execute startup command.
+
+docker run = docker create + docker start
+
+so that mean we can execute the process seprately.
+$ docker create hello-world
+> 955c4d767sdmfdbfwefsdfbfsdbf3u4r3r43r34r34r4...4
+
+$ docker start -a 955c4d767sdmfdbfwefsdfbfsdbf3u4r3r43r34r34r4...4
+>Hello World image output.
+
+what is -a ?  --> give me output and print it on terminal if you don't add -a you won't be able to see the output.
+
+when we have container which is already exhist we can not overwrite the default command.
+It means this won't work ->
+
+docker start -a 955c4d767sd echo bye there  // this won't work.
+
+Remove Stopped containers:
+
+$docker system prune
+
+Warning this will remove: 
+               - all stopped containers
+               - all network not used by atleaset one container
+               - all dangling images 
+               - all build cache    - redownload image from docker hub
+Are you sure you want to continue ? [Y/N]
+
+Retriving log output: 
+what if you want to get output from container without adding -a flag (what if you forget?)
+
+use logs command if you want get logs
+docker logs <container-id>
+
+Stoping Containers.
+
+$docker create busybox ping.google.com
+>955c4d767sdmfdbfwefsdfbfsdbf3u4r3r43r34r34r4...4
+
+$docker start 955c4d767sdmfdbfwefsdfbfsdbf3u4r3r43r34r34r4...4
+>955c4d767sdmfdbfwefsdfbfsdbf3u4r3r43r34r34r4...4
+
+$docker logs v
+
+PING google.com (142.250.71.110): 56 data bytes                                                                         64 bytes from 142.250.71.110: seq=0 ttl=63 time=7.681 ms                                                                64 bytes from 142.250.71.110: seq=1 ttl=63 time=11.255 ms                                                               64 bytes from 142.250.71.110: seq=2 ttl=63 time=13.163 ms                                                               64 bytes from 142.250.71.110: seq=3 ttl=63 time=8.526 ms                                                                64 bytes from 142.250.71.110: seq=4 ttl=63 time=6.551 ms                                                                64 bytes from 142.250.71.110: seq=5 ttl=63 time=29.393 ms                                                               64 bytes from 142.250.71.110: seq=6 ttl=63 time=16.538 ms                                                               64 bytes from 142.250.71.110: seq=7 ttl=63 time=14.711 ms                                                               64 bytes from 142.250.71.110: seq=8 ttl=63 time=7.126 ms                                                                64 bytes from 142.250.71.110: seq=9 ttl=63 time=7.723 ms                                                                64 bytes from 142.250.71.110: seq=10 ttl=63 time=15.097 ms                                                              64 bytes from 142.250.71.110: seq=11 ttl=63 time=16.164 ms                                                              64 bytes from 142.250.71.110: seq=12 ttl=63 time=6.382 ms                                                               64 bytes from 142.250.71.110: seq=13 ttl=63 time=54.123 ms                                                              64 bytes from 142.250.71.110: seq=14 ttl=63 time=6.310 ms                                                               64 bytes from 142.250.71.110: seq=15 ttl=63 time=8.232 ms                                                               64 bytes from 142.250.71.110: seq=16 ttl=63 time=8.283 ms   
+
+Now how we will stop this container ?
+
+we can use 
+docker stop command or docker kill command.
+what is diffrence between them ?
+
+In case docker stop: Hardware signam is sent 'SIGTERM'
+It means terminate signal shut down on it's time.
+
+you are giving time to process to do a little bit of cleanup. a lot of programming lang has ability to listen to these signals.
+At other side docker kill issue SIGKILL signals to the primary running process inside the container. you have to shut down right now.
+
+Internally if docker stop also calls docker kill if process is not down for 10 seconds.
+
+Multi Command Continer:
+
+redis: In order to start you need to start redis server. and then start redis-cli.
+outside docker env it is very easy in 1 tab start redis server in another tab start redis cli.
+
+but when you run redis server inside docker env (as container) how you will access redis cli ?
+
+Executes commands in running containers
+docker exec -it <container-id> <commands>
+
+so in this case.
+
+1st tab) docker run redis
+2nd tab) docker exec -it 6681edb236a7 redis-cli 
+
+-it --> if we don't add -it flag it will still run but not allow to interact.
+
+The Purpose of IT flag.
+when you run docker on your machine every single container that you are running is running inside of a virtual machine linux. (even if you are running mac or windows)
+
+-it is nothing but two seprate flags. -i -t
+-i - connect with STDIN chanel of that running process.
+-t show up the text littile bit preety.
+
+Getting a command prompt in a container.
+writing everytime this statement is not always goodthing.
+
+docker exec -it 6681edb236a7 <command 1>
+docker exec -it 6681edb236a7 <command 2>
+docker exec -it 6681edb236a7 <command 3>
+
+so better way is 
+docker exec -it 6681edb236a7 sh     // sh stands for shell
+
+we get full terminal access which is extrimlly powerfull. and helpfull in case of debugging.
+
+so when you are inside terminal (shell)
+#redis-cli
+127.0.0.1:6379>
+
+now what is sh?
+bash, powershell, zsh, sh --> command processor
+
+most containers you gonna run that will gonna have sh program included.
+
+one downside of using 
+docker exec -it <container> sh
+
+you loose primary command. you have to manually start server.
+
+container isolcation: two container do not share the file system space. (even if it belongs to same image)
+
+we can use images which are created by other developers we can also create our own images.
+
+How to create image ?
+A) --> Dockerfile --> Docker Client --> Docekr Server --> Usable Image.
+
+Steps for Creating a Docker File
+1) Specify the base image.
+2) Run some commands to install additional programs.
+3) Specify a command to run on contianer startup.
+
+ok let's build docker image that run redis server.
+
+create file namely "Dockerfile" and folling lines of code.
+
+# Use and exhisting docker image as base.
+FROM alpine
+
+#Downloadn & Install dependencies
+RUN apk add --update redis
+
+#tell the image what to do when it start
+#as a container
+CMD ["redis-server"]
+
+// now in a terminal
+$docker build .
+
+> writing image sha256:e0607e55c471009f5a690af8e5536f7ed9dd1ab9e906afd3b12d6f4bdc5f5891 
+
+not take this id and run 
+$docker run e0607e55c471009f5a690af8e5536f7ed9dd1ab9e906afd3b12d6f4bdc5f5891
+
+Docker File Tear Down.
+
+writing a dockerfile  ===  being given a computer with no os and being told to install to install chrome.
+
+ok then what is apline ? -- it is like installing OS (Specify a base image).
+alpine comes with preinstalled set of programs that are usefull to you.
+
+apk - aapache package manager (comes preinstalled with alpine)
+
+Build Process summary --> 
+every step along the way every addition instruction we essentially take the image that was generated during the previous step,
+we create a new container out of it. we execute a command in the container or make a change to it's file system. we execute command in a container 
+then we take snapshot of it's file system and save it as output for the next instruction along the chain.
+and then when there is no more instruction to execute is output from the entire process as the final image that we really care about.
+
+one more interesting thing of docker is it caches every step if re run docke build then we get lot of performance benifit.
+and if modify(add/remove) dokcer build still wil get caching benifit till the section file was same.
+
+Tagging an Image
+remembering id for docker run command is pain. solution is tag image 
+docker build -t stephengrider/redis:latest . 
+
+-t --> tag
+stephengrider --> Username
+redis --> image name
+latest --> version (optional if we don't specify it is default)
+
+
+$docker run stephengrider/redis:latest
+
+Manually Image genration with Docker Commit.
+
+Docker Commit: Create a new image from a container's changes. (saying statue to your current container(make image) and over whenever you want (make build out of it)).
+it's not that heavily used but good to know it exhist.
+
+$docker run -it alpine sh
+#apk add --update redis
+
+we run alpine contianer which is community container and then manually installed redis and now in another tab
+docker ps
+Container ID    Image   .........
+32342343242342   alpine  ........
+
+$docker commit 'CMD ["redis-server"]' 32342343242342
+>sha256:0823423423423423423423423423234
+
+$docker run 0823423423423423423423423423234
+
+
+Making Real Project With Docker
+Steps:
+1) Create Node Js Web APP
+2) Create a DockerFile
+3) Build Image from Dockerfile
+4) Run Image as container
+5) Connect to web app from a browser
+
+Creating simple docker file.
+
+#Specify the bae image
+FROM node:14-alpine
+
+#Install Some Dependencies
+RUN npm install
+
+#Default Command
+CMD ["npm", "start"]
+
+
+alpine don't have npm installed so what we can do is find the base image who has npm installed.
+now let's try to run docker file and try to make image out of it.
+
+docker build .
+docker run [container ID]
+
+error why? package.json and index.js need to move inside container.
+
+solution add this before RUN npm install
+COPY ./ ./
+
+copy current directory files inside container's root directory.
+
+create container out of image
+Now open browser on port 8080 (this port number is specified at node index file)
+borser showing nothing.
+
+docker container can make request to outside world (when we perform npm install).
+but when it cones to incoming request we need to port mapping.
+
+docker run -p 5000: 8080 <image id>
+
+5000 - where all the trafic move (destination port)
+8080 - source port when app is running inside container.
+
+docker run -p 5000:8080  169b5a58ddeac665fe9581 (working)
+in browser -->
+localhost://5000   o/p in browser Hi There.
+
+one more little gotcha
+if we copy all the files in a root directort there is huge chance that
+we might overwrite some folders and files which we dont want.
+
+better to move everything inside a subfolder.
+to do that specify workdir before we copy
+
+WORKDIR /usr/app
+COPY ./ ./
+if this folder do not exhist docker will create such strcture for us.
+and all the files will get moved to /usr/app.
+
+Unnecessary Rebuild:
+Let change content of index.js "Hi There" to "Bye There"
+and now refresh the browser we are not seeing "Bye there". why??
+
+while making container docker simply taking snapshot at that time it was "Hi There" not "Bye There".
+
+so inrder to get latest changes again we need to build docker image. but only problem with this approach in node modules dependencies.
+we really really can not install dependecy every single time.
+
+Minimizing Cache Busting and Rebuild
+so simple hack is reposition your commands.
+
+FROM node:alpine
+WORKDIR /usr/app
+
+COPY ./package.json ./
+RUN npm install
+COPY ./ ./
+
+CMD ["npm","start"]
+
+now cache will get invalidated only when package.json changes which is perfect.
+we will get advantages of caching here.
+
+Docker Compose With Multiple Local Containers:
+App OverView - we are making app which simply show no of times this page is visited.
+quite simple, but imagine due to load we need to increase server (scale) now each docker container
+hold redis app and each having diffrent count. (A->80, B->40, C->10, D-20)
+
+so to avoid this we store redis instance in diffrent container(one) and app in diffrent containers (many).
+and container somehow communicates with redis server.
+
+what we are building is 1 container for redis and 1 container for our app. (for simplicity)
+App Server Starter Code:
+
+Docker Compose:
+*) Seprate CLI that gets installed along with docker.
+*) Used to start up multiple docker containers at the same time.
+*) Automate some of the long-winded arguments we were passing to docker run.
+
+Docker Compose File: - It contains all the options we had normally pass to docker cli.
+docker-compose.yml
+
+docker-compose.yml
+
+Here are the containers I want (2 containers basically)
+	1) redis-server
+		make it using redis image
+	2) node-app
+		make it using Dockerfile in the current directory.
+		Map port 4001 to 8081
+
+docker-compose.yml
+
+version: "3"
+services:
+  redis-server:
+    image: "redis"
+  node-app:
+    build: .
+    ports: -"4001:8081"
+
+
+Now cool thing about the docker compose is now this two containers can freely communicate with each other without any heck.
+no internal port mapping no work needed.
+
+remember in order to run redis we need to redis server running and we have to specify it's location
+in local env it is something like 'localhost:6379' but here in docker env we have to speicify container name that we have added in docker-compose.yml
+
+
+Docker Compose Commands:
+
+command:
+docker run myimage      }-> docker-compose up
+
+docker build .          }
+docker run myimage      }-> docker-compose up -- build
+
+if you want to rebuild all the images use "docker-compose up --build" if you want to just run the containers "docker-compose up"
+
+Stoping the docker compose container
+docker-compose down   : all the continers are stoped that belongs to compose file.
+
+docker-compose up -d        --> Run Container in Background
+
+Container Maintainers with compose:
+
+how to deal when specific container crash ?
+let's crash node js app when user visits site 
+process.exit(0);   so our node js app will crash.
+
+what we want is app should run again even after crash basically.
+
+process.exit(0)  
+0  --> we exited everything is OK
+1,2,3..etc ---> we exited because something went wrong.
+
+Restart Policies:
+"no"  Never Attempt to restart this (don't forget inverted commans)
+Always  if this container stop for any reason always attempts to restart it
+on-failure  only restart if the container stops with an error code.
+unless-stopped Always restart unless we (the developer) forcibly stop it.
+
+Recomended to use ---> Always  for server
+if is it worker container then use on-failure  
+worker container - container processing a file.
+
+Container Status with docker compose.
+we have command docker ps which list all running containers.
+
+docker-compose ps
+specific to docker-compose.yaml file it will only list it's own containers and only work in same directory.
+if you go above directory and there if you don't have any docker-compose file then running this command won't give any output
+
+Creating Production a grade workflow:
+Develop -> Testing -> Deployment ---> again back to develope (loop)
+
+Flow: 
+Github (feature ---> Master)
+Travis CI
+AWS Hosting
+
+but wait something to notic 
+Last Diagram didn't mention anything about docker
+docker is a tool in normal developement tool
+Docer makes some of these tasks a lot of easier.
+
+Project Genration:
+npx create-react-app frontend
+
+DockerFile create image by custome name:
+$docker build -f Dockerfile.dev .
+
+Dulicating Dependecies- deleted node modules from dir why ?
+no need to samp copy anyway we gonna run it on docker container so we can remove it in outside env.
+
+Volumes: Volumes provide a mechanism to share and persist data between containers and the host machine.
+Docker volumes are a way to persist data generated by and used by Docker containers.
+When a Docker container is deleted, any data that hasn't been stored in a volume will be lost.
+
+-v:
+In Docker, the -v flag is used to mount volumes to containers,
+enabling you to persist data, share files, and customize
+the container's filesystem.
+
+Specifying the Volume:
+1) Named Volume: Use -v <volume_name>:<container_path>
+2) Anonymous Volume: -v <container_path>
+
+docker run -it -p 3000:3000 -v /app/node_modules -v ${PWD}:/app nikhil647:frontend
+
+my understanding - any time projects wants some module,so it will go and check volumes we have mapped to it.
+
+Using Docker Compose YAML
+
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    volumes:
+      - /app/node_modules
+      - .:/app
+
+Do we need copy inside docker file now ?
+A) No! we are using volumes when you create image we can use -v (volume) and in case of docker compose we specify in volume section
+but still let it be for future refrenece.
+
+Executing Test:
+docker build -f Dockerfile.dev .
+docker run -it 44af9c1f22d7f1d129bada2e8036253acd npm run test
+
+great downside of this approach is if we make changes in test file (add/remove)
+problem --> test don't rerun (we don't get watch mode advantages)
+
+so sir showed two approaches to tackle the problem.
+1) in docker-compose file created 1 service (container) then used that image and overwritten it by (npm run test)
+
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    volumes:
+      - /app/node_modules
+      - .:/app
+
+
+2) Build another service for running test. (tests)
+
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+  tests:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
+
+Now problem is solved we get updated result but downside of this approach is we lost interactivity. (w, a, p while testing)
+we have two solution nither is perfect.
+
+
+Need of Nginx: 
+npm run build --> Build the prodution version of application.
+
+What happend in dev envirment ?
+we have developement server, browser makes request to port (3000) dev server takes index.html file & main.js file or some js files 
+sends back to browser. but we move to production envirment dev server falls away.
+
+Dev server is not suitable for production env it has tone of process involved which are not necessarily in prod env.
+what we need is some type of production server(nginx) for serving files.
+
+Muulti-step docker builds:
+For deployment what should be the expected steps.
+1) use node:alpine
+2) Copy package.json file
+3) Install dependency
+4) Run 'npm run build'
+5) Start nginx
+
+what are problems with the steps.
+1) Dependency only needed to execute 'npm run build'
+2) where ngnix coming from ?  ---> 
+
+for problem number (2) we are gonna have two diffrent blocks of configuration.
+we are gonna have 1 block of configuration to implement build phase. will use node:apline as base image
+in another block we gonna have have nginx as base image
+
+*Build Phase*
+Use node:alpine
+Copy package.json file
+Install Depenencies
+Run 'npm run build'
+
+*Run Phase*
+Use nginx
+copy over the result of 'npm run build'
+Start nginx
+
+
+FROM node:16-alpine as builder
+WORKDIR '/app'
+COPY package.json .
+RUN npm install
+COPY . .
+RUN npm run build
+
+FROM nginx
+COPY --from=builder /app/build /usr/share/nginx/html
+
+$docker build .
+$docker run -p 8080:80 
+
+ngnix run 80 port and start automatically.
+
+Continous Integration & Deployment:
+
+what we do in this chaper is 
+setup CI & Deployment how ? what tools ??
+
+1) docker
+2) Github Action
+3) AWS Beanstalk
+
+first let's talk about each: docker already know just help to install software.
+
+Github Action:  automate all your software workflows, now with world-class CI/CD. (explained in details below)
+AWS Beanstalk: AWS Elastic Beanstalk is a service from Amazon Web Services that helps you deploy applications by managing different AWS tools like EC2, S3, notifications, monitoring, auto-adjustment, and load balancing.
+
+
+let's start: follow this for detailed guide for setting up (in course traves CI is used for that credit card is required)
+
+https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/11437142#questions/17673926
+
+smally summary of it. only process is explained will require more research for detailed guide.
+
+1) Create a .github/workflows directory in your repository on GitHub if this directory does not already exist.
+2) n the .github/workflows directory, create a file named deploy.yml
+3) Add code inside yml which will instruct github branch nme for deployment, deployment details cred etc.
+4) push this changes in master/main branch. github will detect it and will start pipeline.
+
+name: Deploy Frontend
+on:
+  push:
+    branches:
+      - master # check your repo, your default branch might be master!
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker build -t cygnetops/react-test -f Dockerfile.dev .
+      - run: docker run -e CI=true cygnetops/react-test npm test
+
+      - name: Generate deployment package
+        run: zip -r deploy.zip . -x '*.git*'
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v18
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          application_name: react-docker-app
+          environment_name: React-docker-app-env
+          existing_bucket_name: elasticbeanstalk-us-east-1-010461912927
+
+          region: us-east-1
+          version_label: ${{ github.sha }}
+          deployment_package: deploy.zip
+
+
+need to R&D for each instructions.
+secrets.DOCKER_USERNAME   docker userr name and password
+secrets.DOCKER_PASSWORD  
+
+secrets.AWS_ACCESS_KEY     we need to create a user which has beanstalk full access.
+secrets.AWS_SECRET_KEY 
+
+1) we need to add these keys in github.
+2) Setting --> secrets and variables
+3) actions
+4) New Repo Secrets (add 4 keys 1 by 1)
+
+Heading towards AWS.
+AWS Configuration Cheat Sheet.
+
+https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/20676694#questions/17673926
+
+Create EC2 IAM Instance Profile
+
+1. Go to AWS Management Console
+2. Search for IAM and click the IAM Service.
+3. Click Roles under Access Management in the left sidebar.
+4. Click the Create role button.
+5. Select AWS Service under Trusted entity type. Then select EC2 under common use cases.
+6. Search for AWSElasticBeanstalk and select the AWSElasticBeanstalkWebTier, AWSElasticBeanstalkWorkerTier and AWSElasticBeanstalkMulticontainerDocker policies. Click the Next button.
+7. Give the role the name of aws-elasticbeanstalk-ec2-role
+8. Click the Create role button
+
+Create Elastic Beanstalk Environment
+
+1. Go to AWS Management Console.
+2. Search for Elastic Beanstalk and click the Elastic Beanstalk service.
+3. If you've never used Elastic Beanstalk before you will see a splash page. Click the Create Application button. If you have created Elastic Beanstalk environments and applications before, you will be taken directly to the Elastic Beanstalk dashboard. In this case, click the Create environment button. There is now a flow of 6 steps that you will be taken through.
+5. You will need to provide an Application name, which will auto-populate an Environment Name.
+6. Scroll down to find the Platform section. You will need to select the Platform of Docker. You then must manually change from Docker running on 64bit Amazon Linux 2023 to Docker running on 64bit Amazon Linux 2.
+7. Scroll down to the Presets section and make sure that free tier eligible has been selected:
+8. Click the Next button to move to Step #2.
+9. You will be taken to a Service Access configuration form.
+Select Create and use new service role and name it aws-elasticbeanstalk-service-role. You will then need to set the EC2 instance profile to the aws-elasticbeanstalk-ec2-role created earlier (this will likely be auto-populated for you).
+10. Click the Skip to Review button as Steps 3-6 are not applicable.
+11. Click the Submit button and wait for your new Elastic Beanstalk application and environment to be created and launch.
+12. Click the link below the checkmark under Domain. This should open the application in your browser and display a Congratulations message.
+
+now after all this steps this should happen.
+Beans stalk automatic configure s3 and ec3 for you.
+
+AWS Elastic Beanstalk provides a URL; if we visit that link, our application should be in a running state.
+
+don't forget to terminate envirment after demo. otherwise it will cost you money.
+
+
+Build Multi Container Application:
+
+Single Container Deployment issue-->
+1) The app was so simple
+2) Our Image was built multiple times
+3) How do we connect to a database from a container ??
+
+what we are building super complicated fibonassie seried app.
+becoz we want to focus on learning docker not the actual application.
+
+
+need achitecture ss can not add here.
+Nginex --> React Server 
+      ---> Express Server -----> Redis  <---> Worker
+                         ----> Postgres
+
+Worker Process --> watch redis for new indecies pull each new indice calculated new value and puts it back into redis.
