@@ -286,6 +286,33 @@ function insertionSort(array) {
 insertionSort([20,30,10,40,5])
 
 
+function quickSort(array) {
+    
+    if(array.length <= 1) {
+        return array;
+    }
+    
+    let pivot = array[0];
+    let leftArray = [], rightArray = [];
+    
+    for(let i=1; i < array.length; i++) {
+        if(pivot > array[i]) {
+            leftArray.push(array[i]);
+        }
+        else {
+            rightArray.push(array[i]);
+        }
+    }
+    return [...quickSort(leftArray),pivot,...quickSort(rightArray)];
+}
+
+let array = [40,64,70,10,20,23]; 
+console.log(quickSort(array));
+
+// Average Case - O(n logn) 
+// Worst Case - O(n^2) - when Arrays is already sorted
+
+
 
 
 Arrays:
