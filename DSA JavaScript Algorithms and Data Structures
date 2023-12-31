@@ -314,6 +314,40 @@ console.log(quickSort(array));
 // Space Complexity - O(1)
 
 
+Merge Sort
+
+function mergeSort(arr) {
+    if(arr.length <= 1) {
+        return arr;
+    }
+    let mid = Math.floor(arr.length / 2);
+    let leftArray = arr.slice(0, mid);
+    let rightArray = arr.slice(mid);
+    return merge(mergeSort(leftArray),mergeSort(rightArray));
+}
+
+function merge(leftArray, rightArray) {
+    let leftIndex = 0, rightIndex = 0;
+    let resultArray = [];
+    while(leftIndex < leftArray.length && rightIndex < rightArray.length) {
+        if(leftArray[leftIndex] < rightArray[rightIndex]) {
+            resultArray.push(leftArray[leftIndex]);
+            leftIndex++;
+        }
+        else {
+            resultArray.push(rightArray[rightIndex]);
+            rightIndex++;
+        }
+    }
+    return resultArray.concat(leftArray.slice(leftIndex)).concat(rightArray.slice(rightIndex))
+}
+
+console.log(mergeSort([34,56,70,10,4]));
+TC - O (n logn)
+SC - The space complexity of merge sort is O(n)
+This is because merge sort uses an auxiliary array of size n to store the merged subarrays
+
+
 
 
 Arrays:
