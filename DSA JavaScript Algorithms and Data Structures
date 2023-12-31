@@ -265,6 +265,26 @@ console.log(BinarySearch(sortedArray, 10 ,0, sortedArray.length-1 ));
 TC - O(log n)
 
 
+Insertion Sort: best case TC - O(n)  and Worst case O(n^2)
+if the array is sorted don't enter in 2nd loop.
+
+function insertionSort(array) {
+    for(let i=1;i<array.length;i++) {
+        
+        let numberToInsert =  array[i];
+        let prevElement = i -1;
+        
+        while(array[prevElement] > numberToInsert && prevElement >= 0) {
+            array[prevElement+1] = array[prevElement]
+            prevElement--;
+        }
+        array[prevElement + 1] = numberToInsert;
+    }
+    console.log('array -->',array)
+}
+
+insertionSort([20,30,10,40,5])
+
 
 
 
