@@ -345,7 +345,28 @@ function merge(leftArray, rightArray) {
 console.log(mergeSort([34,56,70,10,4]));
 TC - O (n logn)
 SC - The space complexity of merge sort is O(n)
-This is because merge sort uses an auxiliary array of size n to store the merged subarrays
+This is because merge sort uses an auxiliary array of size n to store the merged subarrays.
+
+
+cartisionProduct: 
+given two set of array [10,20], [30,40]
+output should be. [ [ 10, 30 ], [ 10, 40 ], [ 20, 30 ], [ 20, 40 ] ]
+
+// Js online 
+function cartisionProduct(arr1, arr2) {
+    let resultArray = [];
+    for(let i = 0;i< arr1.length; i++) {
+        for(let j = 0; j< arr2.length; j++) {
+            resultArray.push([arr1[i], arr2[j]]);
+        }
+    }
+    console.log(resultArray)
+}
+
+
+cartisionProduct([10,20], [30,40]);
+
+TC - O(n^2)
 
 
 
