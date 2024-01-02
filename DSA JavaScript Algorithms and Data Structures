@@ -412,6 +412,23 @@ function gcd(a, b) {
     return a;
 }
 console.log(gcd(20, 30));
+TC - O(min(a,b))
+
+
+using Euclidean Algorithm
+console.log(findGCDofTwoNumbers(30,25));
+function findGCDofTwoNumbers(a, b) {
+    let Reminder;
+    while((a%b) > 0) {
+        Reminder = a%b;
+        a=b;
+        b=Reminder;
+    }
+    return Reminder;
+}
+
+console.log(findGCDofTwoNumbers(30,25));
+TC - log(min(a, b))
 
 
 
