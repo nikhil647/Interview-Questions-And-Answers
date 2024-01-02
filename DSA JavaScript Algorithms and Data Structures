@@ -384,6 +384,22 @@ function ClimbingStaircase(n) {
 }
 console.log('initialArray -->',ClimbingStaircase(5))
 
+TOH - ????
+
+function TOH(n, from, to , inter) {
+    if(n == 1) {
+        console.log(`Move disk ${n} from ${from} to ${to}`);
+        return
+    }
+    TOH(n-1, from, inter, to);
+    console.log(`Move disk ${n} from ${from} to ${to}`);
+    TOH(n-1, inter, to, from);
+}
+
+let n = 3;
+TOH(n, 'A', 'C', 'B');
+
+
 
 
 
