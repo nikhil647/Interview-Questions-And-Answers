@@ -399,6 +399,20 @@ function TOH(n, from, to , inter) {
 let n = 3;
 TOH(n, 'A', 'C', 'B');
 
+GCD - Greates Common Devisor
+function gcd(a, b) {
+    while(a != b) {
+        if(a < b) {
+            b -= a;
+        }
+        else {
+            a -= b;
+        }
+    }
+    return a;
+}
+console.log(gcd(20, 30));
+
 
 
 
