@@ -64,6 +64,32 @@ It provides the framework to develop, deploy, and maintain microservices archite
 
 word Microservices just came into picture few years back but companies using this more than 15 years ago.
 
-pros - selective scaling possible. 
+pros - 
+1) selective scaling possible. 
 Now we can have 5 service running for product and 2 service for payment.
-And we have independence 
+And each service can be written in diffrent proogramming language.
+
+why is is possible talking to other app via n/w
+--> so you talking in language nuetral protocal (Json Resp) can be read by every prog language.
+
+2) Size of Each Application will be smaller - Build Time & Run Time (App Start Time)
+3) Understanding Codebase is much easier
+4) 24x7 you don't need big machine 
+
+Cons:
+1) latency will increase
+2) Infrastructure overhead will be increasing
+if you use 'n' number of programming language you will also required developer to understand 'n' number of programming language.
+3) We have 3 Network hops now.
+
+Ways of communication between Microservice 
+1) Http  2) RPC  3) Messaging Queue
+
+HTTP - HTTP is synchronous and the responses come in the requested order, no matter if the system is asynchronous it will be ineffective.
+This is why HTTP should not be used as a backend for microservices.
+
+/***********************************************************************************/
+Multiple Application - 
+Earlier LB job was wasy route to any server now in micro service it is not possible.
+PG req can not handle by auth service.
+so how to identify correct service for request ?
