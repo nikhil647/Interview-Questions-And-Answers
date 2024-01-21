@@ -138,5 +138,63 @@ Communication between Microservice
 Event Driven Architecture(KAFKA)
 1) Distributed Transaction
 
-suppose we have two services 1) Order Service   2) Payment Service
+Communication Ways : 1) Sync 2)Async 3)Event Driven
 
+suppose we have two services 1) Product Service   2) User Service
+
+Sync: Product service will not be able to serve it's users unless service respond to it. so here we need to make sync call.
+payments process part handle by both part and you want two service cordinated payment process.
+
+ASync: News Feed Service of Instagram (Recent Post)
+As my friend can be present in db1 or db2 so service needs to look all db copy because my friend present across dbs.
+Here we make request and do some other work (Async way)
+
+Event Driven Communication:- Analogy river flowing from Hill. Queue is River 
+ 1st part is producer - create an info or create an even 
+ 2nd part is consumer - like to do some action based on event.
+
+eg. Auth Service - 
+On 'Sign Up' Event Email ----------------------> Notification Server Interested in event and send email.
+Consumer has subscribed to perticular type of event when it receives some event it will do the work.
+
+Beauty of Message Queue is it will keeps the task untill consume.
+Auth Seriver 10 Server ------------Event Queue-------------------> 2 Notification Service
+
+MQ can also have multiple copies, typically 7 days retension policy.
+
+Distrubuted Transaction:
+ACID: Automacity, Consistency, Isolation, Durability
+
+Automacity - when you are running a req of db query it should look single query.
+
+Bank Transaction A ---500r---> B
+
+1) Get Current Balancer
+2) check if > 500
+3) if No ---> abort
+4) set balance as current = current - 500
+5) get balancer of B
+6) B =+ 500
+
+Now chance at any point server can crash or bad thing happen let's say at worst case if failed at step 4 :(
+
+to solve this DB uses lock rows on which opearation needs to perform.
+A & B copy in some other rows perform operation there brign back values
+
+this is fine for single db.
+
+what about distributed db? 
+1 row is present in another table and another row is present in another table. and they are present in diffrent db machines
+
+Implementing locking across is inconsistent.
+1 machine recivers signal other might not due to n/w failure so it will rollback.
+
+we have another method two phase commit 
+lock rows in both db only release after I receive ack from both.
+
+fine but we have to pay penalty of bad user experaice due to n/w delay. so this is also not good option
+
+solution is SAGA pattern
+1) orchestration 
+2) choreography
+ 
