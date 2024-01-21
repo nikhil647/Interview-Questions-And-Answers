@@ -198,3 +198,41 @@ solution is SAGA pattern
 1) orchestration 
 2) choreography
  
+orchestration server: - Responsible for all transaction hey leader get things done. 
+this service can talk to all the service.
+
+It has all edge cases and steps 
+if payment success do this 
+if it fails do this.
+
+Now you are not taking local so no autmacity.
+banking system also not giving autmacity.
+
+Choreography: It is a decentralized approach to coordinating interactions between microservices.
+In this pattern, each service communicates directly with other services, without relying on a central coordinator
+
+which 1 is better ? --> orchestration
+In case of updation we need to update only that service and orchestration (if steps of transaction change)
+choreography tight coupling 1 of the server can go down.
+
+Kubernetis is orchestration tool db it use etcd.
+
+1 Design Pattern  
+How load balancer 
+1) Get to know a new instance.
+2) Keep a check that instace is live.
+
+1) LB  /register    
+Every app know the IP address of a load balancer when the application start it sends the request to load balancer asking itself to register.
+
+Application - please start sending req to me of type XYZ (if product req came or user req came).
+
+2) Healthcheck Approach
+two approaches
+i) HealtthCheck  (LB ----- /status ----> Application Server)
+ii) Heartbeat    (Application Server------> LB)
+
+which 1 to pick? BOTH are populer but if no of server are more always go for Heartbeat
+whatsapp server can not make billions of call to check no of online users it's responsibility of device.
+
+R&D topic zipkin
