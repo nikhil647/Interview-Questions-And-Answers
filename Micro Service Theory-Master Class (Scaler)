@@ -5,9 +5,6 @@ Types of Archeture
 
 Monolithic - A traditional model of a software program, which is built as a unified unit that is self-contained and independent from other applications.
 
-Microservices - A microservices architecture is a type of application architecture where the application is developed as a collection of services.
-It provides the framework to develop, deploy, and maintain microservices architecture diagrams and services independently.
-
 let's see pros and cons of Monolithic
 Monolithic Pros - Very Easy to manage, Easy deployment, One code base.
 Monolithic Cons - Single Point of Failure, If load increase, waiting time increases. you always need of backup.
@@ -48,3 +45,25 @@ load balancer keeps a check server if it is dead it remove from list so always k
 puting everything (codebase) in each server is not always good - we don't get optionality of selecting scaling.
 eg. take flipkart example. 
 product display service will require more computing power than payment. (because not all products are viewed are purchased).
+
+so cons of this approach -->
+--> No Selective scaling
+--> No independence of technology
+--> if size is more new program find difficult to understand 
+--> Build and runtime is will also slow.
+--> developer productivity reduce.
+
+pros --> Easy to handle
+     --> Module to Module call is just method call (In case of Micro service N/w Comes in betwween)
+  
+So monolothic are lower latency and can save lot of money. (No Network calls).
+Speed is not always concerns of every application some prefered security over it such as banks.
+
+Microservices - A microservices architecture is a type of application architecture where the application is developed as a collection of services.
+It provides the framework to develop, deploy, and maintain microservices architecture diagrams and services independently.
+
+word Microservices just came into picture few years back but companies using this more than 15 years ago.
+
+pros - selective scaling possible. 
+Now we can have 5 service running for product and 2 service for payment.
+And we have independence 
