@@ -99,4 +99,44 @@ flipkart.cmo/pay  --> Payment Gateway
 flipkart.cmo/orders --> Order Service.
 
 We introduce new layer called API Gateway layer.
+API gateway will read requirement so it will forward request to Load Balancer.
+
+API Gateway also does the other things 
+1) Rate Limiter
+2) sometime also manage authencation 
+
+
+                           ---> LB ----> Multiple Auth Server
+Client -->  API Gateway ---
+                           ---> LB ----> Multiple PG Server
+
+Usage of Http ends at API gatwwat inside we don't use HTTP and JSON for communication internally we use some better stuff.
+
+Serialisation: In computing, serialization (or serialisation) is the process of translating a data structure or object state into a format that can be stored.
+eg converting Java Object to JSON in API for browsers or end users.
+
+ProtoBuf:- Protocol Buffers are language-neutral, platform-neutral extensible mechanisms for serializing structured data.
+             
+           HTTP
+client ---------------> API G/W --------------->  (Internally Protobuf used instead of JSON)
+
+HTTP is very heavy protocol.
+HTTP is also add additional overhead.
+
+why not use internally better protocol ?
+- grpc (remote procedure call) - Use for interserver communication.
+ - most browser don't support RPC that's why we still use HTTP.
+
+gRPC is a high-performance, open-source RPC (remote procedure call) framework that can be used to build microservices.
+It uses HTTP/2 for transport and Protocol Buffers as the interface description language.
+
+So Instead of HTTP ---> GRPC  and JSON ---> ProtoBuf
+
+Communication between Microservice
+1) HTTP  2) RPC  3) Messaging Queue
+
+Event Driven Architecture(KAFKA)
+1) Distributed Transaction
+
+suppose we have two services 1) Order Service   2) Payment Service
 
