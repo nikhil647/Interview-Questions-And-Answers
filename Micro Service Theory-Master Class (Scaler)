@@ -1,1 +1,50 @@
 #MicroServices - Scaler Master Class
+
+Types of Archeture
+1) Monolithic 2) Microservie
+
+Monolithic - A traditional model of a software program, which is built as a unified unit that is self-contained and independent from other applications.
+
+Microservices - A microservices architecture is a type of application architecture where the application is developed as a collection of services.
+It provides the framework to develop, deploy, and maintain microservices architecture diagrams and services independently.
+
+let's see pros and cons of Monolithic
+Monolithic Pros - Very Easy to manage, Easy deployment, One code base.
+Monolithic Cons - Single Point of Failure, If load increase, waiting time increases. you always need of backup.
+
+Every product start with monolithic because of low budget.
+
+Scaling - easily increase or decrease your computing resources as needed
+There are two main types of scaling in the cloud: vertical scaling and horizontal scaling.
+
+Vertical Scaling:
+Vertical scaling involves increasing the capacity of a single virtual machine (VM) or server by adding more resources such as CPU, RAM, or storage
+
+Horizontal Scaling:
+Horizontal scaling involves adding more instances of a resource, such as virtual machines or containers, to distribute the load
+
+ Flipkart Analogy:
+When it started in 2008 it might getting 10 Orders per day.
+and 2 years later in 2010 - 1000 Orders per day
+
+Now 1 normal server is not enough so replaced with 1 super computer(server) (- rich in resources).
+this is nothing but vertical scaling. and it has it's limitation it's not infinite scalable.
+we can not always bring bigger compter.
+
+Now instead of upgrading what flipkart brought 20 new compuers(servers).
+Now same code running on 20 instances.
+
+Now we can not hard 20 IP address in frontend. (20 is also not fixed number it would be always changing).
+so to solve this issue we have something called as Load Balanncer.
+
+Load Balancer - the device or service that sits between the user and the server group and acts as an invisible facilitator, ensuring that all resource servers are used equally.
+
+then load balncer becomes SPOF (Single Point of failure)
+load balancer also has many replicas.
+
+and how it works ? Round Robin most of the time. if req distribution algo is heavy then itself becomes problem.
+load balancer keeps a check server if it is dead it remove from list so always keeps light algo.
+
+puting everything (codebase) in each server is not always good - we don't get optionality of selecting scaling.
+eg. take flipkart example. 
+product display service will require more computing power than payment. (because not all products are viewed are purchased).
