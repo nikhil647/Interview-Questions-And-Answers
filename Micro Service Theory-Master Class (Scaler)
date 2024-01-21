@@ -92,4 +92,11 @@ This is why HTTP should not be used as a backend for microservices.
 Multiple Application - 
 Earlier LB job was wasy route to any server now in micro service it is not possible.
 PG req can not handle by auth service.
-so how to identify correct service for request ?
+so how to identify correct service for request ? ---> Use URL
+
+flipkart.cmo/product  --> Product Listing 
+flipkart.cmo/pay  --> Payment Gateway
+flipkart.cmo/orders --> Order Service.
+
+We introduce new layer called API Gateway layer.
+
