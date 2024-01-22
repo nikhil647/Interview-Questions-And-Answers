@@ -803,3 +803,53 @@ Both async and defer: Scripts with these attributes do not block the rendering o
 
 // to do
 Cookies what httpOnly flag, secure flag, sameSiteFlag?
+
+# 31) What are the possible ways to create objects in JavaScript
+
+Object literal syntax:
+
+1) The object literal syntax (or object initializer), is a comma-separated set of name-value pairs wrapped in curly braces.
+
+var object = {
+     name: "Sudheer",
+     age: 34
+};
+
+2) The simplest way to create an empty object is using the Object constructor. Currently this approach is not recommended.
+
+var object = new Object();
+The Object() is a built-in constructor function so "new" keyword is not required.
+
+3) The create method of Object is used to create a new object by passing the specificied prototype object and properties as arguments.
+
+const person = {
+  isHuman: false,
+  printIntroduction: function () {
+    console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+  },
+};
+
+const me = Object.create(person);
+
+me.name = 'Matthew'; // "name" is a property set on "me", but not on "person"
+ // Inherited properties can be overwritten
+
+me.printIntroduction();
+
+4) Function constructor
+create any function and apply the new operator to create object instances
+
+function Person(name) {
+  this.name = name;
+  this.age = 21;
+}
+var object = new Person("Sudheer");
+
+5) ES6 Class syntax
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+var object = new Person("Sudheer");
