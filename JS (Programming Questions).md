@@ -308,7 +308,7 @@ console.log(returnRandomeString(charaterSet,expectedlength));
 ```
 
 #Link List
-
+```
 class ListNode {
     constructor(data) {
         this.data = data
@@ -403,6 +403,7 @@ list.printLL();
 // console.log(list.getFirst().data);
 // console.log(list.head.next.data);
 console.log(list.printMiddle())
+```
 
 ## React: Create Stopwatch (sandbox)
 ```
