@@ -7,6 +7,7 @@
  data types -->  undefined, null, boolean, string, Symbol, Number, Object
 ```
 ***
+
 **2) Feature of JS**
 ```
 Lightweight and Interpreted
@@ -20,6 +21,12 @@ Region of your program in which is is defined
 Types - Local & Global
 ```
 ***
+
+**Q) var, let & const**
+
+![image](https://github.com/nikhil647/Interview-Questions-And-Answers/assets/15242726/bdaa0449-f7fc-4232-8f09-88a2356177d3)
+
+
 
 **4)Some Built In Methods in JS**
 ```
