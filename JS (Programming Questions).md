@@ -307,6 +307,103 @@ const expectedlength = 8;
 console.log(returnRandomeString(charaterSet,expectedlength));
 ```
 
+#Link List
+
+class ListNode {
+    constructor(data) {
+        this.data = data
+        this.next = null                
+    }
+}
+class LinkedList {
+    constructor(head = null) {
+        this.head = head;
+        this.size = 1;
+    }
+    size() {
+        let count = 0; 
+        let node = this.head;
+        while (node) {
+            count++;
+            node = node.next
+        }
+        return count;
+    }
+    getLast() {
+        let lastNode = this.head;
+        if (lastNode) {
+            while (lastNode.next) {
+                lastNode = lastNode.next
+            }
+        }
+        return lastNode
+    }
+    getFirst() {
+        return this.head;
+    }
+    insertAtBeg(data) {
+        const newNode = new ListNode(data);
+        newNode.next= this.head;
+        this.head = newNode;
+        this.size++;
+    }
+    insertAtEnd(data) {
+        let node = this.head;
+        while(node.next !== null) {
+            node = node.next;
+        }
+        node.next = new ListNode(data);
+        this.size++;
+    }
+    printLL() {
+        let node = this.head;
+        while(node !== null) {
+            console.log('Data -->',node.data);
+            node = node.next;
+        }
+    }
+    printMiddle() {
+        let node = this.head;
+        const middle = Math.ceil(this.size / 2);
+        let index = 1;
+        while(middle !== index) {
+            node = node.next;
+            index++;
+        }
+        return node.data;
+    }
+    reverseLinkList() {
+        let current = this.node;
+        let prev = null;
+        let next;
+        while(current != null) {
+           next = current.next;
+           current.next = prev;
+           prev = current;
+           current= next
+        }
+    }
+}
+let node1 = new ListNode(2);
+let list = new LinkedList(node1);
+list.insertAtBeg(1);
+list.insertAtEnd(3)
+list.insertAtEnd(4)
+list.insertAtEnd(5)
+list.printLL();
+
+list.reverseLinkList();
+
+list.printLL();
+
+
+// let list = new LinkedList(node1);
+// console.log(list.size())
+// console.log(list.getLast());
+// console.log(list.getFirst().data);
+// console.log(list.head.next.data);
+console.log(list.printMiddle())
+
 ## React: Create Stopwatch (sandbox)
 ```
 https://codesandbox.io/s/elastic-hoover-dq6dxx?file=/src/App.js
