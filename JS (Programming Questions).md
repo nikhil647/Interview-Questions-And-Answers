@@ -46,6 +46,22 @@ let resultArray = uniqueArray(inputArray);
 console.log(resultArray);
 ```
 
+Using Object:
+```
+const array = [60,10,20,30,40,40, 60];
+
+let obj = {};
+
+array.forEach(ele => {
+    obj[ele] = ele;
+});
+
+for(key in obj) {
+    console.log(obj[key]);
+}
+```
+
+
 ## Quick Sort
 Logic - select first element as pivot arrange all small elements to the left and all large element at right (not necessarily in sorted manner)
 Steps
