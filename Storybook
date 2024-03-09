@@ -38,3 +38,19 @@ we export object with two prop
 All files withing the source folder that end file .stories.mdx or stories.@(js.jsx.ts.tsx) has to treated as stories for storybook app.
 
 addons - wil talk later.
+
+Preview - It contains Configuration for your stories that you write.
+
+Inside src folder we have stories that are added by storybook initialisation.
+
+Initially we have 3 components
+1) Button
+2) Header
+3) Page
+
+We have introduction.storries.mdx - Which is landing page when you run storybook.
+
+Each Component has 3 files
+Button.jsx, Button.css & Button.stories.js
+
+We will lookinto Button.stories.js inorder write stories for component.
