@@ -1,3 +1,25 @@
 Playlist Link: https://www.youtube.com/playlist?list=PLC3y8-rFHvwhC-j3x3t9la8-GQJGViDQk
 
 React Storybook Tutorial - 1 - Introduction
+
+Storybook: what & Why ?
+
+Storybook is a development environment and playground for UI components.
+It allows you to create components independently and showcase them interactively in an isolated development environment.
+This means that Storybook runs outside of your main React application, so you can develop UI components in isolation without having to worry about the business logic.
+
+Benefits of using Storybook:
+View the different components that have already been developed as part of the app
+See the different props that those developed components accept
+Visually showcase those components to your stakeholders for feedback
+Change the props on a component and immediately see the changes in the UI without having to move back and forth between the browser and your editor
+Get feedback about the accessibility score of the component, like color contrast
+Learning Storybook is a valuable skill to have as a React developer, especially if you are working on a team.
+
+React Storybook Tutorial - 2.1 - Getting Started with V6
+
+Storybook Initialization:
+```
+npx sb init
+```
+
