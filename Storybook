@@ -22,4 +22,19 @@ Storybook Initialization:
 ```
 npx sb init
 ```
+This command does lot of work behind the scene.
 
+Storybook will look into your project depencies and provide best configuration available.
+
+It create two thing
+1) .storybook Folder
+2) And Install lot of dev depenceies since it is totally isolated from actual developement.
+
+.storybook folder has 2 files
+1) Main - 
+2) Preview - 
+
+we export object with two prop
+All files withing the source folder that end file .stories.mdx or stories.@(js.jsx.ts.tsx) has to treated as stories for storybook app.
+
+addons - wil talk later.
