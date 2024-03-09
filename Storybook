@@ -54,3 +54,29 @@ Each Component has 3 files
 Button.jsx, Button.css & Button.stories.js
 
 We will lookinto Button.stories.js inorder write stories for component.
+
+React Storybook Tutorial - 3 - Writing Stories
+
+bro deleted existing stories folder and starting from scratch :D
+
+Written two Stories.
+1) Button 
+2) Input
+
+```
+import React from 'react';
+import Button from './Button';
+
+export default {
+    title: 'Button',
+    component: Button
+}
+
+export const Primary = () => <Button variant='primary'> Primary </Button>
+export const Secondary = () => <Button variant='secondary'> Secondary </Button>
+export const Success = () => <Button variant='success'> Success </Button>
+export const Danger = () => <Button variant='danger'> Danger </Button>
+```
+
+named export represent story.
+default export is for title in storybook.
