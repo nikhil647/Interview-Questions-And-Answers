@@ -80,3 +80,7 @@ export const Danger = () => <Button variant='danger'> Danger </Button>
 
 named export represent story.
 default export is for title in storybook.
+
+And Suppose we want to show button inside form in storybook we can write like this in default export.
+
+ title: 'Form/Button'
