@@ -154,9 +154,9 @@ For assertion, we use expect  passing in a value and combine it with a matcher f
 
 Queries are the methods that testing library provides to find the elements on page
 To find a single element on page we have
-getBy..
-queryBy..
-findBy
+getBy.. --> This function throws an error if the element you're searching for isn't found, or if there are multiple matches. 
+queryBy..--> This function returns null if the element isn't found, and throws an error if there are multiple matches.
+findBy --> This is helpful for asynchronous scenarios where the element might appear after an action, like an API call
 
 TO find multiple elements 
 getAllBy..
