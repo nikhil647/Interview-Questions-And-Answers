@@ -102,3 +102,7 @@ we can rename exhisting story like this
 export const Small = () => <Input variant='small' />
 Small.storyName = 'Small Input';       <-- In storybook this story will look like "Small Input" instead of Small.
 
+Sorting Storries:
+.storybook/preview.js
+
+options: { storySort: (a, b) => a.id === b.id ? 0 : a.id.localeCompare(b.id, undefined, { numeric: true }) }
