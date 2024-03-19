@@ -83,4 +83,22 @@ default export is for title in storybook.
 
 And Suppose we want to show button inside form in storybook we can write like this in default export.
 
- title: 'Form/Button'
+export default {
+    title: 'Form/Button',       // <----- here
+    component: Button
+}
+
+we can go 1 more level deep by this.
+
+
+export default {
+    title: 'Form/control/Button',       // <----- here
+    component: Button
+}
+
+Renameing: 
+we can rename exhisting story like this
+
+export const Small = () => <Input variant='small' />
+Small.storyName = 'Small Input';       <-- In storybook this story will look like "Small Input" instead of Small.
+
