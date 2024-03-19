@@ -102,7 +102,50 @@ we can rename exhisting story like this
 export const Small = () => <Input variant='small' />
 Small.storyName = 'Small Input';       <-- In storybook this story will look like "Small Input" instead of Small.
 
-Sorting Storries:
+Sorting Stories:
 .storybook/preview.js
 
 options: { storySort: (a, b) => a.id === b.id ? 0 : a.id.localeCompare(b.id, undefined, { numeric: true }) }
+
+Story withing Story:
+
+just for example we also have 1 more story for Input.
+
+```
+import React from 'react';
+import Input from './input';
+
+export default {
+    title: 'Form/Input',
+    component: Input
+}
+
+export const Small = () => <Input variant='small' />
+export const Med = () => <Input variant='med' />
+export const Large = () => <Input variant='large' />
+
+Small.storyName = 'Small Input';
+```
+
+Now we are directly using this  'Large' in another story as it. so don't need to specify other props once again but
+we can take full advantage of args system.
+
+let's create 1 more story.
+// subscription.stories.js
+```
+import React from 'react';
+import { Primary } from '../Button/Button.stories';
+import { Large } from '../input/input.stories';
+
+export default {
+    title: 'form/Subscription'
+}
+
+export const PrimarySubscription = () => (
+    <>
+        <Large />
+        <Primary />
+    </>
+)
+```
+
