@@ -148,4 +148,48 @@ export const PrimarySubscription = () => (
     </>
 )
 ```
+Using args in V6
+// Just another way of writing the above code in Button (stories). this way is more concise and reusable.
+```
+const Template = args => <Button {...args} />
+export const PrimaryA = Template.bind({});
+PrimaryA.args = {    
+ variant: 'primary',
+ children: 'Primary Argument'
+}
 
+
+export const LongPrimaryA = Template.bind({});
+LongPrimaryA.args = {
+    ...PrimaryA.args,
+    children: 'Long Primary Ags'
+}
+
+export const SecondaryA = Template.bind({});
+SecondaryA.args = {
+    variant: 'secondary',
+    children: 'Secondary Argument'
+}
+```
+In this way you can extend the story from other props.
+
+We can add args add component level so every story will receive the argument.
+
+component level:
+
+export default {
+    title: 'Form/Button',
+    component: Button,
+    args: {
+        chidren: 'Button'
+    }
+}
+
+Now even if don't specify every story will have this children.
+but if we write same args at story level it will overwrite the story.
+
+export const LongPrimaryA = Template.bind({});
+LongPrimaryA.args = {
+    ...PrimaryA.args,
+    children: 'Long Primary Ags'       // <--- More Priority will be given to this.
+}
