@@ -193,3 +193,37 @@ LongPrimaryA.args = {
     ...PrimaryA.args,
     children: 'Long Primary Ags'       // <--- More Priority will be given to this.
 }
+
+Decorators:
+
+decorators are components that wrap a story. They allow you to add functionality to all your stories at once.
+
+The video starts with an example of a button story where the button is placed to the left of the screen.
+The instructor wants to place the button at the center of the screen.
+This can be achieved with CSS.
+
+To achieve this, a new component called `center` is created.
+This component center aligns any content.
+
+Center.js
+```
+import React from 'react'
+
+function Center(props) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center'}} >{props.children}</div>
+  )
+}
+
+export default Center
+```
+
+The center component is then imported into the button.stories.js file. 
+Every button story is wrapped with the center component. This way, all the buttons are center aligned.
+
+```
+export const Primary = () => <Center><Button variant='primary'> Primary </Button> </Center>
+export const Secondary = () => <Center> <Button variant='secondary'> Secondary </Button> </Center>
+export const Success = () => <Center> <Button variant='success'> Success </Button> </Center>
+export const Danger = () => <Center> <Button variant='danger'> Danger </Button></Center>
+```
