@@ -227,3 +227,33 @@ export const Secondary = () => <Center> <Button variant='secondary'> Secondary <
 export const Success = () => <Center> <Button variant='success'> Success </Button> </Center>
 export const Danger = () => <Center> <Button variant='danger'> Danger </Button></Center>
 ```
+
+The instructor then explains that decorators are components that wrap a story.
+In this case, the center component is a decorator.
+Storybook however makes it easier for us to specify decorators by letting us write it once and be used for every story
+
+export default {
+    title: 'Form/Button',
+    component: Button,
+    decorators: (story => <Center>{story()}</Center>)    <-- This line
+}
+
+We also have something called as global decorators previous one was the example of component level decorators.
+
+To add global decorators, we need to create a new file in the storybook folder called preview.js.
+In this file, we first make the necessary imports.
+
+```
+const preview = {
+    parameters: {
+        ...
+    }
+    decorators: [
+        (Story) => (
+          <Center>
+            <Story />
+          </Center>
+        )
+      ]
+}
+```
