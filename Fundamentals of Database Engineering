@@ -46,3 +46,33 @@ UPDATE ACCOUNT SET BALANCE = BALANCE - 100 WHERE ID = 1
 UPDATE ACCOUNT SET BALANCE = BALANCE + 100 WHERE ID = 2
 COMMIT TX1
 
+# ACID
+ACID is an acronym that stands for Atomicity, Consistency, Isolation, and Durability.
+These are the four key properties that are desired to ensure reliability and consistency in database transactions
+
+
+# Atomocity
+
+All queries in a transaction must succeed.
+● If one query fails, all prior successful queries in the transaction
+should rollback.
+● If the database went down prior to a commit of a transaction,
+all the successful queries in the transactions should rollback.
+
+classic example:
+Transfer 100$ from account A to account B:
+
+After we restarted the machine the first account has been debited but the
+other account has not been credited.
+● This is really bad as we just lost data, and the information is inconsistent
+● An atomic transaction is a transaction that will rollback all queries if one or
+more queries failed.
+● The database should clean this up after restart
+
+(instrctor also told that if database went down it takes hours to rollback (to clean the data))
+
+
+# Isolation:
+
+
+
