@@ -74,5 +74,51 @@ more queries failed.
 
 # Isolation:
 
+Question? can my inflight transaction see changes made by other inflight transaction ?? (inflight means not yet complete)
+
+Read phenomena: 
+
+Isolcation Levels:
+
+Dirty reads: you read something that some other transaction has wrote but didn't really commit yet.
+so change could be rollback.
+
+Non-repeatable Read: - you try to read same value from db due to some reasons but two diffrent value comming.
+
+Phantom Read: A phantom read occurs when a transaction executes the same query twice with the same conditions, but the result sets differ. This happens because another transaction inserts or deletes rows that meet the query criteria in between the first and second execution of the query in the first transaction.
+
+Key Differences:
+
+Non-repeatable reads involve modifications (updates) to existing data.
+Phantom reads involve insertions or deletions of data that meet the query criteria.
+
+Lost Update:
+
+scenarios involving multiple transactions accessing and modifying the same data concurrently. It refers to a situation where one transaction overwrites changes made by another transaction without being aware of those changes, resulting in the loss of the second transaction's updates.
+
+Transaction A reads a row from a database table.
+Transaction B reads the same row from the table.
+Transaction A updates the row.
+Transaction B updates the same row, unaware of the changes made by Transaction A.
+Transaction A commits its changes, overwriting the changes made by Transaction B.
+Transaction B commits its changes, which are now lost, as they have been overwritten by Transaction A.
+
+Solution is Lock the row (resource).
+
+
+## Isolation levels for inflight transaction:
+
+Read uncommited - No Isolation, any change from outside is visible to the transaction, commited or not. - BAD you can get dirty read due to this. (technically - fast)
+
+Read commited - Each Query in a transaction only sees commited changes by other transaction.
+
+Repetable Read - The transaction will make sure that when a query reads a row, that row will remain unchanged while its running.
+(db Implementation perspective - how you implement something like this - there is cost for everthing there are n number of transaction going on actual db)
+
+Snapshot - Each query in a transaction only sees that have been commited up to the start of the transaction. like snapshot version of database at that movement.
+(postgres does this snapshot isolcation based on timestamp it isolate the things)
+
+Serializable - Transaction are run as if they serialized one after the other
+
 
 
