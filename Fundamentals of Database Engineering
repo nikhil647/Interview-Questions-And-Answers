@@ -1,0 +1,47 @@
+Fundamentals of Database Engineering - Created by Hussein Nasser (27 h)
+
+Course Introduction:- Learn ACID, Indexing, Partitioning, Sharding, Concurrency control, Replication, DB Engines, Best Practices and More!
+
+Section 2: ACID
+
+What is Transaction ?
+Atomicity ?
+Isolation ?
+Consistency ?
+Durability ?
+
+Transaction: It is nothing but collection of queries. treated as One unit of work.
+
+eg. transferring amount from 1 account to another. 
+so it is nothing but 3 steps
+React amount is valid or not. if yes update accoount A and update Account B.
+
+
+Transaction Lifespan:
+
+always begin with the keyword: Transaction BEGIN
+Transaction BEGIN - indicating you are about to start brand new transaction.
+
+Transaction COMMIT - commits till the transaction to commit and to persist the thing to disk.
+now just thing when to commit
+1) after every query
+2) 1 commit for all db transaction (start to end)
+3) add transaction block in middle.
+
+there are pros or crons of each way. just thoughts of instrcitor nothing else.
+
+Transaction ROLLBACK - flush everthing from memmory. (nothing will get commited)
+
+Nature of Transaction: 
+Usually Transaction are used to change and modify data.
+However it is perfectly normal to have read only transaction. (-_-)
+example: you want to genrate a report and you want to get consistent snapshot based at the time of transaction.
+
+Send $100 From Account 1 to Account 2 
+
+BEGIN TX1
+SELECT BALANCE FROM ACCOUNT WHERE ID = 1
+BALANCE > 100    // Checking
+UPDATE ACCOUNT SET BALANCE = BALANCE - 100 WHERE ID = 1
+UPDATE ACCOUNT SET BALANCE = BALANCE + 100 WHERE ID = 2
+COMMIT TX1
