@@ -180,3 +180,28 @@ The advantage of AOF is that it allows for full database reconstruction in case 
 However, AOF can lead to larger log files compared to WAL due to the continuous append nature.
 These techniques offer different trade-offs between durability, performance, and recovery time. The choice of technique depends on specific database requirements and priorities.
 
+Practical Example of ACID in postgres (used docker for running server)
+
+Atomicity:
+started transaction updated 1 recored but didn't commit and exited process. so transaction old value remains -  Atomicity DONE
+
+Consistency : 
+
+User A initiates a withdrawal of $100.
+PostgreSQL starts a transaction.
+It first debits the account balance in the accounts table (balance becomes $400).
+Then, it inserts a record into the transactions table reflecting the withdrawal.
+If everything succeeds: The transaction commits, and both changes are permanent.
+If an error occurs (e.g., system crash): The transaction rolls back, undoing the changes in both tables, maintaining consistency.
+Without Transaction: data would be in inconsistent state. - this is only achived by transaction.
+
+Isolation: In postgres by default if the transaction is commited something that value can be access by other transaction.
+mode - `read commited`,
+we need to change it to `repeatable read`. if we do this even if the some other transaction changes the value,
+current transaction would be consistent. it won't affected by there operation.
+
+Depends on the use you can choose.
+
+Durability: started 1 transaction (Insertion) and commited and almost at the same time from another terminal kills docker to simulate db failure. value persisted succesfully that means last transaction was durable.
+
+
