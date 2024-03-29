@@ -135,7 +135,7 @@ don’t get phantom reads with postgres in repeatable read.
 Serializable are usually implemented with optimistic concurrency control, you
 can implement it pessimistically with SELECT FOR UPDATE.
 
-| Isolation level  | Dirty read   | Lost update | Non-repeatable read | Phantom read |
+| Isolation level --> Prbolems <br> Aproach to solve   | Dirty read   | Lost update | Non-repeatable read | Phantom read |
 |------------------|--------------|-------------|---------------------|--------------|
 | Read uncommitted | may occure   | may occure  | may occure   | may occure  |
 | Read Committed   | don't occure | may occure  | may occure   | may occure  |
