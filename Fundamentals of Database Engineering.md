@@ -156,3 +156,27 @@ Youtube-like service to illustrate the two types of consistency. Strong consiste
  Strong consistency is better when the negative impact of stale data is high, such as a stock exchange service.
 price of stock should be accuate.
 
+# Durability
+
+ It ensures that once a transaction is committed (completed successfully), the changes made by that transaction are permanently stored in the database and will not be lost even if the system crashes or there's a power failure.
+
+ ● Durability techniques 
+
+Durability Techniques in DBMS:
+Here's a breakdown of the durability techniques you mentioned:
+
+WAL (Write-Ahead Logging): This is a common technique used to ensure data durability. Here's how it works:
+
+Before any changes are made to the actual database files, they are first written to a transaction log (WAL). This log acts as a temporary record of all modifications.
+Only after the transaction log is successfully updated, are the changes applied to the database files.
+If a system failure occurs during this process, the database can recover by replaying the unapplied transactions from the WAL during startup.
+Asynchronous Snapshot: This technique involves creating periodic backups of the database at specific points in time. These backups can be full or incremental, capturing only the changes since the last snapshot.
+
+Asynchronous means the snapshot creation happens in the background, without interrupting ongoing database operations.
+In case of a failure, the database can be restored to the most recent consistent snapshot, minimizing data loss.
+AOF (Append-Only File): This technique relies on maintaining a log file where every write operation performed on the database is sequentially appended. Unlike WAL, the AOF file is a permanent record of all changes made to the database.
+
+The advantage of AOF is that it allows for full database reconstruction in case of a crash by replaying all the operations stored in the AOF file.
+However, AOF can lead to larger log files compared to WAL due to the continuous append nature.
+These techniques offer different trade-offs between durability, performance, and recovery time. The choice of technique depends on specific database requirements and priorities.
+
