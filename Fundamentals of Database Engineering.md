@@ -74,6 +74,8 @@ more queries failed.
 
 # Isolation:
 
+This property ensures that the execution of transactions concurrently does not result in any data inconsistency. Each transaction should be isolated from other transactions until it is completed and committed
+
 Question? can my inflight transaction see changes made by other inflight transaction ?? (inflight means not yet complete)
 
 Read phenomena: 
@@ -120,5 +122,15 @@ Snapshot - Each query in a transaction only sees that have been commited up to t
 
 Serializable - Transaction are run as if they serialized one after the other
 
+● Each DBMS implements Isolation level differently.
 
+Database Implementation of Isolation
+Pessimistic - Row level locks, table locks, page locks to avoid lost updates.
+Optimistic - No locks, just track if things changed and fail the transaction if so.
 
+Repeatable read “locks” the rows it reads but it could be expensive if you
+read a lot of rows, postgres implements RR as snapshot. That is why you
+don’t get phantom reads with postgres in repeatable read.
+
+Serializable are usually implemented with optimistic concurrency control, you
+can implement it pessimistically with SELECT FOR UPDATE.
