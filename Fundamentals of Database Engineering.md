@@ -138,7 +138,7 @@ can implement it pessimistically with SELECT FOR UPDATE.
 | Isolation level  | Dirty read   | Lost update | Non-repeatable read | Phantom read |
 |------------------|--------------|-------------|---------------------|--------------|
 | Read uncommitted | may occure   | may occure  | may occure   | may occure  |
-| Read Committed   | don't occure | may occure  | may occure | | may occure  |
+| Read Committed   | don't occure | may occure  | may occure   | may occure  |
 | Repetable Read   | don't occure | don't occure| don't occure | may occure |
 | Serializable     | don't occure | don't occure| don't occure | don't occure |
 
