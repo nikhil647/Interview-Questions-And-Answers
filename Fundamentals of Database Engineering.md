@@ -134,3 +134,25 @@ don’t get phantom reads with postgres in repeatable read.
 
 Serializable are usually implemented with optimistic concurrency control, you
 can implement it pessimistically with SELECT FOR UPDATE.
+
+| Isolation level  | Dirty read   | Lost update | Non-repeatable read | Phantom read |
+|------------------|--------------|-------------|---------------------|--------------|
+| Read uncommitted | may occure   | may occure  | may occure   | may occure  |
+| Read Committed   | don't occure | may occure  | may occure | | may occure  |
+| Repetable Read   | don't occure | don't occure| don't occure | may occure |
+| Serializable     | don't occure | don't occure| don't occure | don't occure |
+
+
+
+# Consistency:
+
+properties that ensures the database remains in a valid state before and after transactions.
+
+Strong Consistency: It means that every read request will always return the most up-to-date value or an error if it can't do that
+Eventual Consistency: It is a more relaxed model where once data is updated, eventually after a short but unspecified length of time, all read requests will again return the same value.
+
+Youtube-like service to illustrate the two types of consistency. Strong consistency would require blocking all read requests to other servers while the update is replicated across all servers. This can negatively impact performance and availability.
+
+ Strong consistency is better when the negative impact of stale data is high, such as a stock exchange service.
+price of stock should be accuate.
+
