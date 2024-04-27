@@ -1,0 +1,52 @@
+Getting Started With Serverless Computing on AWS
+
+Data storage has become very affordable and computing power has vastly increased.
+And this has allowed us to build applications that leverage these advancements in the computing
+space.
+The application has to be fast and responsive. And at the same time, it must be scalable with almost no downtime.
+
+Serverless Computing is this new trend in cloud computing which attempts to solve many
+of these challenges.
+
+Now, if we look at the traditional architecture, there are several activities and tasks that
+you must perform in order to run any particular application.
+
+First, you got to create and setup servers, install operating systems, install and setup
+databases, manage software patches and hardware updates, manage capacity and scaling, Manage
+High-availability through load-balancing and so on.
+And of course, this server infrastructure and the computing power has its own costs, which
+are often substantial.
+
+On the other hand, with Serverless Architecture, all these mundane tasks of managing the underlying
+infrastructure are abstracted away from us.
+So in a way when you use serverless architecture, you won’t really feel like you are using
+any high-end servers, because you’re not the one who is actually taking care of it.
+
+That’s the reason this approach is called as Serverless.
+
+That means, Serverless Computing still uses servers, but you no longer have to worry about
+managing them or worry about the uptime or availability or anything that has to do with the infrastructure
+part.
+
+Serverless means “Event-driven Computing” using “Small independent stateless
+functions” running inside “containers in the cloud”.
+That’s the short definition of what Serverless is all about.
+
+Whenever the triggering event occurs, the cloud platform spins up a container or initializes
+a container, loads the function in it and executes the function.
+
+These events could be file uploads, database updates, in-app activity, API calls, website
+clicks, or sensor outputs just like those from IoT devices and so on.
+
+We'll create a hello world API using AWS Lambda and API Gateway.
+
+
+
+
+
+
+
+
+
+
+
