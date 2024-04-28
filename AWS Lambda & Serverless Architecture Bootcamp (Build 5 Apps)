@@ -40,6 +40,41 @@ clicks, or sensor outputs just like those from IoT devices and so on.
 
 We'll create a hello world API using AWS Lambda and API Gateway.
 
+```
+var messages = [
+    "Hello World!",
+    "Hello Serverless!",
+    "It's a great day today!",
+    "Yay, I'm learning something new today!",
+    "On cloud nine!",
+    "Over the moon!",
+    "Shooting for the stars!",
+    "On top of the World!",
+    "World at my feet!",
+    "Doing everything I love!"
+];
+
+export const handler = async (event, context, callback) => {
+    let message = messages[Math.floor(Math.random()*10)];
+    callback(null, message);
+};
+```
+
+This lambda triggered by api gateway (Another Amazon Service).
+
+Benefits of Serverless Architecture:
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
