@@ -15,6 +15,75 @@ for (let i = 0;i < array.length; i++) {
 console.log(max)
 ```
 
+## Write a program to rotate / shift the array n times 
+```
+let arr = [1,3,2,5,3,6,7,22,12,5,32,56,21];
+
+// Solution
+const rotateTheArray = n =>{
+	if(!arr || arr.length === 0) {
+		return []
+	}
+	const arrLength = arr.length
+	let rotateValue = n > arrLength ? Math.floor(n % arrLength) : n
+	const slicedValues = arr.slice(0, rotateValue)
+	const rotatedArray = [...arr, slicedValues]
+	console.log('rotatedArray', rotatedArray)
+}
+rotateTheArray(4) // [5, 3, 6, 7, 22, 12, 5, 32, 56, 21, 1, 3, 2, 5]
+
+```
+```
+
+//or optimized solution
+const rotateTheArray = (arr, n) => {
+  if (!Array.isArray(arr) || arr.length === 0) {
+    return [];
+  }
+  const arrLength = arr.length;
+  const rotateValue = n % arrLength;
+  const rotatedArray = [...arr.slice(rotateValue), ...arr.slice(0, rotateValue)];
+  return rotatedArray;
+};
+const originalArray = [1, 2, 3, 4, 5];
+const rotatedArray = rotateTheArray(originalArray, 2);
+console.log(rotatedArray); // Output: [3, 4, 5, 1, 2]
+```
+
+## Flatten the nested array, depth level will also passed
+```
+let arr =  [1, [2, [3, 4], 5], 6];
+Using JS function
+Const flatternArr = arr.flat(3) // Output: [1, 2, 3, 4, 5, 6]
+
+```
+```
+
+//custom funtion
+
+let arr =  [1, [2, [3, 4], 5], 6];
+const flattenArray = (arr, depth) =>{
+	if(!arr || arr.length === 0) {
+		return []
+	}
+	if (depth === 0) {
+		return arr.slice()
+	}
+	const flattenedArray = []
+	arr.forEach((val)=> {
+		if( Array.isArray(val) && depth > 0) {
+			flattenedArray.push(...flattenArray(val, depth - 1))
+		} else {
+			flattenedArray.push(val)
+		}
+	})
+  return flattenedArray 
+	
+}
+console.log(flattenArray(arr, 2)) // Output: [1, 2, 3, 4, 5, 6]
+
+```
+
 ## Write a function that returns a new array containing only the unique elements from an input array
 With Set
 ```
@@ -275,6 +344,41 @@ for (let i = 1;i<= 5;i++) {
     }, 100);
 }
 Output --> 1, 2, 3, 4, 5
+```
+```
+/* 1. */
+console.log(a);
+console.log(b);
+var a = b = 5; // a = undefined, b (error: not defined)
+
+/* 2. */
+var a = 5;
+console.log(a++);
+console.log(++a);
+console.log(a); // 5, 7, 7
+
+
+/* 3. */
+console.log(1 < 2 < 3); //True
+console.log(3 > 2 > 1); //False
+
+
+/* 4. */
+const name = "John";
+this.name = "Jane";
+const printName = () => {
+  console.log(this.name);
+}
+printName.call({name: "Joe"}); // 'Jane'
+
+
+/* 5. */
+for(var i = 1; i <= 3; i++) {
+  setTimeout(() => {
+    console.log(i);
+  }, 1000);
+}
+// output 4 4 4
 ```
 ***
 Local & Global Scope Question
