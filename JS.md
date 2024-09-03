@@ -37,7 +37,8 @@ text.charAt(1);   // e
 ```
 
 ```
-forEach - The forEach() method is used to iterate over an array and execute a provided function once for each array element. It does not create a new array; it simply executes a function for each element in the array.
+forEach - The forEach() method is used to iterate over an array and execute a provided function once for each array element. 
+It does not create a new array; it simply executes a function for each element in the array.
 array.forEach(function(currentValue, index, array) {
   // code to be executed for each element
 });
@@ -48,7 +49,9 @@ array: The array that forEach() is being applied to.
 ```
 ```
 map
-The map() method creates a new array by calling a provided function on every element in the calling array. It returns a new array where each element is the result of applying the provided function to the original array's elements. Here's the syntax:
+The map() method creates a new array by calling a provided function on every element in the calling array. 
+It returns a new array where each element is the result of applying the provided function to the original array's elements. 
+Here's the syntax:
 let newArray = array.map(function(currentValue, index, array) {
   // return element for newArray
 });
@@ -70,7 +73,8 @@ console.log(text.length); // 11
 ```
 
 ```
-shift - The shift() method removes the first element from an array and returns that removed element. It also updates the length property of the array.
+shift - The shift() method removes the first element from an array and returns that removed element. 
+It also updates the length property of the array.
 
 Example:
 let fruits = ['apple', 'banana', 'orange'];
@@ -134,23 +138,30 @@ typeof - type of operand
 Cookies are small text files that are stored on the user's computer by a website.
 Cookies are sent as HTTP headers between the web server and the browser, and they are used for various purposes
 
-Session Management: Cookies can store session information, allowing users to stay logged in as they navigate between pages or if they revisit a website later.
+Session Management: Cookies can store session information, allowing users to stay logged in as they navigate between pages 
+or if they revisit a website later.
 
 Personalization: Websites can use cookies to remember user preferences, such as language settings, themes, or other customizable options.
 
-Tracking and Analytics: Cookies enable website owners to track user behavior, such as which pages were visited, how long users stayed on a site, and which links were clicked. This information is valuable for website analytics and improving user experience.
+Tracking and Analytics: Cookies enable website owners to track user behavior, such as which pages were visited, 
+how long users stayed on a site, and which links were clicked. This information is valuable for website analytics and improving user experience.
 
-Shopping Carts: In e-commerce websites, cookies can store items in a user's shopping cart, allowing users to continue shopping without losing the items they have already selected.
+Shopping Carts: In e-commerce websites, cookies can store items in a user's shopping cart, allowing users to continue shopping 
+without losing the items they have already selected.
 
 Authentication: Cookies can be used to authenticate users, allowing them to access secure areas of a website after logging in.
 
 Types of Cookies:
-Session Cookies: These cookies are temporary and are erased from the user's device when the web browser is closed. They are often used for session management and user authentication. 
+Session Cookies: These cookies are temporary and are erased from the user's device when the web browser is closed. 
+They are often used for session management and user authentication. 
 (The expire attribute shows the date the cookie will expire. If this is blank, the cookie will expire when the visitor quits the browser)
 
-Persistent Cookies: Persistent cookies are stored on the user's device even after the browser is closed. They have an expiration date and remain valid until that date is reached unless manually deleted by the user.
+Persistent Cookies: Persistent cookies are stored on the user's device even after the browser is closed. 
+They have an expiration date and remain valid until that date is reached unless manually deleted by the user.
 
-Secure and HttpOnly Cookies: Secure cookies are transmitted over secure, encrypted connections (HTTPS), ensuring that the cookie data is not intercepted during transmission. HttpOnly cookies are not accessible via JavaScript, providing an additional layer of security against cross-site scripting (XSS) attacks.
+Secure and HttpOnly Cookies: Secure cookies are transmitted over secure, encrypted connections (HTTPS), 
+ensuring that the cookie data is not intercepted during transmission. HttpOnly cookies are not accessible via JavaScript, 
+providing an additional layer of security against cross-site scripting (XSS) attacks.
 
 Set and Get cookies by this.
 document.cookie
@@ -197,7 +208,8 @@ window.location, window.localStorage / window.sessionStorage, window.console
 
 ```
 Document Object:
-The document object represents the web page or document displayed in the browser window. It provides access to the structure and content of the document and allows manipulation of the HTML elements and their attributes
+The document object represents the web page or document displayed in the browser window. It provides access to the structure 
+and content of the document and allows manipulation of the HTML elements and their attributes
 ```
 
 
@@ -212,7 +224,8 @@ External - <script src="https://www.w3schools.com/js/myScript.js"></script>
 ```
 Local Storage 
 ```
-Local Storage is a web storage solution in web browsers that allows websites to store key-value pairs locally within a user's web browser. This data persists even after the browser is closed and can be accessed and manipulated via JavaScript
+Local Storage is a web storage solution in web browsers that allows websites to store key-value pairs locally within a user's web browser. 
+This data persists even after the browser is closed and can be accessed and manipulated via JavaScript
 
 localStorage.setItem('key', 'value');
 let storedValue = localStorage.getItem('key');
@@ -223,13 +236,15 @@ localStorage.removeItem('key');
 
 Storage Limit: Local Storage has a storage limit (typically around 5-10 MB per domain, although this can vary between browsers).
 
-Data Type: Local Storage can only store strings. If you want to store complex objects, you'll need to serialize and deserialize them (for example, using JSON.stringify() and JSON.parse()).
+Data Type: Local Storage can only store strings. If you want to store complex objects, you'll need to serialize and deserialize them 
+(for example, using JSON.stringify() and JSON.parse()).
 
 Same-Origin Policy: Local Storage data is only accessible to pages from the same origin (same protocol, domain, and port.
 
 ***11)Session Storage***
 ```
-Session Storage is another web storage solution in web browsers similar to Local Storage. It allows websites to store key-value pairs, but the data is accessible only for the duration of the page session.
+Session Storage is another web storage solution in web browsers similar to Local Storage. It allows websites to store key-value pairs, 
+but the data is accessible only for the duration of the page session.
 ```
 
 **12)Event Bubling**
@@ -277,7 +292,8 @@ Type coercion is the process of converting value from one type to another.
   ['x'] == 'x'          // Result: true,  == operator converts non primitive to primitive by applying toString methods on it.
   [] + null + 1         // Result: "null1" (Empty array is converted to an empty string, then null is converted to "null", and finally 1 is concatenated as a string)
   [1,2,3] == [1,2,3]    // Result: false (Arrays are objects, and objects are compared by reference, these two arrays are different objects)
-  {}+[]+{}+[1]          // Result: "0[object Object]1" (Explanation: {} is interpreted as an empty code block, then +[] evaluates to 0. +{} evaluates to [object Object]. [1] is converted to the string "1". The concatenation works from left to right)
+  {}+[]+{}+[1]          // Result: "0[object Object]1" (Explanation: {} is interpreted as an empty code block, then +[] evaluates to 0. +{} evaluates to [object Object].
+                                   [1] is converted to the string "1". The concatenation works from left to right)
   !+[]+[]+![]           //  ??
   new Date(0) - 0       // Result: 0 (Subtracts 0 from the timestamp of the date object, effectively converting the date to a number)
   new Date(0) + 0       // Result: "Thu Jan 01 1970 02:00:00 GMT+0200 (Eastern European Standard Time)0" (Converts the date to a string and concatenates 0 as a string)
@@ -292,7 +308,8 @@ Type coercion is the process of converting value from one type to another.
 
 **17)Strict mode in JS**
 ```
-  Strict mode is a feature introduced in ECMAScript 5 (ES5) that allows developers to write safer JavaScript code by catching common coding bugs and preventing the use of problematic features
+  Strict mode is a feature introduced in ECMAScript 5 (ES5) that allows developers to write safer JavaScript code
+  by catching common coding bugs and preventing the use of problematic features
 
   To enable strict mode in JavaScript
   "use strict";
@@ -440,7 +457,9 @@ console.log(curriedAdd); // Output: 6
 are both methods in JavaScript used with Promises, but they behave differently in how they handle the resolving  of multiple promises.
 
 Promise.all() -->
-Promise.all() is a method that takes an array of promises and returns a new promise that resolves to an array of the results when all of the input promises are resolved. If any of the input promises are rejected, the Promise.all() method immediately rejects with the reason of the first rejected promise.
+Promise.all() is a method that takes an array of promises and returns a new promise that resolves to an array of the results
+when all of the input promises are resolved. If any of the input promises are rejected, the Promise.all() method immediately
+rejects with the reason of the first rejected promise.
 
 const promise1 = Promise.resolve(1);
 const promise2 = Promise.resolve(2);
@@ -456,7 +475,8 @@ Promise.all([promise1, promise2, promise3])
 
 
 Promise.allSettled()
-Promise.allSettled() is a method that takes an array of promises and returns a new promise that resolves to an array of objects representing the outcome of each promise, whether it is fulfilled or rejected.
+Promise.allSettled() is a method that takes an array of promises and returns a new promise that resolves to an
+array of objects representing the outcome of each promise, whether it is fulfilled or rejected.
 
 const promise1 = Promise.resolve(1);
 const promise2 = Promise.resolve(2);
@@ -482,11 +502,13 @@ const add = (a, b) => a + b;
 2) Binding of this:
 Normal Function:
 
-The value of this in normal functions is dynamically scoped, which means it is determined by how the function is called. You can change the value of this using bind(), call(), or apply() methods.
+The value of this in normal functions is dynamically scoped, which means it is determined by how the function is called.
+You can change the value of this using bind(), call(), or apply() methods.
 
 Arrow Function:
 
-Arrow functions lexically bind the this value, meaning they inherit this from the surrounding code. You cannot change the value of this in arrow functions using bind(), call(), or apply().
+Arrow functions lexically bind the this value, meaning they inherit this from the surrounding code.
+You cannot change the value of this in arrow functions using bind(), call(), or apply().
 
 3) The arguments object is a local variable available within all functions and contains an array-like structure of all the arguments passed to the function.
 function sum() {
@@ -508,7 +530,9 @@ console.log(sum(1, 2, 3, 4)); // Output: 10
 
 **26)Reduce method**
 ```
-The reduce() method in JavaScript is a powerful and versatile array method that is used to reduce an array to a single value. It executes a provided function for each element of the array (from left to right) and accumulates the result into a single value. Here's the basic syntax of the reduce() method.
+The reduce() method in JavaScript is a powerful and versatile array method that is used to reduce an array to a single value.
+It executes a provided function for each element of the array (from left to right) and accumulates the result into a single value.
+Here's the basic syntax of the reduce() method.
 
 array.reduce(callback(accumulator, currentValue, currentIndex, array), initialValue)
 
@@ -531,7 +555,8 @@ b.x = 1;
 console.log(a.x); // return 1
 
 2) Shallow Copy 
-A shallow copy would create a new object and copy the top-level properties of the original object into the new object. Shallow copies do not create copies of nested objects or arrays;
+A shallow copy would create a new object and copy the top-level properties of the original object into the new object.
+Shallow copies do not create copies of nested objects or arrays;
 
 const a = { x: 0, y: { z: 0 }};
 const b = {...a};
@@ -596,7 +621,8 @@ JS execute all opearation on a single thread but using a smart data structure it
 
 there are two main types of queues: the Callback Queue (Task Queue) and the Microtask Queue (Job Queue).
 
-Callback Queue (Task Queue): Asynchronous operations, such as setTimeout callbacks or event handlers, are placed in the Callback Queue when they are ready to be executed
+Callback Queue (Task Queue): Asynchronous operations, such as setTimeout callbacks or event handlers,
+are placed in the Callback Queue when they are ready to be executed
 
 Microtask Queue (Job Queue): Promises and certain APIs schedule their callbacks as microtasks. 
 ```
@@ -634,10 +660,12 @@ myPromise.then((successMessage) => {
 var:
 
 Variables declared with var are function-scoped. They are not block-scoped like let and const.
-var variables are hoisted to the top of their function or global scope. This means you can use a variable before it's declared, but it will have an initial value of undefined.
+var variables are hoisted to the top of their function or global scope. This means you can use a variable before it's declared,
+but it will have an initial value of undefined.
 
 let: Variables declared with let are block-scoped. They exist only within the block, statement, or expression on which they are defined.
-let variables are also hoisted to the top of their block scope, but they are not initialized until the actual declaration is encountered during the code execution.
+let variables are also hoisted to the top of their block scope, but they are not initialized until the
+actual declaration is encountered during the code execution.
 Unlike var, redeclaring a variable with let in the same scope is not allowed.
 
 const:
@@ -679,7 +707,8 @@ constructor():
 Called when the component is initialized. You can set up state and bind event handlers here.
 
 static getDerivedStateFromProps(props, state):
-A static method that is called when the component is instantiated as well as when it receives new props. It returns an object to update the state or null to indicate no state updates are necessary.
+A static method that is called when the component is instantiated as well as when it receives new props.
+It returns an object to update the state or null to indicate no state updates are necessary.
 
 render():
 The only required method in a class component. It returns the JSX that represents the component's UI.
