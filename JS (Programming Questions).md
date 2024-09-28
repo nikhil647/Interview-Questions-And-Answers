@@ -148,6 +148,72 @@ for (key in obj) {
   console.log(obj[key])
 }
 ```
+## Write a program which will take string of countries name like 'INDIA_AUS', list countries with its number of matches
+```
+// Input : "INDIA_AUS, NEWZELAND_AUS, INDIA_ENGLAND, SA_NEPAL"
+// Output: INDIA: 2, NEWZELAND: 1, AUS: 2, ENGLAND: 1, SA: 1, NEPAL: 1
+
+//Solution
+function countCountryMatches(input) {
+  let countryMatches = {}
+  let matches = input.split(", ")
+  
+  matches.forEach(match => {
+    let countries = match.split("_")
+    
+    countries.forEach(country => {
+      if (countryMatches[country]) {
+        countryMatches[country]++
+      } else {
+        countryMatches[country] = 1
+      }
+    })
+  })
+
+  // Construct the output string
+  let output = Object.entries(countryMatches)
+                     .map(([country, count]) => `${country}: ${count}`)
+                     .join(", ")
+  
+  return output
+}
+let input = "INDIA_AUS, NEWZELAND_AUS, INDIA_ENGLAND, SA_NEPAL";
+let result = countCountryMatches(input);
+console.log(result) // INDIA: 2, NEWZELAND: 1, AUS: 2, ENGLAND: 1, SA: 1, NEPAL: 1
+```
+
+## Write a program to move all the zero elements of the INPUT array to the right side of the array
+
+```
+// Constraints: Rearrangement of the elements should be done in the INPUT array itself. Creation of 
+    another array to solve the problem is not allowed. 
+// INPUT ARRAY : [10, 15, -12, 0, -2, 0, 10, -14, 0, 30, -5]
+// OUTPUT: [10, 15, -12, -2, 10, -14, 30, -5, 0, 0, 0]
+// NOTE: After rearrangement non-zero element can be in any order.
+
+//Solution
+function moveZerosToEnd(arr) {
+  let nonZeroIndex = 0;
+
+  // Move non-zero elements to the front of the array
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] !== 0) {
+      arr[nonZeroIndex] = arr[i];
+      nonZeroIndex++;
+    }
+  }
+
+  // Fill the rest of the array with zeros
+  for (let i = nonZeroIndex; i < arr.length; i++) {
+    arr[i] = 0;
+  }
+}
+
+// Example usage
+let arr = [10, 15, -12, 0, -2, 0, 10, -14, 0, 30, -5];
+moveZerosToEnd(arr);
+console.log(arr);
+```
 
 ## Palindrome
 Logic --> take mid and travel to mid and calculate length compare first element with last (length - i) if not matching - not a pandindrom
