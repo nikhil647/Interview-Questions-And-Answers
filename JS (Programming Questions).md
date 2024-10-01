@@ -326,38 +326,16 @@ if (str1 == str2) {
   console.log('Not anagram of each other')
 }
 ```
-## Quick Sort
-Logic - select first element as pivot arrange all small elements to the left and all large element at right (not necessarily in sorted manner)
-Steps
-1) We use recursion so base condition is array length is less than or equal to 1 return array.
-2) keep first element as pivot and start loop from 1st(0th + 1) till end.
-3) maintain two array left and right array. in for loop push all smaller elements in left array and large element in right array
-4) Apply same logic on left and right array but write in this array.
-  pivot element is already sorted.
-
+## Sort array of object with age property
 ```
-function quickSort(arr) {
-  if (arr.length <= 1) {
-    return arr
-  } else {
-    const pivot = arr[0]
-    const left = []
-    const right = []
-    for (let i = 1; i < arr.length; i++) {
-      if (arr[i] < pivot) {
-        left.push(arr[i])
-      } else {
-        right.push(arr[i])
-      }
-    }
-    return [...quickSort(left), pivot, ...quickSort(right)]
-  }
-}
+const people = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Charlie', age: 20 },
+]
 
-// Example usage
-let inputArray = [4, 2, 7, 1, 9, 5];
-let resultArray = quickSort(inputArray);
-console.log(resultArray); // Output: [1, 2, 4, 5, 7, 9]
+people.sort((a, b) => a.age - b.age)
+console.log(people)
 ```
 ## Output Based Question ?
 ```
@@ -411,7 +389,39 @@ for (var i = 1; i <= 3; i++) {
 }
 // output 4 4 4
 ```
+## Quick Sort
+Logic - select first element as pivot arrange all small elements to the left and all large element at right (not necessarily in sorted manner)
+Steps
+1) We use recursion so base condition is array length is less than or equal to 1 return array.
+2) keep first element as pivot and start loop from 1st(0th + 1) till end.
+3) maintain two array left and right array. in for loop push all smaller elements in left array and large element in right array
+4) Apply same logic on left and right array but write in this array.
+  pivot element is already sorted.
 
+```
+function quickSort(arr) {
+  if (arr.length <= 1) {
+    return arr
+  } else {
+    const pivot = arr[0]
+    const left = []
+    const right = []
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i] < pivot) {
+        left.push(arr[i])
+      } else {
+        right.push(arr[i])
+      }
+    }
+    return [...quickSort(left), pivot, ...quickSort(right)]
+  }
+}
+
+// Example usage
+let inputArray = [4, 2, 7, 1, 9, 5];
+let resultArray = quickSort(inputArray);
+console.log(resultArray); // Output: [1, 2, 4, 5, 7, 9]
+```
 
 ## Merge Sort
 ```
