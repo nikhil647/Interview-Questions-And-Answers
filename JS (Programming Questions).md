@@ -47,7 +47,8 @@ const rotateTheArray = (arr, n) => {
 const originalArray = [1, 2, 3, 4, 5];
 const rotatedArray = rotateTheArray(originalArray, 2);
 console.log(rotatedArray); // Output: [3, 4, 5, 1, 2]
-
+```
+```
 // or rotate bothways
 const rotateArr = (arr, n) => {
   if(!arr || !arr.length) {
