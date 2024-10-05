@@ -214,6 +214,65 @@ let arr = [10, 15, -12, 0, -2, 0, 10, -14, 0, 30, -5];
 moveZerosToEnd(arr);
 console.log(arr);
 ```
+## Write a program to rotate string with capitalize first letter without using in-built js functions
+```
+const str = 'blue sky bright sun'
+// Output:- 'Sun Bright Sky Blue'
+const reverseStr = (str) => {
+  let result = ''
+  let word = ''
+  
+  for(let i= str.length - 1; i >= 0; i-- ){
+    if(str[i] === ' ') {
+      result = result + capitalizeWord(word) + ' '
+      word = ''
+    } else {
+      word = str[i] + word 
+    }
+  }
+  result = result + capitalizeWord(word)
+  
+  return result
+}
+
+function capitalizeWord(word) {
+  if (word.length === 0) {
+    return word;
+  }
+  
+  let capitalizedWord = '';
+  for (let i = 0; i < word.length; i++) {
+    if (i === 0) {
+      capitalizedWord += word[i].toUpperCase();
+    } else {
+      capitalizedWord += word[i];
+    }
+  }
+  
+  return capitalizedWord
+}
+console.log(reverseStr(str))
+```
+
+## Find out combination where there addition comes to zero
+```
+const arrData = [3, -1, 1, -3, 2, -2]
+//Output:- [ [ 3, -3 ], [ -1, 1 ], [ 1, -1 ], [ -3, 3 ], [ 2, -2 ], [ -2, 2 ] ]
+const findZeroSumCombinations = (arr) => {
+  const arrPair = []
+  
+  arrData.forEach((ele, ind)=> {
+    arrData.forEach((ele2, ind2)=> {
+      if(ele + ele2 === 0) {
+        arrPair.push([ele, ele2])
+      }
+    })
+  })
+  return arrPair
+}
+
+console.log(findZeroSumCombinations(arrData))
+```
 
 ## Palindrome
 Logic --> take mid and travel to mid and calculate length compare first element with last (length - i) if not matching - not a pandindrom
