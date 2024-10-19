@@ -293,6 +293,38 @@ const findZeroSumCombinations = (arr) => {
 console.log(findZeroSumCombinations(arrData))
 ```
 
+## Given an array of digits, add 1 to the integer it represents and return the result as an array, without converting it to a number,
+  handling cases like carries with digits ending in 9.
+```
+// In: ["1", "2", "3"] Out: ["1", "2", "4"] / In: ["1", "9", "9"] Out: ["2", "0", "0"] 
+// In: ["9", "9", "9"] Out: ["1", "0", "0", "0"]
+// You are not allowed to convert the array of digits into an actual number. 
+//You must perform the addition directly on the array.
+
+function addOneToArray(arr) {
+  let n = arr.length;
+
+  for (let i = n - 1; i >= 0; i--) {
+    if (arr[i] < 9) {
+      arr[i] = (parseInt(arr[i]) + 1).toString();
+      return arr;
+    } else {
+      arr[i] = '0';
+    }
+  }
+
+  // If we exit the loop, it means all digits were 9, so we need to add '1' at the beginning
+  arr.unshift('1');
+  return arr;
+}
+
+// Test cases
+console.log(addOneToArray(['1', '2', '3']));  // Output: ["1", "2", "4"]
+console.log(addOneToArray(['1', '9', '9']));  // Output: ["2", "0", "0"]
+console.log(addOneToArray(['9', '9', '9']));  // Output: ["1", "0", "0", "0"]
+console.log(addOneToArray(['0']));            // Output: ["1"]
+```
+
 ## Palindrome
 Logic --> take mid and travel to mid and calculate length compare first element with last (length - i) if not matching - not a pandindrom
 ```
