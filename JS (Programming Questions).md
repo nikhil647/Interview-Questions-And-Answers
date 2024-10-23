@@ -329,15 +329,23 @@ console.log(addOneToArray(['0']));            // Output: ["1"]
 Logic --> take mid and travel to mid and calculate length compare first element with last (length - i) if not matching - not a pandindrom
 ```
 let string = 'raar'
-const stringArray = string.split('')
-console.log(stringArray)
-const L = stringArray.length - 1
-for (let i = 0; i < Math.floor(L / 2); i++) {
-  if (stringArray[i] !== stringArray[L - i]) {
-    console.log('Not a Palindrom')
-    break
+const checkIsPalindrome = (str) => {
+  const strArr = str.split('')
+  const strL = strArr.length
+  
+  const iterateL = Math.floor(strL / 2)
+  let isPalindrome = true
+  for(let i = 0; i < iterateL; i++) {
+    if(strArr[i] !== strArr[strL - i - 1]) {
+      console.log('Not a Palidrome')
+      isPalindrome = false
+      break
+    }
   }
+  return isPalindrome
 }
+
+console.log(checkIsPalindrome(string))
 ```
 With Js Inbuilt Methods.
 ```
