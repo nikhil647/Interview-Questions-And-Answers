@@ -393,6 +393,20 @@ function isPrime(num) {
   for (let i = 2; i * i <= num; i++) if (num % i === 0) return false
   return num > 1
 }
+
+function isPrime(num) {
+  if (num <= 1) return false; // Numbers less than or equal to 1 are not prime
+  if (num === 2) return true; // 2 is the only even prime number
+  if (num % 2 === 0) return false; // Exclude even numbers greater than 2
+
+  // Check for divisors from 3 to the square root of num
+  for (let i = 3; i <= Math.sqrt(num); i += 2) {
+    if (num % i === 0) {
+      return false; // Not a prime number
+    }
+  }
+  return true; // Prime number
+}
 ```
 
 ## two string Anagram of each other
