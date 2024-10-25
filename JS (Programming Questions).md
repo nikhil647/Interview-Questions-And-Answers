@@ -408,7 +408,39 @@ function isPrime(num) {
   return true; // Prime number
 }
 ```
+##Maximum Points by Picking k Cards
+```
+You are given an array cardPoints where each element represents the number of points associated with a card. The cards are arranged in a row, and you can pick exactly k cards from the array.
+In each step, you are allowed to take one card either from the beginning of the row or from the end. Your score is the sum of the points of the k cards you take.
+Write a function to determine the maximum score you can obtain by picking exactly k cards.
 
+function(cardPoints, k) {
+  const n = cardPoints.length
+  
+  // Step 1: Find total sum of all card points
+  const totalSum = cardPoints.reduce((acc, val) => acc + val, 0)
+  
+  // If k equals n, take all cards
+  if (k === n) return totalSum
+  
+  // Step 2: Find minimum sum of subarray of length n - k
+  let windowSize = n - k
+  let currentWindowSum = cardPoints.slice(0, windowSize).reduce((acc, val) => acc + val, 0)
+  
+  let minWindowSum = currentWindowSum
+  
+  for (let i = windowSize; i < n; i++) {
+      currentWindowSum += cardPoints[i] - cardPoints[i - windowSize]
+      minWindowSum = Math.min(minWindowSum, currentWindowSum)
+  }
+  
+  // Step 3: Maximum score is total sum minus minimum window sum
+  return totalSum - minWindowSum
+};
+
+// Example usage:
+console.log(maxScore([1, 2, 3, 4, 5, 6, 1], 3)); // Output: 12
+```
 ## two string Anagram of each other
 
 anagram.js 
