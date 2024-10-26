@@ -409,7 +409,7 @@ function isPrime(num) {
   return true; // Prime number
 }
 ```
-##Maximum Points by Picking k Cards
+## Maximum Points by Picking k Cards
 ```
 You are given an array cardPoints where each element represents the number of points associated with a card. 
 The cards are arranged in a row, and you can pick exactly k cards from the array.
