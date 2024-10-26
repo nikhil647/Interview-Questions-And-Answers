@@ -293,7 +293,8 @@ const findZeroSumCombinations = (arr) => {
 console.log(findZeroSumCombinations(arrData))
 ```
 
-## Given an array of digits, add 1 to the integer it represents and return the result as an array, without converting it to a number,
+## Given an array of digits, add 1 to the integer it represents and return the result as an array, 
+  without converting it to a number,
   handling cases like carries with digits ending in 9.
 ```
 // In: ["1", "2", "3"] Out: ["1", "2", "4"] / In: ["1", "9", "9"] Out: ["2", "0", "0"] 
@@ -410,8 +411,10 @@ function isPrime(num) {
 ```
 ##Maximum Points by Picking k Cards
 ```
-You are given an array cardPoints where each element represents the number of points associated with a card. The cards are arranged in a row, and you can pick exactly k cards from the array.
-In each step, you are allowed to take one card either from the beginning of the row or from the end. Your score is the sum of the points of the k cards you take.
+You are given an array cardPoints where each element represents the number of points associated with a card. 
+The cards are arranged in a row, and you can pick exactly k cards from the array.
+In each step, you are allowed to take one card either from the beginning of the row or from the end. 
+Your score is the sum of the points of the k cards you take.
 Write a function to determine the maximum score you can obtain by picking exactly k cards.
 
 function(cardPoints, k) {
