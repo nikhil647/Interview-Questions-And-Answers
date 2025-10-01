@@ -19,10 +19,7 @@ console.log(max)
 ```
 let arr = [1,3,2,5,3,6,7,22,12,5,32,56,21];
 let n = 3;
-
-n = n % arr.length; // handle large n
 const rotated = [...arr.slice(-n), ...arr.slice(0, -n)];
-
 console.log(rotated);
 // [32, 56, 21, 1, 3, 2, 5, 3, 6, 7, 22, 12, 5]
 ```
