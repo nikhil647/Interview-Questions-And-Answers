@@ -32,25 +32,21 @@ Const flatternArr = arr.flat(3) // Output: [1, 2, 3, 4, 5, 6]
 ```
 ```
 //custom funtion
-let arr = [1, [2, [3, 4], 5], 6]
-const flattenArray = (arr, depth) => {
-  if (!arr || arr.length === 0) {
-    return []
-  }
-  if (depth === 0) {
-    return arr.slice()
-  }
-  const flattenedArray = []
-  arr.forEach((val) => {
-    if (Array.isArray(val) && depth > 0) {
-      flattenedArray.push(...flattenArray(val, depth - 1))
-    } else {
-      flattenedArray.push(val)
+const arr = [1, [2, [3, 4], 5], 6];
+const resultArray = [];
+const flatIt = (arrayRecived) => {
+    return arrayRecived.map(ele => {
+    if(Array.isArray(ele)) {
+     return flatIt(ele)   
     }
-  })
-  return flattenedArray
+    else {
+        resultArray.push(ele);
+        return ele;
+    }
+    });
 }
-console.log(flattenArray(arr, 2)) // Output: [1, 2, 3, 4, 5, 6]
+flatIt(arr)
+console.log('resultArray -->',resultArray);
 ```
 ## Memoize function in JS
 ```
