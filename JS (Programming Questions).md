@@ -123,33 +123,22 @@ for (key in obj) {
 // Input : "INDIA_AUS, NEWZELAND_AUS, INDIA_ENGLAND, SA_NEPAL"
 // Output: INDIA: 2, NEWZELAND: 1, AUS: 2, ENGLAND: 1, SA: 1, NEPAL: 1
 
-//Solution
-function countCountryMatches(input) {
-  let countryMatches = {}
-  let matches = input.split(", ")
-  
-  matches.forEach(match => {
-    let countries = match.split("_")
-    
-    countries.forEach(country => {
-      if (countryMatches[country]) {
-        countryMatches[country]++
-      } else {
-        countryMatches[country] = 1
-      }
-    })
-  })
+const countries = "INDIA_AUS, NEWZELAND_AUS, INDIA_ENGLAND, SA_NEPAL";
+const allCountries = countries
+  .split(',')
+  .reduce((acc, pair) => {
+    const [c1, c2] = pair.split('_');   // destructure instead of map
+    acc.push(c1.trim(), c2.trim());     // push directly
+    return acc;
+  }, []);
 
-  // Construct the output string
-  let output = Object.entries(countryMatches)
-                     .map(([country, count]) => `${country}: ${count}`)
-                     .join(", ")
-  
-  return output
-}
-let input = "INDIA_AUS, NEWZELAND_AUS, INDIA_ENGLAND, SA_NEPAL";
-let result = countCountryMatches(input);
-console.log(result) // INDIA: 2, NEWZELAND: 1, AUS: 2, ENGLAND: 1, SA: 1, NEPAL: 1
+let countObj = allCountries.reduce((acc, ele) => {
+  acc[ele] = (acc[ele] || 0) + 1;
+  return acc;
+}, {});
+
+console.log(countObj);
+// { INDIA: 2, AUS: 2, NEWZELAND: 1, ENGLAND: 1, SA: 1, NEPAL: 1 }
 ```
 
 ## Write a program to move all the zero elements of the INPUT array to the right side of the array
