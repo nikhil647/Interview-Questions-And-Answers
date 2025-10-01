@@ -18,55 +18,13 @@ console.log(max)
 ## Write a program to rotate / shift the array n times 
 ```
 let arr = [1,3,2,5,3,6,7,22,12,5,32,56,21];
+let n = 3;
 
-// Solution
-const rotateTheArray = (n) => {
-  if (!arr || arr.length === 0) {
-    return []
-  }
-  const arrLength = arr.length
-  let rotateValue = n > arrLength ? Math.floor(n % arrLength) : n
-  const slicedValues = arr.slice(0, rotateValue)
-  const rotatedArray = [...arr, slicedValues]
-  console.log('rotatedArray', rotatedArray)
-}
-rotateTheArray(4) // [5, 3, 6, 7, 22, 12, 5, 32, 56, 21, 1, 3, 2, 5]
+n = n % arr.length; // handle large n
+const rotated = [...arr.slice(-n), ...arr.slice(0, -n)];
 
-```
-```
-//or optimized solution
-const rotateTheArray = (arr, n) => {
-  if (!Array.isArray(arr) || arr.length === 0) {
-    return [];
-  }
-  const arrLength = arr.length;
-  const rotateValue = n % arrLength;
-  const rotatedArray = [...arr.slice(rotateValue), ...arr.slice(0, rotateValue)];
-  return rotatedArray;
-};
-const originalArray = [1, 2, 3, 4, 5];
-const rotatedArray = rotateTheArray(originalArray, 2);
-console.log(rotatedArray); // Output: [3, 4, 5, 1, 2]
-```
-```
-// or rotate bothways
-const rotateArr = (arr, n) => {
-  if(!arr || !arr.length) {
-    return arr ?? []
-  }
-  let effN = n % arr.length
-  if(n < 0) {
-    effN = arr.length + n
-  }
-
-  for(let i =0; i < effN; i++) {
-    const lastItem = arr.pop()
-    arr.unshift(lastItem)
-  }
-  return arr
-}
-console.log(rotateArr([1,3,2,5,3,6,7,22,12,5,32,56,21], 3)) // [ 32, 56, 21, 1,  3,  2, 5,  3,  6, 7, 22, 12, 5 ]
-console.log(rotateArr([1,3,2,5,3,6,7,22,12,5,32,56,21], -3)) // [ 5,  3,  6,  7, 22, 12, 5, 32, 56, 21,  1, 3, 2]
+console.log(rotated);
+// [32, 56, 21, 1, 3, 2, 5, 3, 6, 7, 22, 12, 5]
 ```
 
 ## Flatten the nested array, depth level will also passed
