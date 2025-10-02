@@ -816,21 +816,19 @@ console.log(fruitsIt.next().value);
 
 # Genrator in JS
 ```
-A generator-function is defined like a normal function, but whenever it needs to generate a value,
-it does so with the yield keyword rather than return
+A generator in JS is a special function that can pause and resume execution using the yield keyword.
 
-function* numbGen() {
-    let i = 1;
-    
-    while(true) {
-        yield i++;
-    }
+function* myGenerator() {
+  yield 1;
+  yield 2;
+  yield 3;
 }
 
-const gen = numbGen();
-console.log(gen.next());
-console.log(gen.next());
-console.log(gen.next());
+const gen = myGenerator();
+console.log(gen.next()); // { value: 1, done: false }
+console.log(gen.next()); // { value: 2, done: false }
+console.log(gen.next()); // { value: 3, done: false }
+console.log(gen.next()); // { value: undefined, done: true }
 ```
 
 # What is prototype & __proto__
