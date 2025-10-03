@@ -29,11 +29,15 @@ I love the fact that something I build can make someone’s work easier, save th
 That feeling of seeing a project go from just an idea to something real that people actually use—that’s what keeps me motivated.
 ```
 
-**What has been your most notable achievement so far?**
+**Tasks which you did zoro just for reference in future**
 ```
-What really drives me is the idea that a few lines of code can have such a big impact on people’s lives.
-I love the fact that something I build can make someone’s work easier, save their time, or even improve their daily experience.
-That feeling of seeing a project go from just an idea to something real that people actually use—that’s what keeps me motivated.
+Migrating Page from old repo (redux saga) to new repo (react-query (microfronntend) + hooks).
+calculation mismatch found why numbers are not matching, minor bugs like unnecessary toast, UI mismatch 
+improve CLS score ie over all page perfomace. improve SEO. Suggest new changes (Recent Grid View, Mobile List view)
+New Supplier Integration - since our site dont have own product it always dependant on other suppliers.
+scenario when we get new supplier or old supplier has setup to automate.
+1) Once customer places an Order, we send PO (Purchase Order) to customer see we got this order for you. via API which supplier provide.
+then we will expect resp from supplier for delivert infomation or order cancelation. in between request and resp need to travel lot's SQS and SNS.
 ```
 
 
