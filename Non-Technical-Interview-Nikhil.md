@@ -40,6 +40,18 @@ scenario when we get new supplier or old supplier has setup to automate.
 then we will expect resp from supplier for delivert infomation or order cancelation. in between request and resp need to travel lot's SQS and SNS.
 ```
 
+**Describe a challenging project or task you worked on and how you handled it.**
+
+```
+Few Years back I get responsibility to improve web page performace, Gtmetrix rating some D for website after my changes 
+it was A, prepared Source Map using webpack
+to improve perfmace I did following things
+1) corrected syntax of extrnal lib like lodash, date-fns if you import carelessly chances are you are loading unncessary utilies in your code base.
+2 Add treeshakable feature to inhouse library
+3) Use zlib compression algo
+4) replaces images with webp format
+and few other modification but now days next js conver all this back then project was built using create react app.
+```
 
 
 
