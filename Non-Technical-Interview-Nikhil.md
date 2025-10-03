@@ -71,6 +71,9 @@ First of all, I connect with them to understand the reason. If they are stuck or
 ```
 Clean, Readable Code – I stick to coding standards, proper naming conventions, and modular design so that the code is easy to understand and maintain.
 Code Reviews & Collaboration – I believe peer reviews are one of the best ways to maintain quality. They not only catch bugs early but also help in knowledge sharing.
+Testing – I write unit tests and, where needed, integration tests using tools like Jest or similar frameworks.
+
+And some company use cypress to make sure devs dont break the exhsiting working feature. I have working expreiance of it
 ```
 
 **How do you measure your success (top 3 career metrics)?**
