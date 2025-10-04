@@ -239,33 +239,125 @@ console.log(myModule.greet('Alice'));
 
 **What is the event loop in Node.js?**
 ```
-Node.js utilizes an event-driven, non-blocking I/O model, which is made possible by the Event Loop, the Call Stack, and various Queues.
-1. The Call Stack:
-The Call Stack is a LIFO (Last-In, First-Out) data structure that keeps track of the execution context of functions.
-When a function is called, a new "frame" or "execution context" is pushed onto the stack.
-When a function completes its execution, its frame is popped off the stack.
-Synchronous code execution happens directly on the Call Stack.
-2. The Queues:
-Macrotask Queue (or Callback Queue/Task Queue): This queue holds callbacks for asynchronous operations like setTimeout, setInterval, I/O operations (file system, network), and setImmediate.
-Microtask Queue: This queue has higher priority than the Macrotask Queue and holds callbacks for process.nextTick() and Promises (.then(), .catch(), .finally()). It is actually composed of two sub-queues: the nextTick queue and the Promise queue.
-3. The Event Loop:
-The Event Loop is the central orchestrator that continuously monitors the Call Stack and the various Queues.
-Its primary role is to ensure that the Call Stack remains empty before moving callbacks from the Queues onto the Call Stack for execution.
-Event Loop Phases: The Node.js Event Loop operates in distinct phases, each with its own specific queues:
-Timers: Handles setTimeout and setInterval callbacks.
-Pending Callbacks: Executes I/O callbacks deferred to the next loop iteration.
-Idle, Prepare: Internal Node.js operations.
-Poll: Retrieves new I/O events, executes some I/O callbacks, and checks for setImmediate callbacks if the timer queue is empty.
-Check: Executes setImmediate callbacks.
-Close Callbacks: Handles close event callbacks.
-How they work together:
-Synchronous code: is executed directly on the Call Stack.
-When an asynchronous operation is initiated (e.g., setTimeout, file read), its callback is registered and the operation is offloaded to the underlying system (e.g., Libuv for I/O). The main thread continues executing subsequent synchronous code.
-Once the asynchronous operation completes, its associated callback is placed into the appropriate Queue (Macrotask or Microtask).
-The Event Loop continuously checks if the Call Stack is empty. 
-If the Call Stack is empty, the Event Loop first processes all callbacks in the Microtask Queue (starting with process.nextTick and then Promises).
-After the Microtask Queue is empty, the Event Loop moves to the next phase and takes the first available callback from the Macrotask Queue (e.g., from the Timer Queue, I/O Queue, or Check Queue, depending on the current phase) and pushes it onto the Call Stack for execution. 
-This cycle repeats, allowing Node.js to handle asynchronous operations efficiently without blocking the main thread.
+# 🌀 Node.js Event Loop, Call Stack, and Queues Explained
+
+Node.js utilizes an **event-driven**, **non-blocking I/O model**, powered by three key components:  
+the **Event Loop**, the **Call Stack**, and various **Queues**.  
+
+---
+
+## ⚙️ 1. The Call Stack
+
+The **Call Stack** is a **LIFO (Last-In, First-Out)** data structure that keeps track of function execution contexts.
+
+- When a function is called, a new **execution context (frame)** is **pushed** onto the stack.  
+- When a function completes, its frame is **popped** off the stack.  
+- **Synchronous code** executes directly on the Call Stack.
+
+✅ **In short:** The Call Stack handles synchronous execution.
+
+---
+
+## 📬 2. The Queues
+
+Node.js maintains two main types of queues to manage asynchronous callbacks.
+
+### 🕒 Macrotask Queue  
+(Also called the **Callback Queue** or **Task Queue**)
+
+- Stores callbacks for asynchronous operations like:
+  - `setTimeout`
+  - `setInterval`
+  - I/O operations (e.g., file system, network)
+  - `setImmediate`
+- These tasks are processed **after** all Microtasks are complete.
+
+### ⚡ Microtask Queue  
+Has **higher priority** than the Macrotask Queue.
+
+- Holds callbacks for:
+  - `process.nextTick()`
+  - Promises (`.then()`, `.catch()`, `.finally()`)
+- Internally, it consists of two sub-queues:
+  1. **NextTick Queue** (for `process.nextTick`)
+  2. **Promise Queue** (for Promises)
+
+✅ **In short:** Microtasks always run before Macrotasks in each Event Loop iteration.
+
+---
+
+## 🔁 3. The Event Loop
+
+The **Event Loop** is the central orchestrator that ensures smooth asynchronous execution.
+
+### 🧭 Its main role:
+- Continuously monitor the **Call Stack** and the **Queues**.  
+- Move callbacks from Queues → Call Stack **only when the Call Stack is empty**.
+
+---
+
+## ⏱️ Event Loop Phases
+
+The Node.js Event Loop executes in **phases**, each managing specific queues:
+
+| **Phase** | **Description** |
+|------------|----------------|
+| **Timers** | Executes callbacks for `setTimeout()` and `setInterval()` |
+| **Pending Callbacks** | Runs I/O callbacks deferred from the previous cycle |
+| **Idle, Prepare** | Internal operations (used by Node.js core) |
+| **Poll** | Retrieves new I/O events and executes related callbacks. If no I/O is pending, it checks for `setImmediate()` callbacks |
+| **Check** | Executes `setImmediate()` callbacks |
+| **Close Callbacks** | Executes `close` event callbacks (e.g., sockets, streams) |
+
+---
+
+## ⚡ How They Work Together
+
+1. **Synchronous code** runs directly on the **Call Stack**.  
+2. When an **asynchronous operation** (like `setTimeout` or file read) starts:
+   - Its callback is **registered** and offloaded to **Libuv** (Node.js’s underlying C library).  
+   - The main thread continues executing other synchronous code.  
+3. Once the async operation completes:
+   - Its **callback** is placed into the appropriate **Queue** (Macrotask or Microtask).  
+4. The **Event Loop** checks if the **Call Stack** is empty:
+   - If **empty**, it first executes **Microtasks** (`process.nextTick`, Promises).  
+   - Once all Microtasks finish, it executes the **next Macrotask** from the current phase.  
+5. This process **repeats indefinitely**, allowing Node.js to handle asynchronous tasks efficiently without blocking the main thread.
+
+---
+
+### 🧩 Summary Diagram (Conceptually)
+
+```
+        ┌──────────────────┐
+        │   Call Stack     │
+        └───────┬──────────┘
+                │
+                ▼
+        ┌──────────────────┐
+        │   Microtask Queue│ ← process.nextTick, Promises
+        └───────┬──────────┘
+                │
+                ▼
+        ┌──────────────────┐
+        │   Macrotask Queue│ ← setTimeout, setInterval, setImmediate, I/O
+        └───────┬──────────┘
+                │
+                ▼
+        ┌──────────────────┐
+        │   Event Loop     │
+        └──────────────────┘
+```
+
+---
+
+### 🚀 TL;DR
+
+- **Call Stack:** Runs synchronous code.  
+- **Microtask Queue:** Runs `process.nextTick` and Promise callbacks (highest priority).  
+- **Macrotask Queue:** Runs timers, I/O, and `setImmediate` callbacks.  
+- **Event Loop:** Manages execution order and keeps Node.js non-blocking.
+
 ```
 ***
 **How does Node.js handle I/O operations ?**
