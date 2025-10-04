@@ -239,16 +239,33 @@ console.log(myModule.greet('Alice'));
 
 **What is the event loop in Node.js?**
 ```
-
-The Node.js event loop is customized for handling I/O operations, such as reading files, making network requests, and handling concurrent connection.
-
-Node.js's event loop includes additional phases like "Timers," "Pending Callbacks," "Poll," "Check," and "Close Callbacks" to handle various asynchronous operations efficiently.
-
-Timers: Execute callbacks scheduled with setTimeout() or setInterval().
-Pending Callbacks: Execute I/O callbacks that were deferred in the previous cycle.
-Poll: Retrieve new I/O events and execute their callbacks. This is where most of the time is spent.
-Check: Execute setImmediate() callbacks.
-Close Callbacks: Execute close event callbacks, e.g., when a socket or a file is closed.
+Node.js utilizes an event-driven, non-blocking I/O model, which is made possible by the Event Loop, the Call Stack, and various Queues.
+1. The Call Stack:
+The Call Stack is a LIFO (Last-In, First-Out) data structure that keeps track of the execution context of functions.
+When a function is called, a new "frame" or "execution context" is pushed onto the stack.
+When a function completes its execution, its frame is popped off the stack.
+Synchronous code execution happens directly on the Call Stack.
+2. The Queues:
+Macrotask Queue (or Callback Queue/Task Queue): This queue holds callbacks for asynchronous operations like setTimeout, setInterval, I/O operations (file system, network), and setImmediate.
+Microtask Queue: This queue has higher priority than the Macrotask Queue and holds callbacks for process.nextTick() and Promises (.then(), .catch(), .finally()). It is actually composed of two sub-queues: the nextTick queue and the Promise queue.
+3. The Event Loop:
+The Event Loop is the central orchestrator that continuously monitors the Call Stack and the various Queues.
+Its primary role is to ensure that the Call Stack remains empty before moving callbacks from the Queues onto the Call Stack for execution.
+Event Loop Phases: The Node.js Event Loop operates in distinct phases, each with its own specific queues:
+Timers: Handles setTimeout and setInterval callbacks.
+Pending Callbacks: Executes I/O callbacks deferred to the next loop iteration.
+Idle, Prepare: Internal Node.js operations.
+Poll: Retrieves new I/O events, executes some I/O callbacks, and checks for setImmediate callbacks if the timer queue is empty.
+Check: Executes setImmediate callbacks.
+Close Callbacks: Handles close event callbacks.
+How they work together:
+Synchronous code: is executed directly on the Call Stack.
+When an asynchronous operation is initiated (e.g., setTimeout, file read), its callback is registered and the operation is offloaded to the underlying system (e.g., Libuv for I/O). The main thread continues executing subsequent synchronous code.
+Once the asynchronous operation completes, its associated callback is placed into the appropriate Queue (Macrotask or Microtask).
+The Event Loop continuously checks if the Call Stack is empty. 
+If the Call Stack is empty, the Event Loop first processes all callbacks in the Microtask Queue (starting with process.nextTick and then Promises).
+After the Microtask Queue is empty, the Event Loop moves to the next phase and takes the first available callback from the Macrotask Queue (e.g., from the Timer Queue, I/O Queue, or Check Queue, depending on the current phase) and pushes it onto the Call Stack for execution. 
+This cycle repeats, allowing Node.js to handle asynchronous operations efficiently without blocking the main thread.
 ```
 ***
 **How does Node.js handle I/O operations ?**
