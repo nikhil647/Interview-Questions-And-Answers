@@ -50,28 +50,31 @@ console.log('This waits for file to load');
 
 // API Route 1
 app.get('/slow', (req, res) => {
-  fs.readFile('bigfile.txt', (err, data) => { // Non-blocking
-    res.send(data);
-  });
+  const data = fs.readFileSync('bigfile.txt'); // Takes 1 minute
+  res.send(data);
 });
 
 // API Route 2
 app.get('/fast', (req, res) => {
-  res.send('Hello');
+  res.send('Hello'); // Should be instant
 });
 
-// Timeline
 Time 0s:   Request 1 hits /slow
-           └─> Registers file read, continues immediately
+           └─> Starts reading file (BLOCKS the entire server)
 
-Time 1s:   Request 2 hits /fast
-           └─> Responds instantly with "Hello" ✓
+Time 10s:  Request 2 hits /fast
+           └─> STUCK! Waiting for Request 1 to finish
+           └─> Can't even send "Hello"
 
-Time 2s:   Request 3 hits /slow
-           └─> Registers file read, continues immediately
+Time 20s:  Request 3 hits /slow
+           └─> STUCK! Also waiting
 
-Time 60s:  Request 1's file completes → Response sent
-Time 62s:  Request 3's file completes → Response sent
+Time 60s:  File read completes
+           └─> Request 1 gets response
+           └─> Request 2 can NOW run (sends "Hello")
+           └─> Request 3 starts its 1-minute wait
+
+Time 120s: Request 3 finally completes
 
 ### Asynchronous Code:
 ```javascript
