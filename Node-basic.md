@@ -239,6 +239,15 @@ console.log(myModule.greet('Alice'));
 
 **What is the event loop in Node.js?**
 ```
+function eventLoopDemo() {
+  setTimeout(() => console.log("Timeout"), 0);
+  Promise.resolve().then(() => console.log("Promise"));
+  console.log("Start");
+}
+eventLoopDemo();
+```
+
+```
 # 🌀 Node.js Event Loop, Call Stack, and Queues Explained
 
 Node.js utilizes an **event-driven**, **non-blocking I/O model**, powered by three key components:  
