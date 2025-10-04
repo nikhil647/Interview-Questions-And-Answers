@@ -2,7 +2,7 @@
 
 **1) What is React Js?**
 ```
-React.js, commonly referred to as React, is an open-source JavaScript library for building user interfaces or UI components. It is maintained by Facebook and a community of individual developers and companies.
+React.js, commonly referred to as React, is an open-source JavaScript library for building user interfaces or UI components. It is maintained by (Meta) Facebook and a community of individual developers and companies.
 ```
 ***
 **2) Features of React Js?**
