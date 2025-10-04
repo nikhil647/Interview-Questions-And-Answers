@@ -112,9 +112,45 @@ useRef - this hook mainly use for 3 purpose
         3) to track application render
 
 Usage: 
-    const inputRef = useRef(null);
-    <input ref={inputRef} type="text" placeholder="Focus me!" />
-    inputRef.current.focus();
+    import React, { useState, useEffect, useRef } from "react";
+
+function UseRefExample() {
+  const [count, setCount] = useState(0);
+  const inputRef = useRef(null);      // 1️⃣ Access DOM
+  const prevCount = useRef(0);        // 2️⃣ Track previous value
+  const renderCount = useRef(0);      // 3️⃣ Count renders
+
+  useEffect(() => {
+    prevCount.current = count;        // store previous value
+    renderCount.current += 1;         // count re-renders
+  });
+
+  const focusInput = () => {
+    inputRef.current.focus();         // direct DOM access
+  };
+
+  return (
+    <div style={{ fontFamily: "sans-serif" }}>
+      <h2>useRef Example</h2>
+
+      <input ref={inputRef} placeholder="Click button to focus me" />
+
+      <div style={{ marginTop: "10px" }}>
+        <p>Count: {count}</p>
+        <p>Previous Count: {prevCount.current}</p>
+        <p>Render Count: {renderCount.current}</p>
+
+        <button onClick={() => setCount(count + 1)}>Increase</button>
+        <button onClick={focusInput} style={{ marginLeft: "10px" }}>
+          Focus Input
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default UseRefExample;
+
 ```
 
 ```
