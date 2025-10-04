@@ -46,7 +46,32 @@ const data = fs.readFileSync('file.txt'); // BLOCKS HERE
 console.log('This waits for file to load');
 ```
 - Stops execution until operation completes
-- Bad for servers - freezes all requests
+- Bad for servers - freezes all requests. 
+
+// API Route 1
+app.get('/slow', (req, res) => {
+  fs.readFile('bigfile.txt', (err, data) => { // Non-blocking
+    res.send(data);
+  });
+});
+
+// API Route 2
+app.get('/fast', (req, res) => {
+  res.send('Hello');
+});
+
+// Timeline
+Time 0s:   Request 1 hits /slow
+           └─> Registers file read, continues immediately
+
+Time 1s:   Request 2 hits /fast
+           └─> Responds instantly with "Hello" ✓
+
+Time 2s:   Request 3 hits /slow
+           └─> Registers file read, continues immediately
+
+Time 60s:  Request 1's file completes → Response sent
+Time 62s:  Request 3's file completes → Response sent
 
 ### Asynchronous Code:
 ```javascript
