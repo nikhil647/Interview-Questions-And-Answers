@@ -1,6 +1,6 @@
 # SQL Interview Question
 
-** What is Database?**
+**What is Database?**
 ```
 A database is a structured collection of data that is organized and stored in a computer system.
 It is designed to efficiently manage, store, and retrieve information.
@@ -9,7 +9,6 @@ types of databases
 including relational databases (such as MySQL, PostgreSQL, and Oracle),
 NoSQL databases (such as MongoDB and Cassandra)
 ```
-***
 
 **What is DBMS?**
 ```
@@ -17,13 +16,11 @@ DBMS stands for Database Management System. DBMS is a system software responsibl
 
 It ensures that our data is consistent, organized, and is easily accessible by serving as an interface between the database and its end-users or application software
 ```
-***
 
 **What is SQL?**
 ```
 SQL stands for Structured Query Language. It is the standard language for relational database management systems
 ```
-***
 
 **What are Tables and Fields?**
 ```
@@ -31,8 +28,6 @@ A table is an organized collection of data stored in the form of rows and column
 Columns can be categorized as vertical and rows as horizontal.
 The columns in a table are called fields while the rows can be referred to as records
 ```
-***
-
 ** What are Constraints in SQL **
 ```
 Constraints are used to specify the rules concerning data in the table
@@ -60,7 +55,6 @@ eg:     Name VARCHAR(255) NOT NULL
 Default: DEFAULT constraint is used to provide a default value.
     column1 datatype DEFAULT default_value,
 ```
-***
 
 **What is a Join? List its different types**
 ```
@@ -78,21 +72,17 @@ INNER JOIN departments ON employees.department_id = departments.department_id;
 
 Instead of INNER JOIN we can have LEFT, RIGHT, FULL.
 ```
-***
 
 **What is a Self-Join?**
 ```
 A self JOIN is a case of regular join where a table is joined to itself based on some relation between its own column(s).
 ```
-***
-
 **What is a Cross-Join?
 ```
 A cross join, also known as a Cartesian join  that produces the Cartesian product of two tables.
 In other words, it returns every combination of rows from the two tables,
 where each row from the first table is combined with every row from the second table
 ```
-***
 
 **What is an Index? Explain its different types**
 ```.
@@ -103,9 +93,8 @@ CREATE INDEX index_name   /* Create Index */
 ON table_name (column_1, column_2);
 DROP INDEX index_name;
 ```
-***
 
-** What is a Subquery? What are its types? **
+**What is a Subquery? What are its types?**
 ```
 A subquery is a query within another query, also known as a nested query or inner query.
 It is used to restrict or enhance the data to be queried by the main query.
@@ -118,15 +107,14 @@ WHERE roll_no IN (
  WHERE subject = 'Maths');
 ```
 
-** What is the SELECT statement? **
+**What is the SELECT statement?**
 ```
 SQL is used to select data from a database. The data returned is stored in a result table, called the result-set.
 
 SELECT * FROM myDB.students;
 ```
-***
 
-** What are some common clauses used with SELECT query in SQL? **
+**What are some common clauses used with SELECT query in SQL?**
 ```
 SQL clauses used in conjuction with a SELECT query are as follows.
 
@@ -137,7 +125,7 @@ ORDER BY studentID DESC;
 ```
 ***
 
-** What are some common clauses used with SELECT query in SQL? **
+**What are some common clauses used with SELECT query in SQL?**
 ```
 Some common SQL clauses used in conjuction with a SELECT query are as follows
 WHERE clause in SQL is used to filter records that are necessary, based on specific conditions.
@@ -159,7 +147,7 @@ HAVING COUNT(studentID) > 5;
 ```
 ***
 
-** What are UNION, MINUS and INTERSECT commands? **
+**What are UNION, MINUS and INTERSECT commands?**
 ```
 UNION: The UNION operator combines and returns the result-set retrieved by two or more SELECT statements.
 MINUS: MINUS or EXCEPT is used to retrieve the rows that exist in the result set of the first
@@ -172,7 +160,7 @@ INTERSECT
 SELECT column1, column2 FROM table2;
 ```
 
-** What are Entities and Relationships? **
+**What are Entities and Relationships?**
 ```
 Entity: An entity can be a real-world object, either tangible or intangible,
         that can be easily identifiable. For example, in a college database, students, professors, workers.
@@ -182,7 +170,7 @@ Relationships: Relations or links between entities that have something to do wit
 ```
 ***
 
-** List the different types of relationships in SQL. **
+**List the different types of relationships in SQL.**
 ```
 One-to-One - This can be defined as the relationship between two tables where each record in one table is associated with the maximum of one record in the other table.
 One-to-Many & Many-to-One - This is the most commonly used relationship where a record in a table is associated with multiple records in the other table.
@@ -191,7 +179,7 @@ Self-Referencing Relationships - This is used when a table needs to define a rel
 ```
 ***
 
-** What is an Alias in SQL? **
+**What is an Alias in SQL?**
 ```
 An alias is a feature of SQL that is supported by most,
 if not all, RDBMSs. It is a temporary name assigned to the table or table column for the purpose of a particular SQL query.
@@ -215,13 +203,13 @@ WHERE department = 'IT';
 ```
 ***
 
-** What is Normalization & De-Normalization.  various forms of Normalization **
+**What is Normalization & De-Normalization.  various forms of Normalization**
 ```
 ??
 ```
 ****
 
-** What are the TRUNCATE, DELETE and DROP statements? **
+**What are the TRUNCATE, DELETE and DROP statements?**
 ```
 DELETE statement is used to delete rows from a table.
 
