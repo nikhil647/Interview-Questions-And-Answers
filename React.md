@@ -333,6 +333,42 @@ export default function App() {
     </div>
   );
 }
+
+
+import { useState, useEffect } from 'react';
+const useFetch = (url) => {
+  const [data, setData] = useState(null);
+  const [loader, setLoader] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => { // Define the async function
+      setLoader(true);
+      setError(null);
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+        setData(await res.json());
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoader(false);
+      }
+    };
+    
+    fetchData(); // Call the async function immediately
+    
+    // Cleanup function (optional but good practice to prevent state update on unmounted component)
+    // You could make this even more concise by removing the cleanup, but it's recommended!
+    return () => {
+      // Logic to cancel the fetch if using an AbortController
+    };
+  }, [url]);
+
+  return { data, loader, error };
+};
+
+export default useFetch;
 ```
 **15)Error Boundary**
 ```
