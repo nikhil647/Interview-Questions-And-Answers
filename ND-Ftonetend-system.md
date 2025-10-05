@@ -103,3 +103,19 @@ Once the **browser has the IP address:**
 4. The **browser** receives the response and may **cache** it for faster future loads.
 
 ---
+
+### ⚙️ Additional Notes
+
+- 🌐 **Browser Parallel Requests:**  
+  A browser can request a maximum of **6–8 parallel connections** per domain.  
+  Any additional requests are placed in a **queue** until earlier ones complete.
+
+- 🔗 **Peering Concept:**  
+  Companies like **Google**, **Netflix**, and **YouTube** establish **direct or near-direct connections** with ISPs.  
+  This reduces latency and improves streaming and loading speeds for end users.
+
+- 🏛️ **ICANN (Internet Corporation for Assigned Names and Numbers):**  
+  The global authority responsible for **managing IP address allocation** and **domain naming guidelines**.
+
+- 🔍 **WHOIS:**  
+  A public database that shows **who owns a domain** — including **registration details** and **privacy protection info**.
