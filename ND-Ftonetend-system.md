@@ -119,3 +119,153 @@ Once the **browser has the IP address:**
 
 - 🔍 **WHOIS:**  
   A public database that shows **who owns a domain** — including **registration details** and **privacy protection info**.
+
+How Web page Renders (Top most interview question)
+
+First: What Happens When a Page Loads
+
+When you open a page (say index.html), the browser follows a pipeline:
+
+Mental modal (not actually)
+1️⃣ Loading → Download the HTML, CSS, JS, images, etc.
+2️⃣ Scripting → Run JavaScript.
+3️⃣ Rendering → Build the layout (where everything goes).
+4️⃣ Painting → Actually draw pixels on the screen.
+
+# Browser Rendering Process Documentation
+
+## Overview
+
+Understanding how browsers render web pages is crucial for web developers. This document explains the complete rendering pipeline from HTML parsing to painting pixels on screen.
+
+---
+
+## Key Concepts
+
+### Critical Loading Behavior
+
+- **CSS Loading**: Until CSS is completely loaded, the web page may appear blank or unstyled (FOUC - Flash of Unstyled Content).
+- **JavaScript Execution**: When JS is executing, it blocks the HTML parser, preventing further parsing until execution completes.
+
+### Core Definitions
+
+- **Parsing**: The process of understanding and analyzing code structure.
+- **Rendering**: The process of drawing/displaying content on screen.
+
+---
+
+## The Three Main Parsers
+
+### 1. HTML Parser
+
+Converts HTML markup into the Document Object Model (DOM).
+```HTML: <h1>Hello</h1>```
+
+### 2. CSS Parser
+
+Converts CSS rules into the CSS Object Model (CSSOM).
+
+```
+CSS: h1 { color: "red" }
+↓
+CSSOM: { h1: { color: 'red' } }
+```
+
+### 3. JavaScript Parser
+
+Reads JavaScript code and builds an Abstract Syntax Tree (AST) for execution.
+
+**Visual Reference:**
+
+<img width="1000" height="500" alt="JS Execution Diagram in Browser" src="https://github.com/user-attachments/assets/b49d2b44-7944-46bd-b25a-71225e12d6bf" />
+
+---
+
+## Browser Rendering Pipeline
+
+### Step 1: Fetch HTML
+
+The browser requests and downloads the HTML document from the server.
+
+### Step 2: Parse HTML
+
+The HTML parser begins reading the document and encounters references to CSS and JS files.
+
+#### CSS Handling
+
+CSS does **not** block HTML parsing, regardless of how it's included:
+- ✅ Inline CSS
+- ✅ Same-file CSS
+- ✅ External CSS files
+
+#### JavaScript Handling
+
+JavaScript behavior varies based on how it's loaded:
+
+| Script Type | Download | HTML Parsing | Execution |
+|------------|----------|--------------|-----------|
+| `<script>` | Blocks parsing | ❌ Stopped | Executes immediately after download |
+| `<script async>` | ⚡ Parallel download | ✅ Continues | ⏸️ Pauses briefly when download completes to execute |
+| `<script defer>` | ⚡ Parallel download | ✅ Continues | ⏳ Waits until HTML parsing is complete |
+
+
+---
+
+### Step 3: Build the DOM Tree
+
+Once HTML is parsed and JavaScript is executed, the DOM tree is formed representing the document structure.
+
+### Step 4: CSS Parsing
+
+The browser parses all CSS from multiple sources:
+- Inline styles
+- Internal `<style>` tags
+- External stylesheets
+
+**CSSOM (CSS Object Model)** is created as a structured representation containing:
+- Selectors
+- Properties and values
+- Media queries
+- Inheritance rules
+
+### Step 5: Construct the Render Tree
+
+```Render Tree = DOM + CSSOM```
+
+**Important characteristics:**
+- Only includes **visible elements** (excludes `display: none`, `<script>`, `<meta>`, etc.)
+- Each node contains both content and computed styles
+- Used by the browser to calculate layout
+
+### Step 6: Layout (Reflow)
+
+The browser calculates the exact position and size of each element:
+- **Position**: Where the element should appear (x, y coordinates)
+- **Dimensions**: Width and height
+- **Box model**: Margins, padding, borders
+
+**Example:**
+```html
+<h1>Hello</h1>
+```
+The browser determines this `<h1>` element's exact pixel position and dimensions.
+
+### Step 7: Painting
+The browser paints pixels on the screen based on the render tree:
+
+- **Colors:** Background and foreground colors  
+- **Text:** Font rendering and text effects  
+- **Shadows:** Text and box shadows  
+- **Images:** Raster and vector graphics  
+
+### Step 8: Compositing
+The browser manages layers and determines rendering order:
+
+- Which layers should be visible  
+- Which layers should be hidden  
+- Stacking context and z-index ordering  
+- Hardware-accelerated layers (GPU compositing)
+
+
+
+
