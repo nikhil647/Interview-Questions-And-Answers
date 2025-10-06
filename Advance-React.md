@@ -114,3 +114,43 @@ filtering a large list) process gradually across frames.
 
 Result: Users see important updates instantly without UI freezing.
 ```
+```
+Example: Search with 500-item Filter
+Old React (Before Fiber):
+
+User types "a"
+  ↓
+React processes everything synchronously:
+  - Update input (1ms)
+  - Show spinner (1ms)
+  - Filter all 500 items (150ms)
+  ↓
+Update DOM with all changes
+  ↓
+Total: ~152ms of frozen UI
+User sees nothing until everything completes
+
+
+New React (With Fiber + startTransition):
+
+User types "a"
+  ↓
+Frame 1 (16ms):
+  Render: Input + Spinner (high priority, 2ms)
+  Commit: Input shows "a", spinner appears
+  User sees response immediately!
+  
+Frame 2-10 (next 144ms):
+  Render: Filter 500 items in chunks (~50 items per frame)
+  Pauses between frames for animations
+  Spinner keeps animating smoothly
+  
+Frame 11:
+  Commit: Display filtered results (50 items)
+  
+Total: ~160ms, but user saw response in 16ms
+UI stayed responsive throughout
+
+Key difference: Old React blocks for 152ms. New React responds in 16ms
+and does heavy work in background while keeping UI interactive.
+```
