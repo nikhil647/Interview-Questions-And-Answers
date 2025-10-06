@@ -61,3 +61,62 @@ So, for those same 10 updates:
 
 React only changes the DOM once, with the final result.
 ```
+**React Fiber Architecture**
+```
+# React Fiber Architecture
+
+## What is Fiber?
+
+React Fiber is a complete rewrite of React's reconciliation algorithm (React 16+). It enables **incremental rendering** - splitting rendering work into chunks across multiple frames.
+
+## The Problem It Solves
+
+Before Fiber, React's reconciliation was synchronous and uninterruptible. Large updates would:
+- Block the main thread
+- Cause dropped frames and janky animations
+- Make UI unresponsive
+
+## How It Works
+
+### Two Phases
+
+**1. Render Phase (Interruptible)**
+- Walks the Fiber tree
+- Calculates what changed
+- Can pause, abort, or restart
+
+**2. Commit Phase (Synchronous)**
+- Applies changes to DOM
+- Runs lifecycle methods
+- Cannot be interrupted
+
+### Key Concepts
+
+**Fiber Node**: A JavaScript object representing a unit of work. Contains:
+- Component state/props
+- Links to parent, child, sibling (linked list)
+- Work priority
+
+**Work Loop**: React checks time availability before processing each unit
+```javascript
+while (workInProgress && !shouldYield()) {
+  workInProgress = performUnitOfWork(workInProgress);
+}
+```
+
+**Prioritization**: Different updates have different priorities
+- User input > Animation > Data fetching
+- High-priority work interrupts low-priority work
+
+## Features Enabled
+
+- Concurrent rendering
+- Suspense
+- useTransition / useDeferredValue
+- Automatic batching
+
+## Interview Answer Template
+
+"Fiber is React's reconciliation engine that breaks rendering into interruptible units of work. It uses a two-phase process: an interruptible render phase that calculates changes, and a synchronous commit phase that applies them. This enables priority-based scheduling where urgent updates can interrupt less important work, keeping the UI responsive."
+
+```
