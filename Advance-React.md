@@ -68,6 +68,21 @@ Which stayed but moved
 
 React does this using the key prop.
 ```
+
+**⚠️ Why Using Index as a Key Is Bad**
+```
+React uses keys to identify elements between renders.
+If you use the array index as a key, problems occur when the list changes order, adds, or removes items.
+
+React may reuse the wrong DOM elements.
+It can cause visual glitches, wrong input values, or unexpected component re-renders.
+
+When It’s (Mostly) Okay
+If your list:
+Never changes order
+Has no additions or deletions
+```
+
 **React Fiber Architecture**
 ```
 # React Fiber Architecture
