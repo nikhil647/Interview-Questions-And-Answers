@@ -136,21 +136,23 @@ New React (With Fiber + startTransition):
 User types "a"
   ↓
 Frame 1 (16ms):
-  Render: Input + Spinner (high priority, 2ms)
-  Commit: Input shows "a", spinner appears
+  Render Phase:
+    - Input (high priority, 1ms)
+    - Spinner (high priority, 1ms)
+    - Start filtering items (low priority, 12ms) → filters ~50 items, then PAUSE
+  Commit Phase:
+    - Input shows "a", spinner appears (2ms)
   User sees response immediately!
   
 Frame 2-10 (next 144ms):
-  Render: Filter 500 items in chunks (~50 items per frame)
+  Render: Continue filtering in chunks (~50 items per frame)
   Pauses between frames for animations
   Spinner keeps animating smoothly
   
 Frame 11:
+  Render: Finish last items
   Commit: Display filtered results (50 items)
   
 Total: ~160ms, but user saw response in 16ms
 UI stayed responsive throughout
-
-Key difference: Old React blocks for 152ms. New React responds in 16ms
-and does heavy work in background while keeping UI interactive.
 ```
