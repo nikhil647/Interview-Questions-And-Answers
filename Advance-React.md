@@ -85,59 +85,32 @@ Has no additions or deletions
 
 **React Fiber Architecture**
 ```
-# React Fiber Architecture
+Fiber is React's reconciliation engine that enables interruptible rendering.
 
-## What is Fiber?
-React Fiber is a complete rewrite of React's reconciliation algorithm (React 16+). It enables **incremental rendering** - splitting rendering work into chunks across multiple frames.
+Before Fiber, if you had a large update, React would block the main thread 
+until complete, causing UI freezes.
 
-## The Problem It Solves
+Fiber solves this by:
 
-Before Fiber, React's reconciliation was synchronous and uninterruptible. Large updates would:
-- Block the main thread
-- Cause dropped frames and janky animations
-- Make UI unresponsive
+1. Maintaining two fiber trees (linked lists) - one showing what's currently 
+   on screen, and one where updates are being built
 
-## How It Works
+2. Using a two-phase process:
+   - Render phase: React walks through the work-in-progress tree, comparing 
+     old and new props/state, and marks which nodes need updates (like 
+     "UPDATE", "DELETE", "INSERT"). This phase can be paused between nodes.
+   
+   - Commit phase: React applies all the marked changes to the actual DOM, 
+     runs effects, and swaps the work-in-progress tree to become the current 
+     tree. This is fast (~1-3ms) and cannot be paused.
 
-### Two Phases
+3. Working in small time chunks. The browser needs 16ms per frame for smooth 
+   60fps. React works for ~5ms, then pauses to let the browser handle 
+   animations and user input, resuming in the next frame.
 
-**1. Render Phase (Interruptible)**
-- Walks the Fiber tree
-- Calculates what changed
-- Can pause, abort, or restart
+You can mark updates as low-priority using `startTransition`. High-priority 
+updates (like typing) commit immediately, while low-priority ones (like 
+filtering a large list) process gradually across frames.
 
-**2. Commit Phase (Synchronous)**
-- Applies changes to DOM
-- Runs lifecycle methods
-- Cannot be interrupted
-
-### Key Concepts
-
-**Fiber Node**: A JavaScript object representing a unit of work. Contains:
-- Component state/props
-- Links to parent, child, sibling (linked list)
-- Work priority
-
-**Work Loop**: React checks time availability before processing each unit
-```javascript
-while (workInProgress && !shouldYield()) {
-  workInProgress = performUnitOfWork(workInProgress);
-}
-```
-
-**Prioritization**: Different updates have different priorities
-- User input > Animation > Data fetching
-- High-priority work interrupts low-priority work
-
-## Features Enabled
-
-- Concurrent rendering
-- Suspense
-- useTransition / useDeferredValue
-- Automatic batching
-
-## Interview Answer Template
-
-"Fiber is React's reconciliation engine that breaks rendering into interruptible units of work. It uses a two-phase process: an interruptible render phase that calculates changes, and a synchronous commit phase that applies them. This enables priority-based scheduling where urgent updates can interrupt less important work, keeping the UI responsive."
-
+Result: Users see important updates instantly without UI freezing.
 ```
