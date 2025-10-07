@@ -165,3 +165,208 @@ UI stayed responsive throughout
 | **React 18**                       | ⚡ Concurrent Rendering & Performance                     | • **Concurrent Rendering (via `createRoot`)**<br>• **Automatic Batching** of state updates<br>• **Transitions API** – `useTransition`, `startTransition`<br>• **Suspense for Data Fetching (Improved)**<br>• **Streaming SSR** + selective hydration<br>• **Strict Mode Enhancements**<br>• **useId**, `useDeferredValue` hooks                                                                                                           | Introduced concurrency officially. React now schedules renders with priorities to keep UI responsive.                                                     |
 | **React 19** *(Upcoming / Latest)* | 🚀 Developer experience, Server Actions, Suspense rework | • **`use()` API** — consume async values (Promises, Contexts) directly in render<br>• **Server Actions / Form Actions** (`useActionState`, `useFormStatus`)<br>• **Functional Components can accept `ref` prop** (no need `forwardRef`)<br>• **Improved Suspense + Streaming SSR**<br>• **Better Hydration & Error Messages**<br>• **Resource Loading APIs** (`preload`, `preinit`)<br>• **Performance tuning & scheduling improvements** | Makes data fetching & server interactions more natural, merges client/server logic more tightly, and simplifies refs + resource loading.                  |
 
+** React 18 all new features Examples **
+
+```
+// React 18 Features Demo
+// ======================
+// This file demonstrates all key React 18 updates in one simple app.
+// Each section below highlights a major feature introduced in React 18
+// with inline explanations.
+
+import React, {
+  useState,
+  useTransition,
+  useDeferredValue,
+  useId,
+  Suspense,
+} from "react";
+import { createRoot } from "react-dom/client";
+
+// ------------------------------------------------------------
+// 1️⃣ Concurrent Rendering (via createRoot)
+// ------------------------------------------------------------
+// ReactDOM.createRoot enables React's concurrent renderer.
+// It allows React to pause, resume, and interrupt rendering when needed
+// for smoother user experiences.
+const root = createRoot(document.getElementById("root")); // ✅ concurrent rendering enabled
+
+// ------------------------------------------------------------
+// 2️⃣ Automatic Batching of State Updates
+// ------------------------------------------------------------
+// In React 17, only event handlers were batched. In React 18,
+// state updates inside async code like setTimeout / Promise are also batched.
+function AutoBatching() {
+  const [count, setCount] = useState(0);
+  const [text, setText] = useState("");
+
+  const updateAsync = () => {
+    setTimeout(() => {
+      // 🧠 Before React 18 → triggers TWO re-renders (one per setState)
+      // ⚡ In React 18 → both updates are automatically batched → ONE render
+      setCount((c) => c + 1);
+      setText("Updated inside setTimeout ✅");
+    }, 1000);
+  };
+
+  console.log("AutoBatching rendered"); // will log once per update group
+
+  return (
+    <div style={sectionStyle}>
+      <h2>Automatic Batching</h2>
+      <p>Count: {count}</p>
+      <p>Text: {text}</p>
+      <button onClick={updateAsync}>Update (batched async)</button>
+    </div>
+  );
+}
+
+// ------------------------------------------------------------
+// 3️⃣ Transitions API – useTransition / startTransition
+// ------------------------------------------------------------
+// Mark non-urgent updates (like rendering a huge list) as low priority.
+// Keeps UI responsive.
+function TransitionExample() {
+  const [isPending, startTransition] = useTransition();
+  const [list, setList] = useState([]);
+
+  const handleChange = (e) => {
+    const input = e.target.value;
+    // 🧠 startTransition tells React: “This update is low priority.”
+    startTransition(() => {
+      const newList = Array(20000)
+        .fill(null)
+        .map((_, i) => `${input} - Item ${i}`);
+      setList(newList);
+    });
+  };
+
+  return (
+    <div style={sectionStyle}>
+      <h2>useTransition</h2>
+      <input onChange={handleChange} placeholder="Type something..." />
+      {isPending && <p>Rendering large list...</p>}
+      <p>Items count: {list.length}</p>
+    </div>
+  );
+}
+
+// ------------------------------------------------------------
+// 4️⃣ Suspense for Data Fetching (Improved)
+// ------------------------------------------------------------
+// React 18 allows Suspense to work with async data (not just lazy components).
+// For demo, we simulate data fetch with a simple "resource" pattern.
+
+const fakeUserResource = {
+  read() {
+    throw new Promise((res) =>
+      setTimeout(() => {
+        fakeUserResource.read = () => "Nikhil Patil 👋";
+        res();
+      }, 1500)
+    );
+  },
+};
+
+function Profile() {
+  const user = fakeUserResource.read(); // Suspends until resolved
+  return <h3>User: {user}</h3>;
+}
+
+function SuspenseExample() {
+  return (
+    <div style={sectionStyle}>
+      <h2>Suspense for Data Fetching</h2>
+      <Suspense fallback={<p>Loading user...</p>}>
+        <Profile />
+      </Suspense>
+    </div>
+  );
+}
+
+// ------------------------------------------------------------
+// 5️⃣ useDeferredValue – defer low-priority updates
+// ------------------------------------------------------------
+// Keeps input fast while deferring heavy UI updates (similar to useTransition).
+function DeferredValueExample() {
+  const [text, setText] = useState("");
+  const deferredText = useDeferredValue(text); // low-priority version
+
+  const list = Array(10000)
+    .fill(null)
+    .map((_, i) => <div key={i}>{deferredText}</div>);
+
+  return (
+    <div style={sectionStyle}>
+      <h2>useDeferredValue</h2>
+      <input
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Type..."
+      />
+      {/* deferredText updates more slowly, keeping input responsive */}
+      <div>{list.slice(0, 5)}</div>
+    </div>
+  );
+}
+
+// ------------------------------------------------------------
+// 6️⃣ useId – unique, consistent IDs for SSR & a11y
+// ------------------------------------------------------------
+// Useful for matching label/input pairs without causing hydration mismatches.
+function UseIdExample() {
+  const id = useId(); // unique & stable per component
+  return (
+    <div style={sectionStyle}>
+      <h2>useId</h2>
+      <label htmlFor={id}>Enter Name:</label>
+      <input id={id} type="text" />
+      <p>(Unique ID: {id})</p>
+    </div>
+  );
+}
+
+// ------------------------------------------------------------
+// 7️⃣ StrictMode Enhancements
+// ------------------------------------------------------------
+// In React 18, StrictMode runs components' init logic twice in DEV mode
+// to help detect unexpected side effects (production unaffected).
+
+function StrictModeExample() {
+  console.log("StrictModeExample rendered");
+  return <div style={sectionStyle}>Check console → renders twice in DEV.</div>;
+}
+
+// ------------------------------------------------------------
+// 🎬 Combine all examples
+// ------------------------------------------------------------
+function App() {
+  return (
+    <>
+      <h1 style={{ textAlign: "center" }}>React 18 Feature Showcase ⚛️</h1>
+      <AutoBatching />
+      <TransitionExample />
+      <SuspenseExample />
+      <DeferredValueExample />
+      <UseIdExample />
+      <StrictModeExample />
+    </>
+  );
+}
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// ------------------------------------------------------------
+// 💅 Styling (optional helper)
+// ------------------------------------------------------------
+const sectionStyle = {
+  border: "1px solid #ccc",
+  padding: "12px",
+  margin: "12px",
+  borderRadius: "10px",
+};
+```
