@@ -370,3 +370,172 @@ const sectionStyle = {
   borderRadius: "10px",
 };
 ```
+
+# React 19 Features Explained with Examples
+
+This document summarizes the key features of React 19 with simple examples for each.
+
+---
+
+## 1. `use()` API — Consume async values (Promises, Contexts) directly in render
+
+### What it means
+In React 19, you can directly use Promises inside components with `use()`.
+
+### Example
+```jsx
+import { use } from "react";
+
+const getUser = async () => {
+  const res = await fetch("/api/user");
+  return res.json();
+};
+
+function UserInfo() {
+  const user = use(getUser()); // directly use async data
+  return <h3>Hello, {user.name} 👋</h3>;
+}
+```
+
+---
+
+## 2. Server Actions / Form Actions (`useActionState`, `useFormStatus`)
+
+### What it means
+React 19 adds built-in server actions for form submission without client-side handlers.
+
+### Example
+```jsx
+"use client";
+import { useActionState, useFormStatus } from "react";
+
+async function saveName(_, formData) {
+  const name = formData.get("name");
+  await new Promise(r => setTimeout(r, 1000));
+  return `Saved: ${name}`;
+}
+
+export default function NameForm() {
+  const [message, formAction] = useActionState(saveName, null);
+
+  return (
+    <form action={formAction}>
+      <input name="name" placeholder="Enter name" />
+      <SubmitButton />
+      <p>{message}</p>
+    </form>
+  );
+}
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return <button disabled={pending}>{pending ? "Saving..." : "Save"}</button>;
+}
+```
+
+---
+
+## 3. Functional Components can accept `ref` prop (no `forwardRef` needed)
+
+### What it means
+Any functional component can now receive a ref directly.
+
+### Example
+```jsx
+function InputBox({ placeholder }, ref) {
+  return <input ref={ref} placeholder={placeholder} />;
+}
+
+function App() {
+  const ref = useRef();
+  useEffect(() => ref.current.focus(), []);
+  return <InputBox ref={ref} placeholder="Type here..." />;
+}
+```
+
+---
+
+## 4. Improved Suspense + Streaming SSR
+
+### What it means
+Suspense works better with async data, and Streaming SSR sends HTML as it’s ready.
+
+### Example
+```jsx
+import { Suspense } from "react";
+import { use } from "react";
+
+const getPost = async () => {
+  const res = await fetch("/api/post");
+  return res.json();
+};
+
+function Post() {
+  const post = use(getPost());
+  return <p>{post.title}</p>;
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<p>Loading post...</p>}>
+      <Post />
+    </Suspense>
+  );
+}
+```
+
+---
+
+## 5. Better Hydration & Error Messages
+
+React 19 improves handling of hydration mismatches and gives clearer error messages.
+
+Example message:
+> "Text mismatch in `<h1>`: expected 'Hello', received 'Hi'. React re-rendered this subtree."
+
+---
+
+## 6. Resource Loading APIs — `preload()` & `preinit()`
+
+### What it means
+Load critical resources early for faster page render.
+
+### Example
+```jsx
+import { preload, preinit } from "react-dom";
+
+preload("/api/data.json", { as: "fetch" });
+preinit("/styles.css", { as: "style" });
+
+function App() {
+  return <h2>Fast Loading Page ⚡</h2>;
+}
+```
+
+---
+
+## 7. Performance Tuning & Scheduling Improvements
+
+React 19 includes smarter batching and scheduling for smoother rendering.
+
+- Better batching of state updates
+- Reduced unnecessary re-renders
+- Improved handling for transitions and Suspense
+
+✅ No code changes needed for this improvement.
+
+---
+
+## Summary Table
+
+| Feature | Description | Example Keyword |
+|---------|-------------|----------------|
+| `use()` | Use Promises directly in components | `const data = use(fetch(...))` |
+| Server/Form Actions | Server-side form handling | `useActionState`, `useFormStatus` |
+| Function ref support | Functional components can receive `ref` | No `forwardRef()` |
+| Suspense + Streaming SSR | Async loading + faster SSR | `<Suspense fallback>` |
+| Better hydration | Clearer errors, auto recovery | — |
+| Resource APIs | Preload scripts/styles/fonts | `preload()`, `preinit()` |
+| Performance | Improved batching/scheduling | Automatic |
+
+
