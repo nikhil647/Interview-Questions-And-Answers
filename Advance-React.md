@@ -576,3 +576,10 @@ export const useDebounce = (debounceVal) => {
 };
 ```
 
+#Demonstrates ability to encapsulate logic.
+```
+Encapsulating logic usually means isolating a piece of behavior or state management so it can be reused and maintained easily.
+
+Component composition is a core React pattern for encapsulating logic and reusing behavior by combining components together.
+means same component is used for 2 diffrent purpose. like showing same card for horizontal and vertical view.
+
