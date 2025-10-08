@@ -401,6 +401,9 @@ function UserInfo() {
 
 ## 2. Server Actions / Form Actions (`useActionState`, `useFormStatus`)
 
+Server Actions can work in production even when JavaScript is disabled
+because they’re built on standard HTML form behavior, not on client-side JS.
+
 ### What it means
 React 19 adds built-in server actions for form submission without client-side handlers.
 
