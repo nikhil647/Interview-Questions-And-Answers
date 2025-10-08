@@ -623,4 +623,10 @@ Where many tiny pieces of data need to react to each other.
 | **Learning curve**        | Moderate                                                      | Easy                                            |
 
 
-
+## How do you optimize React Context to avoid unnecessary re-renders?
+```
+0) Instead of storing all your app state in one big context, split it into multiple smaller contexts.
+1) Memoize Context Value
+2) useReducer instead of useState
+3) Use Pure component (React.memo)
+```
