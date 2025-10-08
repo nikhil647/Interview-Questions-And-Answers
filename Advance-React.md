@@ -630,3 +630,13 @@ Where many tiny pieces of data need to react to each other.
 2) useReducer instead of useState
 3) Use Pure component (React.memo)
 ```
+
+## How do service workers integrate with React (PWA)?
+```
+Temproray Answer for interview will write later deep answer
+
+Service workers are a key component of Progressive Web Apps (PWAs) and can be integrated with a React app to enable features like
+offline support, background sync, and push notifications.
+
+once I tried in next js we need to install next-pwa package do some configuration in next.config.js
+```
