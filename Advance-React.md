@@ -582,4 +582,13 @@ Encapsulating logic usually means isolating a piece of behavior or state managem
 
 Component composition is a core React pattern for encapsulating logic and reusing behavior by combining components together.
 means same component is used for 2 diffrent purpose. like showing same card for horizontal and vertical view.
+```
+
+# Performance Optimization
+## Your React application has a large list of 1000+ items that needs to be rendered. Users are complaining about slow scrolling and lag. What strategies would you use to optimize this?
+
+```
+Debouncing Search/Filter
+Key Optimization
+Suggest Pagination or Infinite Scroll
 
