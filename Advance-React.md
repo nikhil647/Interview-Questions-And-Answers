@@ -640,3 +640,25 @@ offline support, background sync, and push notifications.
 
 once I tried in next js we need to install next-pwa package do some configuration in next.config.js
 ```
+
+## Explain React Server Components. How are they different from SSR/SSG in Next.js?
+```
+React Server Components are a new feature in React that allow certain parts of your UI to render on the server only, never included in the client-side JavaScript bundle
+It Can access backend resources directly (e.g. DB, file system).
+```
+| Feature          | **RSC**                                         | **SSR**                          | **SSG**                        |
+| ---------------- | ----------------------------------------------- | -------------------------------- | ------------------------------ |
+| Render Location  | Server (only)                                   | Server (on request)              | Build-time                     |
+| Client JS Bundle | ❌ Not included                                  | ✅ Included                       | ✅ Included                     |
+| Data Fetching    | Server-only (can call DB directly)              | Fetches on each request          | Fetches once during build      |
+| Use Case         | Dynamic UI with heavy server logic & minimal JS | Dynamic pages needing fresh data | Static pages (e.g. blog, docs) |
+| Output           | React component stream                          | HTML                             | HTML                           |
+| Interactivity    | Wrapped with client components                  | Fully interactive                | Fully interactive              |
+
+In next js all components are by default server component and we need to specify 'use client' for specifying component is not RSC.
+if we use 'use-client' then component automatically behave like SSR plus client hydration
+
+implement SSG --> export const dynamic = 'force-static';
+implement ISR --> export const revalidate = 60; // Re-generate the page at most once every 60 seconds
+
+
