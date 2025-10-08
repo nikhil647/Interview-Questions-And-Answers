@@ -657,8 +657,11 @@ It Can access backend resources directly (e.g. DB, file system).
 
 In next js all components are by default server component and we need to specify 'use client' for specifying component is not RSC.
 if we use 'use-client' then component automatically behave like SSR plus client hydration
-
+```
 implement SSG --> export const dynamic = 'force-static';
 implement ISR --> export const revalidate = 60; // Re-generate the page at most once every 60 seconds
+implement CSR --> use client with useEffect api call store data in some state. 
+implement SSR --> in server component use client componet with { ssr: true } so that component would be render on server.
+
 
 
