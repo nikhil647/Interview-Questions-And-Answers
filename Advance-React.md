@@ -686,3 +686,7 @@ React.useEffect(() => setMounted(true), []);
 
 return mounted ? <BrowserComponent /> : null;
 ```
+
+## How would you architect a React app that needs internationalization (i18n) and multi-theme support?
+```
+```
