@@ -1,3 +1,4 @@
+```
 import React, { useState } from "react";
 import "./styles.css";
 import { useDebounce } from "./useDebounce";
@@ -33,3 +34,4 @@ export const useDebounce = (debounceVal) => {
 
   return debouncedVal;
 };
+```
