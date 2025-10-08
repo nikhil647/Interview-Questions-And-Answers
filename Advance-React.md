@@ -591,4 +591,9 @@ means same component is used for 2 diffrent purpose. like showing same card for 
 Debouncing Search/Filter
 Key Optimization
 Suggest Pagination or Infinite Scroll
+```
+# How do you manage complex form state (15+ fields)? Would you use Context, Zustand, Redux, or custom hooks?
+```
+I think react-hooks-form would be great fit.
+```
 
