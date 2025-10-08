@@ -662,6 +662,27 @@ implement SSG --> export const dynamic = 'force-static';
 implement ISR --> export const revalidate = 60; // Re-generate the page at most once every 60 seconds
 implement CSR --> use client with useEffect api call store data in some state. 
 implement SSR --> in server component use client componet with { ssr: true } so that component would be render on server.
+```
 
+## How does React handle hydration in SSR apps? What problems can occur (e.g., hydration mismatch)?
+```
+When you render a React app on the server (SSR), the HTML is already generated and sent to the client.
+React needs to attach its event listeners and make the static HTML “interactive.” This process is called hydration.
 
+Hydration Mismatch
+Occurs when the server-rendered HTML doesn’t match what React renders on the client.
 
+Consequences:
+
+React may replace DOM nodes to fix mismatch, losing server-rendered HTML optimizations.
+Flickering UI on load.
+Lost initial state.
+
+How to fix?
+Keep render output deterministic. Avoid random values or client-only APIs in SSR render
+
+const [mounted, setMounted] = React.useState(false);
+React.useEffect(() => setMounted(true), []);
+
+return mounted ? <BrowserComponent /> : null;
+```
