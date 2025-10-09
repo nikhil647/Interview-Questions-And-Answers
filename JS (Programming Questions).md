@@ -173,6 +173,18 @@ let arr = [10, 15, -12, 0, -2, 0, 10, -14, 0, 30, -5];
 moveZerosToEnd(arr);
 console.log(arr);
 ```
+
+```
+let array = [10, 15, -12, 0, -2, 0, 10, -14, 0, 30, -5];
+const leftSideArray = [];
+array.forEach((ele) => {
+    if (ele !== 0) {
+        leftSideArray.push(ele)   
+    }
+});
+const rightSideArray = new Array(array.length-leftSideArray.length).fill(0)
+console.log([...leftSideArray, ...rightSideArray]);
+```
 ## Write a program to rotate string with capitalize first letter without using in-built js functions
 ```
 const str = 'blue sky bright sun'
