@@ -930,3 +930,15 @@ class Person {
 }
 
 var object = new Person("Sudheer");
+
+# Math.random() - gives number between 0,1
+```
+Random number between 0 and N-1
+Math.floor(Math.random() * N);
+
+Math.floor(Math.random() * 10); // 0 to 9
+
+Random number between min and max (inclusive)
+Math.floor(Math.random() * (max - min + 1)) + min;
+```
+
