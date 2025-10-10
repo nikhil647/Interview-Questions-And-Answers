@@ -133,6 +133,27 @@ export default MyComponent;
 ```
 ***
 
+***
+What can be done for react optimisation?
+```
+1) Prevent Unnecessary Re-renders 
+
+use memo, useMemo,useCallback
+
+2) Code Splitting & Lazy Loading
+
+3) Virtualization - Only renders visible items (package- react-window)
+
+4) use Debouncing & Throttling wherever needed
+
+5) if form is complex always prefer form library like react-hooks-form
+
+6) Use Keys Properly
+
+7) Avoid Inline Objects/Arrays (react style)
+```
+***
+
 **12) Hooks in React ?** 
 ```
 useRef - this hook mainly use for 3 purpose
