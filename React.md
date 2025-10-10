@@ -284,6 +284,8 @@ export default Counter;
 **useLayoutEffect**
 ```
 we should use useLayoutEffect only DOM mutations that must happen before paint.
+useLayoutEffect BLOCKS the browser - if your code is slow, UI freezes
+
 
 function ScrollToTop() {
   const ref = useRef();
@@ -295,6 +297,8 @@ function ScrollToTop() {
 
   return <div ref={ref}>Content</div>;
 }
+
+always prefer useEffect → only use useLayoutEffect if you see visual glitches/flickers that need fixing
 ```
 
 **13) React context's API ?** <br>
