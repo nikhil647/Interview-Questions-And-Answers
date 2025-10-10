@@ -36,7 +36,12 @@ React event are named using camelCase rather than lowercase in HTML.
 ```
 A race condition in React occurs when multiple asynchronous operations, such as data fetching or state updates, are initiated and their completion order is not guaranteed.
 
-useEffect(() => { const fetchData = async () => { const response = await fetch(/api/data/${id}); const data = await response.json(); setData(data); }; fetchData(); }, [id]); // If 'id' changes quickly, multiple fetches can race.
+useEffect(() => {
+  const fetchData = async () => {
+  const response = await fetch(/api/data/${id});
+  const data = await response.json(); setData(data); };
+  fetchData();
+}, [id]); // If 'id' changes quickly, multiple fetches can race.
 ```
 **4)Synthetic Event**
 ```
