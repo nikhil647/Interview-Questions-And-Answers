@@ -112,6 +112,30 @@ Only history object changes and we move to diffrent page but in normal routing h
 ```
 ***
 
+**Event delegation**
+```
+Instead of attaching listeners to many elements, attach ONE listener to their parent.
+React automatically uses event delegation under the hood!
+
+function TodoList({ todos }) {
+  const handleDelete = (id) => {
+    console.log(`Delete ${id}`);
+  };
+  
+  return (
+    <ul>
+      {todos.map(todo => (
+        <li key={todo.id}>
+          {todo.text}
+          <button onClick={() => handleDelete(todo.id)}>Delete</button>
+          {/* React doesn't attach listener here! */}
+        </li>
+      ))}
+    </ul>
+  );
+}
+```
+
 **11)Pure Component**
  - The main difference between a regular component and a pure component lies in how they handle shouldComponentUpdate().
 
