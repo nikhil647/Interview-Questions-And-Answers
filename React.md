@@ -280,7 +280,22 @@ const Counter = () => {
 
 export default Counter;
 ```
-***
+
+**useLayoutEffect**
+```
+we should use useLayoutEffect only DOM mutations that must happen before paint.
+
+function ScrollToTop() {
+  const ref = useRef();
+
+  useLayoutEffect(() => {
+    // Scroll MUST happen before user sees content
+    ref.current.scrollTop = 0;
+  }, []);
+
+  return <div ref={ref}>Content</div>;
+}
+```
 
 **13) React context's API ?** <br>
 It is used to solve prop drilling problem.
@@ -579,6 +594,8 @@ Dynamic imports allow you to load modules asynchronously during runtime. This is
 | SSR / Full-stack | **Next.js (React)** |
 
 ---
+
+## 
 
 ### 💡 Final Thought
 > React is lightweight and flexible — perfect for fast-moving projects and startups.  
