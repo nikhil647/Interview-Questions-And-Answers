@@ -52,6 +52,16 @@ and it must be uniqe.
 -compared to classbased they are lightweight (babel transpilation of classbased components are messy compared to function based)
 ```
 ***
+
+## Throttling
+**Definition:**  
+Throttling limits how often a function can run within a specific time period.
+
+**Example (Machine Gun Analogy):**  
+Imagine a **machine gun** that can shoot bullets continuously if you keep pressing the trigger.  
+But throttling acts like a **cooldown mechanism** — even if you keep pressing the trigger,  
+it allows **only one bullet per second**, ignoring extra presses until time resets.
+
 **7)React Lifecycle Methods ?**
 | Mounting | Updating| Unmounting |
 | :---: | :---: | :---: |
@@ -60,6 +70,14 @@ and it must be uniqe.
 | getDerivedStateFromProps | componentWillReceiveProps | |
 | compoenentDidMount | | |
 ***
+
+## Debouncing (Definition + Simple Explanation)
+
+**Definition:**  
+Debouncing is a technique that **delays** the execution of a function until a certain amount of **time has passed without any new event**.
+
+**Simple Explanation:**  
+Think of it like saying — “Wait until the user stops typing for 500 ms, then run the code.”
 
 **8)React Fragment ?**
 ```
