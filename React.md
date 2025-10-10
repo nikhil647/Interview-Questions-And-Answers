@@ -21,6 +21,10 @@ Virtual DOM:
 -Once the differences are identified, React determines the most efficient way to update the real DOM to match the new Virtual DOM tree.
 -Finally, React updates the real DOM based on the calculated differences, ensuring that the user interface reflects the updated state of the application.
 ```
+*** Event Bubbling - Events Travel Up***
+```
+  When an event fires on an element, it bubbles up through all its ancestors.
+```
 ***
 
 **3) What is Event ?**
