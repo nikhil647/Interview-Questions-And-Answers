@@ -4899,37 +4899,124 @@ export default async function Page({ params, searchParams }) {
 
 ## 18. Quick Reference
 
-### 🚀 Essential Commands
+### Commands
+- Start dev server: `npm run dev` or `next dev`
+- Build for production: `npm run build`
+- Run production build: `npm start` or `next start`
+- Static export: `npm run build && npm run export` (creates `out/`)
+- Lint: `npm run lint`
+- Analyze bundle: `ANALYZE=true npm run build` (with `@next/bundle-analyzer`)
 
-```bash
-# Create new app
-npx create-next-app@latest
+### Common folders & files (at-a-glance)
+- `app/` (App Router): `page.js`, `layout.js`, `loading.js`, `error.js`, `not-found.js`, `route.js` (API)
+- `pages/` (Page Router): `pages/api/*`, `_app.js`, `_document.js`, `_error.js`, `404.js`
+- `public/` — static assets
+- `.next/` — build output (do not commit)
+- `next.config.js` — Next.js configuration
 
-# Development
-npm run dev
+### App Router file roles
+- `page.js` — route UI (server component by default)
+- `layout.js` — persistent layout wrapper
+- `loading.js` — loading UI (Suspense fallback)
+- `error.js` — error boundary (client component)
+- `not-found.js` — 404 UI for route segment
+- `route.js` — API route handler (export `GET`, `POST`, ...)
 
-# Build for production
-npm run build
+### Data fetching cheat-sheet
+- **Page Router (classic)**
+  - SSG: `getStaticProps()` (+ `getStaticPaths()` for dynamic routes)
+  - SSR: `getServerSideProps()`
+  - Client: fetch in `useEffect` / SWR
+- **App Router (recommended)**
+  - SSG (default): `await fetch(url)` (cached)
+  - SSR: `fetch(url, { cache: 'no-store' })`
+  - ISR: `fetch(url, { next: { revalidate: seconds } })`
+  - Static params: `export async function generateStaticParams()`
 
-# Start production server
-npm start
+**Small examples**
+```js
+// App Router SSR
+const res = await fetch('https://api.example.com/data', { cache: 'no-store' });
 
-# Type checking
-npm run lint
-
-# Analyze bundle
-ANALYZE=true npm run build
+// App Router ISR
+const res = await fetch('https://api.example.com/data', { next: { revalidate: 60 } });
 ```
 
----
+### fetch cache options (quick)
+- `cache: 'no-store'` — always dynamic (SSR)
+- default (no cache option) — cached (SSG) when used in Server Component
+- `next: { revalidate: N }` — ISR, revalidate after N seconds
 
-### 📁 Project Structure (App Router)
-
+### Route handlers & API routes
+- **App Router (route handlers)**
+```js
+// app/api/users/route.js
+export async function GET(request, { params }) {
+  return Response.json({ ok: true });
+}
 ```
-my-app/
-├── app/
-│   ├── layout.js          # Root layout
-│   ├── page.js            # Home page
+- **Page Router (API routes)**
+```js
+// pages/api/users.js
+export default function handler(req, res) {
+  res.status(200).json({ ok: true });
+}
+```
+
+### Important components & props
+- `<Image src="/img.jpg" width={800} height={600} alt="..." priority />` — use `next/image` for optimized images
+- `<Link href="/path">...</Link>` — prefetch behavior is automatic; use `prefetch={false}` to disable
+- `<Script src="..." strategy="lazyOnload" />` — control script loading strategy
+- Metadata: App Router uses `metadata` exports and `<head>` helpers in `app/`
+
+### Environment variables
+- Server-only: `MY_SECRET` (no prefix)
+- Client-exposed: must be prefixed with `NEXT_PUBLIC_` (e.g. `NEXT_PUBLIC_API_URL`)
+- Priority order (highest → lowest): `.env.production.local` → `.env.development.local` → `.env.local` → `.env.production` → `.env.development` → `.env`
+
+### Middleware & Edge
+- `middleware.js` runs on Edge runtime; use for redirects, geolocation, A/B tests
+- Add `export const config = { matcher: ['/protected/:path*'] }` to target routes
+- Use `export const runtime = 'edge'` on pages/route handlers to run on the Edge
+
+### Edge runtime notes
+- Fast, globally distributed, limited Node APIs
+- Available APIs: `fetch`, `Request/Response`, `Headers`, Web Crypto, Streams
+- Avoid heavy CPU tasks or full Node libraries on Edge
+
+### Common troubleshooting & quick fixes
+- **Hydration mismatch**: ensure server-rendered and client-rendered output match (avoid `Math.random()`/dates in render)
+- **Large client bundle**: minimize `'use client'` scope; keep most components server-side
+- **Env var missing on client**: prepend `NEXT_PUBLIC_` if you need it in the browser
+- **Images not optimized during export**: for static export set `images.unoptimized = true` in `next.config.js`
+- **404 on dynamic page**: ensure `generateStaticParams()`/`getStaticPaths()` returns expected params or use `fallback: 'blocking'`
+
+### next.config.js quick snippets
+```js
+module.exports = {
+  reactStrictMode: true,
+  output: 'standalone', // useful for Docker
+  images: {
+    domains: ['assets.example.com'],
+    formats: ['image/avif', 'image/webp'],
+  },
+  experimental: {
+    appDir: true,
+  },
+};
+```
+
+### Deployment reminders
+- Vercel: easiest path; automatic optimization and preview deployments
+- Docker: use `output: 'standalone'` and copy `.next/standalone`
+- Static export: limited (no SSR, no API routes, no ISR)
+
+### Quick mental checklist (before shipping)
+- ✅ CSS & fonts optimized (use `next/font`)
+- ✅ LCP image marked `priority`
+- ✅ API secrets kept server-side (no `NEXT_PUBLIC_` for secrets)
+- ✅ `revalidate`/ISR configured where needed
+- ✅ Tests & eslint passing
+- ✅ Environment variables correctly set in your deployment platform
 
 ---
-
