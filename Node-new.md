@@ -8,7 +8,26 @@
 ---
 
 ### 2. How does Node.js handle child threads?
-**Answer:** Node.js operates on a single main thread but can leverage child threads for specific tasks using the thread pool (powered by libuv library) and Worker Threads module. When CPU-intensive tasks are needed, they're offloaded to the thread pool, keeping the main event loop responsive. Worker Threads allow dedicated computation without blocking I/O operations. This prevents blocking while maintaining Node.js's event-driven architecture efficiency.
+**Answer:** Node.js runs JavaScript on a single main thread, but it can use child threads behind the scenes for concurrency. It does this in two ways — first, through the libuv thread pool, which handles background I/O tasks like file operations or crypto without blocking the main event loop. And second, through the Worker Threads module, which lets developers run CPU-intensive JavaScript code in parallel.
+
+This approach keeps Node.js non-blocking and efficient, even when handling heavy operations.
+
+libuv Thread Pool — used automatically
+	•	The Node.js runtime itself decides to use the thread pool for specific built-in APIs that are I/O or native blocking.
+  ```
+fs.readFile('file.txt');     // file system → thread pool
+crypto.pbkdf2(...);          // crypto → thread pool
+dns.lookup(...);             // DNS → thread pool
+  ```
+  2. Worker Threads — you choose manually
+
+⁠Node will never use Worker Threads automatically.
+	•	These are for your own CPU-heavy JavaScript logic (like loops, data processing, ML, etc.).
+
+```
+const { Worker } = require('worker_threads');
+new Worker('./heavyComputation.js');
+```
 
 ---
 
