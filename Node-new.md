@@ -97,7 +97,8 @@ Executes I/O-related callbacks (e.g., fs.readFile done reading).
 ❌ Close Callbacks Phase
 6) Executes cleanup callbacks like socket.on('close').
 
-🧩 Between each phase, microtasks (Promises, process.nextTick()) are executed before moving to the next phase.
+Between each phase, microtasks (Promises, process.nextTick()) are executed before moving to the next phase.
+
 ---
 
 ### 5. What is the difference between Node.js and traditional web server technologies?
@@ -116,6 +117,47 @@ Managing thousands of simultaneous connections efficiently
 
 Use Java for:
 CPU-heavy tasks like image/video processing, complex calculations, data analytics
+
+# Node.js vs Java – 1000 Requests Scenario
+
+## Scenario
+- Both Node.js and Java servers have a **100ms task**.  
+- **1,000 requests per second** are sent to each server.  
+- Task can be **CPU-heavy** or **I/O-heavy**.  
+
+---
+
+## 1️⃣ I/O-heavy Task (e.g., database query, file read)
+
+| Server       | Behavior                                                                                   |
+|-------------|--------------------------------------------------------------------------------------------|
+| **Node.js** | Handles thousands of requests efficiently using **single-threaded, event-driven model**. |
+| **Java**    | Handles requests using **thread pool**, consumes more memory per thread.                  |
+
+**Takeaway:** Node.js shines for I/O-heavy workloads because it handles many concurrent requests with low memory usage.  
+
+---
+
+## 2️⃣ CPU-heavy Task (e.g., calculations, image processing)
+
+### Without Node worker threads
+
+| Server       | Behavior                                                                                     |
+|-------------|----------------------------------------------------------------------------------------------|
+| **Node.js** | Single-threaded → CPU task blocks event loop → requests queue up → performance drops.       |
+| **Java**    | Multi-threaded → threads run in parallel → better CPU utilization, higher throughput.       |
+
+### With Node worker threads
+
+| Server       | Behavior                                                                                                 |
+|-------------|--------------------------------------------------------------------------------------------------------|
+| **Node.js** | CPU-heavy tasks run in **worker threads**, main thread free → can handle more requests efficiently.   |
+| **Java**    | Thread pool continues to efficiently handle CPU-heavy tasks using JVM optimizations.                  |
+
+**Takeaway:**  
+- Java still slightly wins for pure CPU-heavy workloads due to **mature multithreading and JVM optimizations**.  
+- Node.js can compete using **worker threads + clustering**.  
+
 ---
 
 ### 6. Explain what "non-blocking" means in Node.js.
