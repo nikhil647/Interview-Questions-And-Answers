@@ -187,7 +187,7 @@ CPU-heavy tasks like image/video processing, complex calculations, data analytic
 ## ⚙️ Node.js Core Modules
 
 ### 11. Describe some of the core modules of Node.js.
-**Answer:** Core modules include: **fs** (file system operations), **http/https** (web server/client), **path** (file path manipulation), **os** (system information), **util** (debugging utilities), **stream** (data stream processing), **events** (EventEmitter for event handling), **crypto** (cryptographic operations), **net** (TCP networking), **dgram** (UDP sockets), **url** (URL parsing), **querystring** (URL query manipulation), **zlib** (compression), **child_process** (spawning processes). These provide essential functionality without external dependencies.
+**Answer:** Streams are objects that let you read data from a source or write data to a destination in a continuous fashion, rather than loading it all into memory at once.
 
 ---
 
@@ -254,7 +254,12 @@ console.log(buf1.length); // 11 bytes
 ---
 
 ### 15. What are streams in Node.js and what types are available?
-**Answer:** Streams handle I/O data efficiently in chunks rather than loading everything into memory. Four types: **Readable** (read data, e.g., fs.createReadStream), **Writable** (write data, e.g., fs.createWriteStream), **Duplex** (both read/write, e.g., TCP sockets), and **Transform** (modify data while reading/writing, e.g., zlib.createGzip). Streams are event-based, support piping (`stream.pipe()`), enable efficient memory usage for large files, and are foundational for HTTP requests/responses, file operations, and real-time data processing.
+**Answer:** Streams are objects that let you read data from a source or write data to a destination in a continuous fashion, rather than loading it all into memory at once.
+
+Why important?
+Avoids loading large files entirely into memory (efficient).
+Enables processing data chunk by chunk, like piping to another process.
+Perfect for network requests, file I/O, or real-time data.
 
 ---
 
