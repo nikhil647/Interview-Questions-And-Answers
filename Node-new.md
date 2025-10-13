@@ -213,8 +213,25 @@ Import http module, use `createServer()` with callback handling request/response
 ---
 
 ### 14. What is the Buffer class in Node.js?
-**Answer:** Buffer is a core class for handling binary data directly in memory. It represents fixed-size, raw binary data sequences (byte arrays). Buffers are used for I/O operations (file reading, network communication), handling binary protocols, cryptography, and data encoding/decoding between formats (UTF-8, base64, hex). Created with `Buffer.from()`, `Buffer.alloc()`, or `Buffer.allocUnsafe()`. Unlike strings, buffers have fixed size, work with raw bytes, and provide shared memory capabilities between Node.js and C++ addons for performance.
+**Answer:** The Buffer class in Node.js is a container for handling raw binary data. Unlike JavaScript strings (which are designed for text), Buffers work with actual bytes of data - perfect for files, network streams, and any binary operations.
+Think of it as a temporary storage area in memory where you can read, manipulate, and write binary data directly.
 
+// Handling file upload (Express.js)
+```
+app.post('/upload', (req, res) => {
+  let chunks = [];
+  
+  req.on('data', (chunk) => {
+    chunks.push(chunk); // Each chunk is a Buffer
+  });
+  
+  req.on('end', () => {
+    const fileBuffer = Buffer.concat(chunks); // Combine all buffers
+    fs.writeFileSync('uploaded-file.pdf', fileBuffer);
+    res.send('File saved!');
+  });
+});
+```
 ---
 
 ### 15. What are streams in Node.js and what types are available?
