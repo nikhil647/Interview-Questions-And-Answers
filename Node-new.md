@@ -32,7 +32,23 @@ new Worker('./heavyComputation.js');
 ---
 
 ### 3. Describe the event-driven programming in Node.js.
-**Answer:** Event-driven programming in Node.js uses an event emitter, listener, and handler architecture. Objects register interest in specific events through listeners (callback functions). When events occur, the event emitter dispatches them, triggering registered callbacks asynchronously. This pattern is core to Node.js's HTTP servers, file operations, and database queries, enabling efficient handling of asynchronous operations without blocking the execution thread.
+**Answer:** Event-driven programming in Node.js means the flow of the program is controlled by events.
+Node.js uses the EventEmitter class, where you can emit (trigger) and listen to events.
+
+When an event happens, Node.js calls the function (listener) attached to it — without blocking the main thread.
+This is how Node.js efficiently handles asynchronous tasks like HTTP requests, file reads, or database queries.
+```
+const EventEmitter = require('events');
+const emitter = new EventEmitter();
+
+// Listener (runs when event occurs)
+emitter.on('greet', () => {
+  console.log('Hello from Node.js!');
+});
+
+// Emit (trigger) the event
+emitter.emit('greet');
+```
 
 ---
 
