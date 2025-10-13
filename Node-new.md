@@ -32,7 +32,7 @@ new Worker('./heavyComputation.js');
 ---
 
 ### 3. Describe the event-driven programming in Node.js.
-**Answer:** Event-driven programming in Node.js means the flow of the program is controlled by events.
+**Answer:** Node.js means the execution of certain parts of the program is triggered by events instead of a fixed sequence of instructions.
 Node.js uses the EventEmitter class, where you can emit (trigger) and listen to events.
 
 When an event happens, Node.js calls the function (listener) attached to it — without blocking the main thread.
