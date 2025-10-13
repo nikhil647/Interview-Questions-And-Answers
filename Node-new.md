@@ -414,7 +414,7 @@ The path module handles cross-platform file path operations, ensuring compatibil
 What Happens If You Don't Use the Path Module?
 1. Cross-Platform Compatibility Issues (Windows: Uses backslashes \ ​& Unix/Linux/Mac: Uses forward slashes /)
 2. Manual String Concatenation Problems (const badPath = '/users' + '/john' + '/' + 'file.txt';) // '/users/john//file.txt' (double slashes)
-3 Edge Cases Not Handled.
+3. Edge Cases Not Handled.
 ```
 // ❌ WITHOUT path
 const ext = filename.split('.').pop(); // Fails on files without extensions
