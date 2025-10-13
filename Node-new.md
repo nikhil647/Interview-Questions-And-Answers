@@ -232,6 +232,25 @@ app.post('/upload', (req, res) => {
   });
 });
 ```
+```
+// Create Buffer from string
+const buf1 = Buffer.from('Hello World');
+
+// Create empty Buffer (10 bytes)
+const buf2 = Buffer.alloc(10);
+
+// Combine multiple Buffers
+const combined = Buffer.concat([buf1, buf2]);
+
+// Convert Buffer to string
+console.log(buf1.toString()); // 'Hello World'
+
+// Convert to base64
+console.log(buf1.toString('base64')); // 'SGVsbG8gV29ybGQ='
+
+// Get Buffer length
+console.log(buf1.length); // 11 bytes
+```
 ---
 
 ### 15. What are streams in Node.js and what types are available?
