@@ -97,8 +97,7 @@ Executes I/O-related callbacks (e.g., fs.readFile done reading).
 ❌ Close Callbacks Phase
 6) Executes cleanup callbacks like socket.on('close').
 
-Between each phase, microtasks (Promises, process.nextTick()) are executed before moving to the next phase.
-
+### Between each phase, microtasks (Promises, process.nextTick()) are executed before moving to the next phase.
 ---
 
 ### 5. What is the difference between Node.js and traditional web server technologies?
