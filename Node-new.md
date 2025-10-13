@@ -32,7 +32,9 @@ new Worker('./heavyComputation.js');
 ---
 
 ### 3. Describe the event-driven programming in Node.js.
-**Answer:** Node.js means the execution of certain parts of the program is triggered by events instead of a fixed sequence of instructions.
+**Answer:** The event loop in Node.js is the core mechanism that handles asynchronous operations without blocking the main thread.
+It continuously checks the call stack and task queues, executing tasks in a specific order.
+
 Node.js uses the EventEmitter class, where you can emit (trigger) and listen to events.
 
 When an event happens, Node.js calls the function (listener) attached to it — without blocking the main thread.
@@ -53,8 +55,49 @@ emitter.emit('greet');
 ---
 
 ### 4. What is the event loop in Node.js?
-**Answer:** The event loop is Node.js's mechanism for managing asynchronous operations. It continuously monitors the call stack and task queues (microtask and callback/macrotask queues). The loop has phases: timers, pending callbacks, idle/prepare, poll (retrieves I/O events), check (setImmediate), and close callbacks. It executes tasks in order, with microtasks (process.nextTick, Promises) having priority over macrotasks (setTimeout, setImmediate, I/O operations).
+**Answer:** The event loop is the heart of Node.js’s asynchronous, non-blocking architecture.
+Since Node.js runs on a single thread, it uses the event loop to manage multiple tasks efficiently — such as I/O, timers, and promises — without blocking other code.
 
+When Node.js executes code:
+
+Synchronous code runs first (on the call stack).
+Asynchronous tasks (like I/O, timers, and promises) are offloaded to the system.
+When they’re done, their callbacks are added to specific queues, and the event loop decides when to execute them.
+```
+setTimeout(() => console.log('setTimeout'), 0);
+setImmediate(() => console.log('setImmediate'));
+Promise.resolve().then(() => console.log('Promise'));
+process.nextTick(() => console.log('nextTick'));
+```
+nextTick
+Promise
+setTimeout
+setImmediate
+
+Phases of the Event Loop (just for reading)
+The event loop runs in cycles (ticks), and each tick has these main phases:
+
+🕒 Timers Phase
+1) Executes callbacks from setTimeout() and setInterval() whose time has expired.
+
+🔁 Pending Callbacks Phase
+2) Executes I/O callbacks that were deferred to the next loop iteration.
+
+⚙️ Idle/Prepare Phase
+3) Used internally by Node.js — developers usually don’t interact with this phase.
+
+📥 Poll Phase
+4) Waits for new I/O events (like reading files or network requests).
+
+Executes I/O-related callbacks (e.g., fs.readFile done reading).
+
+✅ Check Phase
+5) Executes callbacks from setImmediate().
+
+❌ Close Callbacks Phase
+6) Executes cleanup callbacks like socket.on('close').
+
+🧩 Between each phase, microtasks (Promises, process.nextTick()) are executed before moving to the next phase.
 ---
 
 ### 5. What is the difference between Node.js and traditional web server technologies?
