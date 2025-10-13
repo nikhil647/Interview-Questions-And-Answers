@@ -260,6 +260,39 @@ Why important?
 Avoids loading large files entirely into memory (efficient).
 Enables processing data chunk by chunk, like piping to another process.
 Perfect for network requests, file I/O, or real-time data.
+1. Without streams (bad for large files)
+```
+const fs = require('fs');
+
+console.time('readFile');
+
+// Read entire file into memory
+const data = fs.readFileSync('bigfile.txt'); // imagine 100MB
+console.log('File size:', data.length);
+
+fs.writeFileSync('copy_file.txt', data); // write whole file
+console.timeEnd('readFile');
+```
+```
+const fs = require('fs');
+
+console.time('streamCopy');
+
+const readable = fs.createReadStream('bigfile.txt');
+const writable = fs.createWriteStream('copy_file.txt');
+
+readable.on('data', (chunk) => {
+    console.log('Processing chunk of bytes:', chunk.length);
+    writable.write(chunk); // write immediately
+});
+
+readable.on('end', () => {
+    writable.end();
+    console.log('File copy completed!');
+    console.timeEnd('streamCopy');
+});
+```
+
 
 ---
 
@@ -288,7 +321,6 @@ async function readWrite() {
 const readStream = fs.createReadStream('large.txt');
 readStream.pipe(fs.createWriteStream('copy.txt'));
 ```
-
 ---
 
 ### 17. How do you use the EventEmitter in Node.js?
