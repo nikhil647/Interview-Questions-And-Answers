@@ -431,6 +431,81 @@ function ScrollToTop() {
 
 ---
 
+⚠️ **Use sparingly!** Blocks rendering.
+
+**When to use:**
+- DOM measurements
+- Prevent visual glitches/flickers
+- Scroll position adjustments
+
+```jsx
+function ScrollToTop() {
+  const ref = useRef();
+
+  useLayoutEffect(() => {
+    ref.current.scrollTop = 0;
+  }, []);
+
+  return <div ref={ref}>Content</div>;
+}
+```
+
+**Rule:** Prefer `useEffect` → only use `useLayoutEffect` if you see flickers
+
+---
+
+
+---
+
+### 9️⃣  useSearchParams
+
+Provides an interface for reading and modifying the query string (the part of the URL after the ?).
+
+```
+import React from "react";
+import { createSearchParams, useSearchParams } from "react-router-dom";
+import "./styles.css";
+
+export default function App() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const favoriteFruit = searchParams.get("fruit");
+  return (
+    <div className="App">
+      <h1>Favorite fruit</h1>
+      {favoriteFruit ? (
+        <p>
+          Your favorite fruit is <b>{favoriteFruit}</b>
+        </p>
+      ) : (
+        <i>No favorite fruit selected yet.</i>
+      )}
+
+      {["🍒", "🍑", "🍎", "🍌"].map((fruit) => {
+        return (
+          <p key={fruit}>
+            <label htmlFor={`id_${fruit}`}>{fruit}</label>
+            <input
+              type="radio"
+              value={fruit}
+              checked={favoriteFruit === fruit}
+              onChange={(event) => {
+                setSearchParams(
+                  createSearchParams({ fruit: event.target.value })
+                );
+              }}
+            />
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
+```
+
+
+
 ### 9️⃣ Custom Hooks
 
 Encapsulate reusable logic.
