@@ -434,7 +434,7 @@ const dir = path.dirname(filepath); // Works on all platforms
 ---
 
 ### 21. What is callback hell and how can it be avoided?
-**Answer:** Callback hell is deeply nested callbacks creating pyramid-shaped, hard-to-maintain code. Solutions: 1) **Modularize** - break into named functions, 2) **Promises** - chain with `.then()`, 3) **Async/Await** - write asynchronous code synchronously, 4) **Control flow libraries** (async.js), 5) **Error handling** at each level. Example transformation:
+**Answer:** Callback hell is deeply nested callbacks creating pyramid-shaped, hard-to-maintain code. Solutions: Promises
 ```javascript
 // Callback hell
 getData(a => getMore(a, b => getMore(b, c => {})));
