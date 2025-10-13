@@ -375,21 +375,55 @@ console.log(params.get('age'));  // 30
 ---
 
 ### 19. How do you manage path operations in Node.js?
-**Answer:** 
+**Answer:** Path operations in Node.js are managed using the built-in path module, which provides utilities for working with file and directory paths.
 ```javascript
 const path = require('path');
 
-path.join('/user', 'docs', 'file.txt'); // Cross-platform path
-path.resolve('file.txt'); // Absolute path
-path.basename('/user/file.txt'); // 'file.txt'
-path.dirname('/user/file.txt'); // '/user'
-path.extname('file.txt'); // '.txt'
-path.parse('/user/file.txt'); // Object with path components
-__dirname; // Current directory
-__filename; // Current file path
+// Join path segments
+const fullPath = path.join('/users', 'john', 'documents', 'file.txt');
+// Result: '/users/john/documents/file.txt'
+
+// Resolve to absolute path
+const absolutePath = path.resolve('folder', 'file.txt');
+// Result: '/current/working/directory/folder/file.txt'
+
+// Get directory name
+const dirName = path.dirname('/users/john/file.txt');
+// Result: '/users/john'
+
+// Get file name
+const baseName = path.basename('/users/john/file.txt');
+// Result: 'file.txt'
+
+// Get file extension
+const extension = path.extname('/users/john/file.txt');
+// Result: '.txt'
+
+// Normalize path (resolve .. and .)
+const normalized = path.normalize('/users//john/../jane/./file.txt');
+// Result: '/users/jane/file.txt'
+
+// Parse path into object
+const parsed = path.parse('/users/john/file.txt');
+// Result: { root: '/', dir: '/users/john', base: 'file.txt', ext: '.txt', name: 'file' }
 ```
+What Happens If You Don't Use the Path Module?
+1. Cross-Platform Compatibility Issues
 The path module handles cross-platform file path operations, ensuring compatibility between Windows, Linux, and macOS.
 
+What Happens If You Don't Use the Path Module?
+1. Cross-Platform Compatibility Issues (Windows: Uses backslashes \ ​& Unix/Linux/Mac: Uses forward slashes /)
+2. Manual String Concatenation Problems (const badPath = '/users' + '/john' + '/' + 'file.txt';) // '/users/john//file.txt' (double slashes)
+3 Edge Cases Not Handled.
+```
+// ❌ WITHOUT path
+const ext = filename.split('.').pop(); // Fails on files without extensions
+const dir = filepath.substring(0, filepath.lastIndexOf('/')); // Fails on Windows
+
+// ✅ WITH path
+const ext = path.extname(filename); // Returns '' if no extension
+const dir = path.dirname(filepath); // Works on all platforms
+```
 ---
 
 ## 🔄 Asynchronous Programming
