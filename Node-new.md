@@ -101,8 +101,21 @@ Executes I/O-related callbacks (e.g., fs.readFile done reading).
 ---
 
 ### 5. What is the difference between Node.js and traditional web server technologies?
-**Answer:** Node.js uses single-threaded, event-driven, non-blocking I/O while traditional servers use multi-threading with blocking I/O. Traditional servers spawn threads per request (resource-intensive when idle), while Node.js handles multiple connections on one thread. Node.js uses JavaScript for both client and server (unified development), requires no recompilation (write-save-run), and uses npm for centralized package management. Traditional servers often need separate languages and compilation. Node.js excels at real-time, data-intensive apps; traditional servers suit enterprise systems and heavy computation.
+**Answer:** 
+Traditional web servers handle each request with a separate thread, which can be slow and memory-heavy for many users.
+threads consume more memory per request.
+you have thousands of simultaneous connections, because each thread uses stack memory and context-switching can become expensive.
 
+Node.js uses single-threaded, event-driven, non-blocking I/O:
+One thread handles thousands of requests without creating a new thread per request.
+I/O operations (database, network, file system) are offloaded, and Node.js resumes processing when they’re done.
+
+Use Node.js for:
+Handling HTTP requests, APIs, real-time communication (chat, notifications, streaming)
+Managing thousands of simultaneous connections efficiently
+
+Use Java for:
+CPU-heavy tasks like image/video processing, complex calculations, data analytics
 ---
 
 ### 6. Explain what "non-blocking" means in Node.js.
