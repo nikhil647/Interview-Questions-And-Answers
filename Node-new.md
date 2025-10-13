@@ -350,8 +350,28 @@ EventEmitter is the base class for event handling, used extensively in Node.js f
 ---
 
 ### 18. What is the QueryString module?
-**Answer:** The querystring module (legacy, replaced by URLSearchParams) parses and formats URL query strings. Methods include `querystring.parse()` (converts query string to object), `querystring.stringify()` (converts object to query string), `querystring.escape()`, and `querystring.unescape()`. Modern approach uses `new URLSearchParams(queryString)` for parsing and manipulation. Used in HTTP request handling to extract and work with URL parameters.
+**Answer:** The querystring module in Node.js is a built-in module used to parse and format URL query strings.
+A query string is the part of a URL after ?
+```https://example.com/page?name=Nikhil&age=30```
+```
 
+const qs = 'name=Nikhil&age=30&skills=Node.js&skills=React';
+const parsed = querystring.parse(qs);
+
+console.log(parsed);
+// O/p
+{
+  name: 'Nikhil',
+  age: '30',
+  skills: ['Node.js', 'React']
+}
+```
+Node.js documentation recommends using the **URLSearchParams**
+```
+const params = new URLSearchParams('name=Nikhil&age=30');
+console.log(params.get('name')); // Nikhil
+console.log(params.get('age'));  // 30
+```
 ---
 
 ### 19. How do you manage path operations in Node.js?
