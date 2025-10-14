@@ -567,10 +567,36 @@ Benefits: consistent error handling, clear separation of error/success paths, en
 ### 33. Explain process.nextTick().
 **Answer:** `process.nextTick()` schedules callback to execute immediately after current operation completes, before event loop continues. It has higher priority than setTimeout/setImmediate and Promise microtasks. Use cases: ensure asynchronous execution even in synchronous-looking code, emit events after object construction, break long operations into smaller chunks. Caution: recursive nextTick can starve I/O, blocking event loop. Example:
 ```javascript
-console.log('start');
-process.nextTick(() => console.log('nextTick'));
-console.log('end');
-// Output: start, end, nextTick
+/ ============================================
+// PROBLEM 1: Constructor emits before user can listen
+// ============================================
+
+class DatabaseBad extends EventEmitter {
+  constructor() {
+    super();
+    this.connect(); // Connects and emits immediately
+  }
+  
+  connect() {
+    // Simulate instant connection
+    this.emit('connected'); // ❌ Emits DURING construction!
+  }
+}
+
+class DatabaseGood extends EventEmitter {
+  constructor() {
+    super();
+    this.connect();
+  }
+  
+  connect() {
+    // ✅ Defer emission so constructor finishes first
+    process.nextTick(() => {
+      this.emit('connected');
+    });
+  }
+}
+
 ```
 
 ---
