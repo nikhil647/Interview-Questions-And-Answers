@@ -1324,6 +1324,107 @@ See [useDebounce custom hook](#🔟-usedebounce-custom-hook) above.
 
 ---
 
+## Cross-Origin Resource Sharing (CORS)
+
+### Q:What is CORS and how do you handle it in web applications?
+
+**ANSWER** CORS (Cross-Origin Resource Sharing) is a browser security mechanism that allows a web page running a script (like JavaScript) to make requests to a domain different from the one that served the web page.
+
+
+
+The Problem it Solves: The Same-Origin Policy (SOP).
+
+
+
+By default, modern browsers enforce the Same-Origin Policy (SOP). SOP is a strict security feature that prevents a document or script loaded from one "origin" (a combination of protocol, domain, and port) from interacting with a resource from a different origin.
+
+Example:
+
+If your front-end web application is at https://app.example.com, SOP prevents it from directly making an AJAX request to an API at https://api.thirdparty.com.
+
+The most important header is **Access-Control-Allow-Origin**. The server includes this in the response to indicate which origin is allowed to access the resource.
+
+Server-Side Configuration
+we are only giving resp if request is comming from the URL https://app.example.com.
+```
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+// Configure CORS for a specific origin
+app.use(cors({
+  origin: 'https://app.example.com', // Only allow this domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+// ... rest of your API routes
+```
+
+## How do you ensure your web application is accessible?
+
+**ANSWER** Accessibility means designing and coding a web application so that people with disabilities can perceive, understand, navigate, and interact with it effectively
+♿ WCAG Principles (POUR)
+
+### 1️⃣ **Perceivable** Users must be able to **perceive the information** presented.\
+\> If users can't see or hear your content, provide an alternative way
+to access it.
+
+**✅ Good Practices** - 🖼️ Provide **text alternatives** for non-text
+content (e.g., images, icons).\
+- 🎧 Add **captions or transcripts** for audio and video content.\
+- 🎨 Maintain **good color contrast** between text and background.\
+
+### 2️⃣ **Operable**
+Users must be able to **interact** with the interface.\
+\> All users, including those using keyboards or assistive devices,
+should be able to use your app.
+
+**✅ Good Practices** - ⌨️ Ensure all functionality is available **via
+keyboard** (no mouse required).\
+- ⏱️ Give users **enough time** to read and interact with content.\
+- ⚡ Avoid **flashing content** faster than 3 times per second (prevents
+seizures).\
+- 🧭 Provide **clear and consistent navigation**.
+
+### 3️⃣ **Understandable**
+Users must be able to **comprehend** the content and interface behavior.
+**✅ Good Practices** - 🗂️ Make text **readable and clear** (simple
+language, meaningful headings).\
+- 🔁 Keep forms and interactive elements **predictable** and
+**consistent**.
+
+### 4️⃣ **Robust**
+Content must be **interpretable by various technologies**, including
+assistive tools like screen readers.
+
+**✅ Good Practices** - 🧱 Use **valid, semantic HTML** and follow web
+standards.\
+- 🧩 Ensure compatibility with **assistive technologies** (e.g., ARIA
+roles and attributes).
+
+
+## Tree Shaking in webpack
+
+Tree Shaking in webpack is a dead code elimination technique that removes unused JavaScript code from the final bundle, resulting in smaller file sizes and faster load times for web applications. 🌳
+
+## Web Performance Metrics.
+Core Web Vitals (Google standards)
+LCP (Largest Contentful Paint) → Measures loading speed (✅ < 2.5s)
+FID (First Input Delay) → Measures interactivity (✅ < 100ms)
+CLS (Cumulative Layout Shift) → Measures visual stability (✅ < 0.1)
+
+2. Other Key Metrics
+
+TTFB (Time to First Byte) → Server response time
+FCP (First Contentful Paint) → First visible element rendered
+TBT (Total Blocking Time) → Main thread blocking duration
+SI (Speed Index) → How quickly content is visually displayed
+
+3. Tools to Measure
+Lighthouse / PageSpeed Insights
+Web Vitals Chrome Extension
+WebPageTest / GTmetrix
+
 ## 📝 Quick Reference
 
 ### Debugging Tools
