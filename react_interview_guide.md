@@ -1410,8 +1410,13 @@ Tree Shaking in webpack is a dead code elimination technique that removes unused
 ## Web Performance Metrics.
 Core Web Vitals (Google standards)
 LCP (Largest Contentful Paint) → Measures loading speed (✅ < 2.5s)
+Measures loading speed – time until the largest visible element loads (good ≤ 2.5s).
+
 FID (First Input Delay) → Measures interactivity (✅ < 100ms)
+The time between a user’s first interaction (click, tap, key press) and the browser actually responding to it.
+
 CLS (Cumulative Layout Shift) → Measures visual stability (✅ < 0.1)
+Measures visual stability – unexpected layout shifts during load
 
 2. Other Key Metrics
 
