@@ -1462,7 +1462,36 @@ const Component = lazy(() => import('./Component'));
 // Loaded at runtime (lazy loading)
 ```
 
+## Security in React App (Interview Notes)
+
+Use HTTPS → Always serve over secure connection.
+Content Security Policy (CSP) → Prevent XSS by restricting scripts.
+Sanitize User Input → Avoid injecting unsafe HTML (dangerouslySetInnerHTML).
+Avoid exposing secrets → Never put API keys in frontend code.
+Use HTTP-only cookies → For auth tokens to prevent XSS/CSRF.
+Dependencies → Keep packages up-to-date, scan for vulnerabilities (npm audit).
+Secure Headers → Use Helmet on server-side if SSR.
+React Strict Mode → Helps detect unsafe lifecycles and warnings.
 ---
+
+## XSS (Cross-Site Scripting) –
+
+Definition: Attack where malicious scripts are injected into web pages, executed in other users’ browsers.
+
+Impact: Steals cookies, session tokens, or modifies page content.
+
+Types:
+
+Reflected XSS → Script in URL or form input executes immediately.
+Stored XSS → Script stored on server (DB) and served to users.
+DOM-based XSS → Script executes via unsafe DOM manipulation.
+
+Prevention in React:
+
+Avoid dangerouslySetInnerHTML.
+Sanitize user input with libraries like DOMPurify.
+Use Content Security Policy (CSP).
+Keep dependencies updated
 
 ## 🎓 Summary
 
