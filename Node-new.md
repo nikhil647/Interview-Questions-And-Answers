@@ -565,7 +565,35 @@ Benefits: consistent error handling, clear separation of error/success paths, en
 ---
 
 ### 33. Explain process.nextTick().
-**Answer:** `process.nextTick()` schedules callback to execute immediately after current operation completes, before event loop continues. It has higher priority than setTimeout/setImmediate and Promise microtasks. Use cases: ensure asynchronous execution even in synchronous-looking code, emit events after object construction, break long operations into smaller chunks. Caution: recursive nextTick can starve I/O, blocking event loop. Example:
+
+`process.nextTick()` in Node.js is a function that allows you to execute a callback function on the next iteration of the event loop. Here's a breakdown:
+
+## Key Points:
+1. *Event Loop*: Node.js uses an event loop to manage asynchronous operations.
+2. *Next Tick*: `process.nextTick()` schedules a callback to be executed on the next iteration of the event loop.
+3. *Microtasks*: `process.nextTick()` is part of the microtask queue, which has higher priority than the macrotask queue (e.g., `setTimeout()`).
+
+## Usage:
+console.log('Start');
+process.nextTick(() => {
+  console.log('Next Tick');
+});
+console.log('End');
+Output:
+Start
+End
+Next Tick
+
+## Use Cases:
+1. *Handling errors*: Use `process.nextTick()` to handle errors asynchronously.
+2. *Breaking up long-running tasks*: Use `process.nextTick()` to break up long-running tasks and avoid blocking the event loop.
+3. *Ensuring async execution*: Use `process.nextTick()` to ensure a function is executed asynchronously.
+
+## Comparison with setImmediate():
+- `process.nextTick()` and `setImmediate()` both schedule callbacks for later execution.
+- `process.nextTick()` has higher priority and is executed before `setImmediate()` callbacks.
+
+By using `process.nextTick()`, you can write more efficient and asynchronous code in Node.js.
 ```javascript
 / ============================================
 // PROBLEM 1: Constructor emits before user can listen
