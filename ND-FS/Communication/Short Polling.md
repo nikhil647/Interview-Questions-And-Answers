@@ -128,3 +128,9 @@ Each request opens and closes a connection — hence, **higher network overhead*
 
 > ⚡ Tip: If you need *instant updates* (like chat apps or live dashboards), use **WebSockets** instead of short polling.
 
+## Scenario where short polling is valid.
+
+Real-Time UI Updates with Predictable Refresh Cycles
+Example: Stock prices, dashboards, or admin panels refreshing every 2–5 seconds.
+Many trading platforms or analytics dashboards still use short polling if sub-second precision isn’t required.
+
