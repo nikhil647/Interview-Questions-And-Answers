@@ -12,22 +12,14 @@ Below is a simple diagram (Mermaid + ASCII fallback) that explains the basic flo
 ## Mermaid diagram (use on GitHub / Mermaid-enabled viewers)
 
 ```mermaid
-flowchart LR
-  A[Attacker]
-  W[Website]
-  V[Victim User]
+flowchart TD
+  Attacker["👨‍💻 Attacker"]
+  Website["🌐 Vulnerable Website"]
+  Victim["🧑‍🦱 Victim User"]
 
-  A --> W
-  V --> W
-  W --> A
-
-  Note1(("1) Attacker injects\nmalicious script into website"))
-  Note2(("2) Malicious script runs\nwhen victim visits website"))
-  Note3(("3) Script exfiltrates\ncookies / credentials to attacker"))
-
-  Note1 --> A
-  Note2 --> V
-  Note3 --> W
+  Attacker -->|1️⃣ Injects malicious script| Website
+  Victim -->|2️⃣ Visits the infected page<br>Script runs in browser| Website
+  Website -->|3️⃣ Sends stolen cookies / credentials| Attacker
 ```
 
 ---
