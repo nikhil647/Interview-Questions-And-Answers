@@ -13,31 +13,21 @@ Below is a simple diagram (Mermaid + ASCII fallback) that explains the basic flo
 
 ```mermaid
 flowchart LR
-  A[Attacker] -->|1) Injects malicious script into website| W[Website]
-  V[Victim User] -->|2) Visits website — malicious script runs in their browser| W
-  W -->|3) Script exfiltrates cookies / credentials back to attacker| A
+  A[Attacker]
+  W[Website]
+  V[Victim User]
 
-  subgraph Step1 [ ]
-    direction TB
-    A
-  end
+  A --> W
+  V --> W
+  W --> A
 
-  subgraph Step2 [ ]
-    direction TB
-    V
-  end
+  Note1(("1) Attacker injects\nmalicious script into website"))
+  Note2(("2) Malicious script runs\nwhen victim visits website"))
+  Note3(("3) Script exfiltrates\ncookies / credentials to attacker"))
 
-  subgraph Target [Website]
-    W
-  end
-
-  classDef attackerStyle fill:#ffecec,stroke:#d9534f,stroke-width:1px;
-  classDef victimStyle fill:#e6f7ff,stroke:#0275d8,stroke-width:1px;
-  classDef websiteStyle fill:#fff7e6,stroke:#f0ad4e,stroke-width:1px;
-
-  class A attackerStyle;
-  class V victimStyle;
-  class W websiteStyle;
+  Note1 --> A
+  Note2 --> V
+  Note3 --> W
 ```
 
 ---
