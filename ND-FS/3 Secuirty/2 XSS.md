@@ -216,6 +216,13 @@ A CSP reduces the impact of XSS by restricting where resources (scripts, styles,
 - **Allowed sources** (`default-src`, `script-src`) — control where scripts/styles/images can come from.
 - **Script nonces** — allow specific inline scripts to run by assigning them a nonce; server generates a random nonce per response and the inline `<script nonce="...">` must match.
 - **Report‑only** — test your policy without enforcing it; the browser sends reports to a specified url.
+Report-only lets you test your CSP rules safely — the browser won’t block anything yet.
+Instead, whenever something violates your policy (like a script from an unknown domain or an inline event),
+the browser simply sends a report to the URL you specify using report-uri or report-to.
+
+This helps you observe what would break if you enforced the policy — without actually breaking the site for real users.
+Once you review the reports and fine-tune your rules, you can confidently switch from
+Content-Security-Policy-Report-Only ➜ Content-Security-Policy to start actually enforcing protection.
 
 **Example Express server (simple)**
 
