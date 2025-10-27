@@ -298,12 +298,205 @@ A **Join** combines rows from two or more tables based on a related column.
 ---
 
 ### ❓ Types of Joins
-- **INNER JOIN**
-- **LEFT JOIN**
-- **RIGHT JOIN**
-- **FULL OUTER JOIN**
-- **CROSS JOIN**
-- **SELF JOIN**
+
+Perfect — let’s go through each SQL **JOIN type** in a clear, exam-friendly way 👇
+
+---
+
+### 🧩 What is a JOIN?
+
+A **JOIN** combines rows from **two or more tables** using a related column — usually a **primary key** in one table and a **foreign key** in another.
+
+We’ll use two sample tables for examples:
+
+**Table: `Customers`**
+
+| CustomerID | Name    |
+| ---------- | ------- |
+| 1          | Alice   |
+| 2          | Bob     |
+| 3          | Charlie |
+
+**Table: `Orders`**
+
+| OrderID | CustomerID | Product  |
+| ------- | ---------- | -------- |
+| 101     | 1          | Laptop   |
+| 102     | 2          | Keyboard |
+| 103     | 4          | Mouse    |
+
+---
+
+## 1️⃣ INNER JOIN
+
+Returns **only the matching rows** from both tables.
+
+```sql
+SELECT Customers.Name, Orders.Product
+FROM Customers
+INNER JOIN Orders
+ON Customers.CustomerID = Orders.CustomerID;
+```
+
+**Result:**
+
+| Name  | Product  |
+| ----- | -------- |
+| Alice | Laptop   |
+| Bob   | Keyboard |
+
+✅ Only customers who **have placed orders** appear (1 and 2).
+❌ Charlie (no order) and OrderID 103 (no matching customer) are excluded.
+
+---
+
+## 2️⃣ LEFT JOIN (LEFT OUTER JOIN)
+
+Returns **all rows from the left table**, and the **matching rows from the right table**.
+If no match → NULLs are shown.
+
+```sql
+SELECT Customers.Name, Orders.Product
+FROM Customers
+LEFT JOIN Orders
+ON Customers.CustomerID = Orders.CustomerID;
+```
+
+**Result:**
+
+| Name    | Product  |
+| ------- | -------- |
+| Alice   | Laptop   |
+| Bob     | Keyboard |
+| Charlie | NULL     |
+
+✅ Shows **all customers**, even if they didn’t order.
+❌ Order with CustomerID 4 not shown.
+
+---
+
+## 3️⃣ RIGHT JOIN (RIGHT OUTER JOIN)
+
+Opposite of LEFT JOIN — returns **all rows from the right table**, and matches from the left.
+
+```sql
+SELECT Customers.Name, Orders.Product
+FROM Customers
+RIGHT JOIN Orders
+ON Customers.CustomerID = Orders.CustomerID;
+```
+
+**Result:**
+
+| Name  | Product  |
+| ----- | -------- |
+| Alice | Laptop   |
+| Bob   | Keyboard |
+| NULL  | Mouse    |
+
+✅ Shows **all orders**, even if customer not found (CustomerID 4 → NULL name).
+
+---
+
+## 4️⃣ FULL OUTER JOIN
+
+Returns **all rows from both tables**, whether they match or not.
+Missing values → filled with NULLs.
+
+```sql
+SELECT Customers.Name, Orders.Product
+FROM Customers
+FULL OUTER JOIN Orders
+ON Customers.CustomerID = Orders.CustomerID;
+```
+
+**Result:**
+
+| Name    | Product  |
+| ------- | -------- |
+| Alice   | Laptop   |
+| Bob     | Keyboard |
+| Charlie | NULL     |
+| NULL    | Mouse    |
+
+✅ Combines results of LEFT + RIGHT JOIN.
+
+---
+
+## 5️⃣ CROSS JOIN
+
+Returns the **Cartesian product** — every combination of rows between two tables.
+⚠️ No `ON` condition is used.
+
+```sql
+SELECT Customers.Name, Orders.Product
+FROM Customers
+CROSS JOIN Orders;
+```
+
+**Result:**
+
+| Name    | Product  |
+| ------- | -------- |
+| Alice   | Laptop   |
+| Alice   | Keyboard |
+| Alice   | Mouse    |
+| Bob     | Laptop   |
+| Bob     | Keyboard |
+| Bob     | Mouse    |
+| Charlie | Laptop   |
+| Charlie | Keyboard |
+| Charlie | Mouse    |
+
+✅ Used rarely — mostly for generating all combinations.
+
+---
+
+## 6️⃣ SELF JOIN
+
+A table joins with **itself** — useful for hierarchical or relational data within the same table.
+
+**Example:**
+`Employees` table:
+
+| EmpID | Name  | ManagerID |
+| ----- | ----- | --------- |
+| 1     | Asha  | NULL      |
+| 2     | Ravi  | 1         |
+| 3     | Neha  | 1         |
+| 4     | Kiran | 2         |
+
+```sql
+SELECT e.Name AS Employee, m.Name AS Manager
+FROM Employees e
+LEFT JOIN Employees m
+ON e.ManagerID = m.EmpID;
+```
+
+**Result:**
+
+| Employee | Manager |
+| -------- | ------- |
+| Asha     | NULL    |
+| Ravi     | Asha    |
+| Neha     | Asha    |
+| Kiran    | Ravi    |
+
+✅ Great for hierarchical relationships (manager → employee).
+
+---
+
+### ⚡ Summary Table
+
+| Join Type      | Returns                    |
+| -------------- | -------------------------- |
+| **INNER JOIN** | Matching rows only         |
+| **LEFT JOIN**  | All from left + matches    |
+| **RIGHT JOIN** | All from right + matches   |
+| **FULL JOIN**  | All from both              |
+| **CROSS JOIN** | All combinations           |
+| **SELF JOIN**  | A table joined with itself |
+
 
 ---
 
