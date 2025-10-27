@@ -224,3 +224,5 @@ DROP command is used to remove an object from the database. If you drop a table,
 
 DROP TABLE Candidates;
 ```
+
+
