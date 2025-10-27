@@ -267,13 +267,22 @@ CREATE TABLE Employees (
 ---
 
 ### ❓ What is a View in SQL and How to Create One?
-A **View** is a **virtual table** based on the result of an SQL query.
+
+A View in SQL is like a virtual table — it doesn’t store data itself but displays data stored in one or more underlying tables.
+
+You can think of it as a saved SQL query
 
 ```sql
-CREATE VIEW StudentView AS
-SELECT name, age FROM Students WHERE age > 18;
+CREATE VIEW IT_Employees AS
+SELECT name, salary
+FROM employees
+WHERE department = 'IT';
 ```
-
+apply query on view
+```sql
+SELECT AVG(salary) AS avg_it_salary
+FROM IT_Employees;
+```
 ---
 
 ### ❓ Uses of a View
