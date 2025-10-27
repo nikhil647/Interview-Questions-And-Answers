@@ -289,18 +289,6 @@ FROM IT_Employees;
 - Simplifies complex queries  
 - Restricts access to specific columns  
 - Provides logical data independence
-
----
-
-### ❓ What is a Join?
-A **Join** combines rows from two or more tables based on a related column.
-
----
-
-### ❓ Types of Joins
-
-Perfect — let’s go through each SQL **JOIN type** in a clear, exam-friendly way 👇
-
 ---
 
 ### 🧩 What is a JOIN?
