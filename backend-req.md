@@ -6,67 +6,67 @@ Seeking an experienced Senior Backend Developer with strong expertise in Node.js
 ## Required Technical Skills
 
 ### Node.js & JavaScript
-- 5+ years of professional Node.js development experience
-- Expert-level JavaScript (ES6+) and TypeScript
-- Deep understanding of asynchronous programming, event loop, and streams
-- Experience with Node.js frameworks (Express, Fastify, NestJS, or Koa)
-- Proficiency in npm/yarn package management
-- Knowledge of Node.js performance optimization and memory management
+- 5+ years of professional Node.js development experience - yes (not actually)
+- Expert-level JavaScript (ES6+) and TypeScript - yes
+- Deep understanding of asynchronous programming, event loop, and streams - (yes except streams video handling prob)
+- Experience with Node.js frameworks (Express, Fastify, NestJS, or Koa) - (no - required to complete -nest js course)
+- Proficiency in npm/yarn package management - yes
+- Knowledge of Node.js performance optimization and memory management - no
 
 ### AWS Cloud Services
 - 3+ years hands-on experience with AWS services
-- **Compute**: EC2, Lambda, ECS/EKS, Fargate
-- **Storage**: S3, EBS, EFS
-- **Database**: RDS (PostgreSQL/MySQL), DynamoDB, Aurora
-- **Messaging**: SQS, SNS, EventBridge
-- **API**: API Gateway, AppSync
-- **Infrastructure**: CloudFormation or CDK, Terraform
-- **Monitoring**: CloudWatch, X-Ray
-- **Security**: IAM, Secrets Manager, KMS, Cognito
-- AWS certification (Solutions Architect or Developer) is a plus
+- **Compute**: EC2, Lambda, ECS/EKS, Fargate - no
+- **Storage**: S3, EBS, EFS - no
+- **Database**: RDS (PostgreSQL/MySQL), DynamoDB, Aurora - no
+- **Messaging**: SQS, SNS, EventBridge - no
+- **API**: API Gateway, AppSync - no
+- **Infrastructure**: CloudFormation or CDK, Terraform - no
+- **Monitoring**: CloudWatch, X-Ray - no
+- **Security**: IAM, Secrets Manager, KMS, Cognito - no
+- AWS certification (Solutions Architect or Developer) is a plus - no
 
 ### Database & Data Management
-- Strong SQL skills (PostgreSQL, MySQL)
-- NoSQL database experience (MongoDB, DynamoDB, Redis)
-- Database design, optimization, and indexing strategies
-- Experience with ORMs (Sequelize, TypeORM, Prisma)
-- Data migration and ETL processes
+- Strong SQL skills (PostgreSQL, MySQL) - (1/2) no
+- NoSQL database experience (MongoDB, DynamoDB, Redis) - no
+- Database design, optimization, and indexing strategies - no
+- Experience with ORMs (Sequelize, TypeORM, Prisma) - only prisma (require to do more projects)
+- Data migration and ETL processes - no
 
 ### API Development
-- RESTful API design and implementation
-- GraphQL experience is a plus
-- API versioning and documentation (Swagger/OpenAPI)
-- Authentication & authorization (JWT, OAuth2, SSO)
-- Rate limiting and API security best practices
+- RESTful API design and implementation - yes
+- GraphQL experience is a plus - yes
+- API versioning and documentation (Swagger/OpenAPI) - no
+- Authentication & authorization (JWT, OAuth2, SSO) - only jwt
+- Rate limiting and API security best practices - no
 
 ### DevOps & CI/CD
-- Docker containerization
-- CI/CD pipelines (GitHub Actions, GitLab CI, Jenkins, AWS CodePipeline)
-- Infrastructure as Code (CloudFormation, CDK, Terraform)
-- Kubernetes basics (if using EKS)
-- Git version control and branching strategies
+- Docker containerization - no
+- CI/CD pipelines (GitHub Actions, GitLab CI, Jenkins, AWS CodePipeline) - no
+- Infrastructure as Code (CloudFormation, CDK, Terraform) - no
+- Kubernetes basics (if using EKS) - no
+- Git version control and branching strategies - yes
 
 ## Core Responsibilities
-- Design and develop scalable, high-performance backend services
-- Build and maintain RESTful APIs and microservices
-- Architect cloud-native solutions on AWS
-- Implement security best practices and data protection measures
-- Optimize application performance and database queries
-- Write clean, maintainable, and well-documented code
-- Conduct code reviews and mentor junior developers
-- Collaborate with frontend developers and product teams
-- Troubleshoot production issues and implement solutions
-- Participate in system design and architecture decisions
+- Design and develop scalable, high-performance backend services - yes
+- Build and maintain RESTful APIs and microservices - yes
+- Architect cloud-native solutions on AWS - BIG no
+- Implement security best practices and data protection measures - BIG no
+- Optimize application performance and database queries - BIG no
+- Write clean, maintainable, and well-documented code - yes
+- Conduct code reviews and mentor junior developers - yes
+- Collaborate with frontend developers and product teams - yes
+- Troubleshoot production issues and implement solutions - yes
+- Participate in system design and architecture decisions - no
 
 ## Additional Skills
-- Message queues (RabbitMQ, Kafka, AWS SQS/SNS)
-- Caching strategies (Redis, Memcached, ElastiCache)
-- Testing frameworks (Jest, Mocha, Supertest)
-- Monitoring and logging tools (ELK stack, DataDog, New Relic)
-- WebSocket/real-time communication
-- Serverless architecture patterns
-- Microservices architecture
-- Event-driven architecture
+- Message queues (RabbitMQ, Kafka, AWS SQS/SNS) - no
+- Caching strategies (Redis, Memcached, ElastiCache) - no
+- Testing frameworks (Jest, Mocha, Supertest) - no
+- Monitoring and logging tools (ELK stack, DataDog, New Relic) - no
+- WebSocket/real-time communication - no
+- Serverless architecture patterns - no
+- Microservices architecture - no
+- Event-driven architecture - no
 
 ## Soft Skills
 - Strong problem-solving and analytical abilities
