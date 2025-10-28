@@ -489,7 +489,105 @@ ON e.ManagerID = m.EmpID;
 ---
 
 ### ❓ What is Normalization?
-**Normalization** is the process of organizing data to reduce redundancy and improve data integrity.
+Normalization’s main goal is indeed:
+
+To reduce redundancy and improve data integrity.
+redundancy - data duplication
+data integrity - the assurance that data is accurate
+---
+
+## 🧱 Before Normalization (Unnormalized Table)
+
+Imagine we have a table storing **customer orders**:
+
+| CustomerID | CustomerName | CustomerEmail                               | OrderID | ProductName | ProductPrice |
+| ---------- | ------------ | ------------------------------------------- | ------- | ----------- | ------------ |
+| 1          | Nikhil       | [nikhil@gmail.com](mailto:nikhil@gmail.com) | 101     | Laptop      | 70,000       |
+| 1          | Nikhil       | [nikhil@gmail.com](mailto:nikhil@gmail.com) | 102     | Mouse       | 1,000        |
+| 2          | Raj          | [raj@gmail.com](mailto:raj@gmail.com)       | 103     | Keyboard    | 2,000        |
+| 2          | Raj          | [raj@gmail.com](mailto:raj@gmail.com)       | 104     | Mouse       | 1,000        |
+
+---
+
+### 🧩 Problems (Redundancy + Integrity)
+
+1. **Redundancy (Duplicate Data)**
+
+   * Customer details (`Name`, `Email`) are repeated for every order.
+   * If Nikhil changes his email, we must update it in **multiple rows**.
+
+2. **Update Anomalies**
+
+   * If one row gets updated but another doesn’t, data becomes **inconsistent**.
+
+3. **Insert Anomalies**
+
+   * Can’t add a new customer until they place an order.
+
+4. **Delete Anomalies**
+
+   * If Nikhil’s last order is deleted, his customer info disappears too.
+
+---
+
+## 🔧 After Normalization (Let’s Normalize to 2NF)
+
+We break it into **separate tables** with relationships.
+
+### 🧍 Customers Table
+
+| CustomerID | CustomerName | CustomerEmail                               |
+| ---------- | ------------ | ------------------------------------------- |
+| 1          | Nikhil       | [nikhil@gmail.com](mailto:nikhil@gmail.com) |
+| 2          | Raj          | [raj@gmail.com](mailto:raj@gmail.com)       |
+| 3          | Govind       | [govind@gmail.com](mailto:govind@gmail.com) |
+
+### 🧾 Orders Table
+
+| OrderID | CustomerID | ProductID |
+| ------- | ---------- | --------- |
+| 101     | 1          | 1         |
+| 102     | 1          | 2         |
+| 103     | 2          | 3         |
+| 104     | 2          | 2         |
+| 105     | 1          | 1         |
+
+### 📦 Products Table
+
+| ProductID | ProductName | Price        |
+ |
+| --------- | ----------- | ------------ |
+| 1         | Laptop      | 70,000       |
+| 2         | Mouse       | 1,000        |
+| 3         | Keyboard    | 2,000        |
+
+---
+
+### ✅ Benefits After Normalization
+
+| Issue               | Before                           | After                            |
+| ------------------- | -------------------------------- | -------------------------------- |
+| **Redundancy**      | Customer info repeated per order | Stored once in `Customers` table |
+| **Data Integrity**  | Risk of inconsistent data        | All references use `CustomerID`  |
+| **Storage**         | Wastes space with duplicates     | Compact and efficient            |
+| **Updates**         | Multiple rows to change          | Single row to update             |
+| **Inserts/Deletes** | Limited flexibility              | Easy and safe                    |
+
+---
+
+### ⚡ Querying Example
+
+To get all orders by Nikhil:
+
+```sql
+SELECT c.CustomerName, p.ProductName, p.ProductPrice
+FROM Customers c
+JOIN Orders o ON c.CustomerID = o.CustomerID
+JOIN Products p ON o.ProductID = p.ProductID
+WHERE c.CustomerName = 'Nikhil';
+```
+
+Even though we use `JOIN`s, the **data is clean, consistent, and scalable** — that’s the power of normalization.
 
 ---
 
@@ -617,3 +715,30 @@ SELECT name FROM Employees WHERE name LIKE 'S%';
 -- Display employee names ending with 'S'
 SELECT name FROM Employees WHERE name LIKE '%S';
 ```
+
+
+# List all customers along with their orders (show customer name and order ID)
+SELECT c.CustomerName, o.OrderID FROM Customers c INNER JOIN Orders o ON c.CustomerID = o.CustomerID;
+
+# Show all products purchased by each customer (customer name + product name).
+SELECT c.CustomerName, p.ProductName from Customers c INNER JOIN Orders o ON c.CustomerID = o.CustomerID INNER JOIN Products p ON o.ProductID = p.ProductID;
+
+
+# 💰 Calculate total amount spent by each customer.
+Select c.CustomerName, SUM(p.ProductPrice) from Customers c INNER JOIN Orders o ON c.CustomerID = o.CustomerID INNER JOIN Products p on p.ProductID = o.ProductID group by c.CustomerName;
+
+
+# Find all customers who have not placed any order yet.
+Select c.CustomerName, o.OrderID from Customers c LEFT JOIN Orders o on c.CustomerID = o.CustomerID WHERE o.OrderID IS NULL;
+
+#List all products that have never been ordered.
+SELECT p.ProductName FROM Orders o RIGHT JOIN Products p ON o.ProductID = p.ProductID WHERE o.OrderID is NULL;
+
+# Show all order details with customer name, product name, and product price — sorted by highest price first.
+SELECT C.CustomerName, P.ProductName, P.ProductPrice FROM Customers C INNER JOIN Orders O ON C.CustomerID = O.CustomerID INNER JOIN Products P ON P.ProductID = O.ProductID ORDER BY P.ProductPrice DESC;
+
+# Find customers who ordered the same product more than once.
+SELECT CustomerID FROM Orders GROUP BY CustomerID, ProductID HAVING COUNT(CustomerID) > 1  
+
+#Show average order value per customer
+SELECT O.CustomerID, AVG(P.ProductPrice) FROM Orders O INNER JOIN Products P ON P.ProductID = O.ProductID GROUP BY CustomerID;
