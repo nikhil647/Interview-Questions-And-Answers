@@ -33,13 +33,14 @@ When an attacker runs script in a victim's browser, they can:
 
 ```mermaid
 flowchart TD
-  A[👨‍💻 Attacker]
-  B[🌐 Vulnerable Website]
-  C[🧑‍🦱 Victim User]
+  A["👨‍💻 Attacker"]
+  B["🌐 Vulnerable Website"]
+  C["🧑‍🦱 Victim User"]
 
-  A -->|1) Injects malicious script (stored/reflected)| B
-  C -->|2) Visits infected page → script runs in browser| B
-  B -->|3) Exfiltrates data (cookies, keystrokes, DOM)| A
+  A -->|"1) Injects malicious script (stored/reflected)"| B
+  C -->|"2) Visits infected page → script runs in browser"| B
+  B -->|"3) Exfiltrates data (cookies, keystrokes, DOM)"| A
+
 ```
 
 ---
