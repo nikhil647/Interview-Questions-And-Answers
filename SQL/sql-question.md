@@ -913,17 +913,99 @@ CREATE TABLE Users (
 ---
 
 ### ❓ Define Referential Integrity
-It ensures relationships between tables remain consistent — a foreign key value must always refer to an existing primary key.
+
+### 🔗 **Referential Integrity — Definition**
+
+**Referential Integrity** is a **rule in relational databases** that ensures the **relationship between two tables remains consistent**.
+
+> It means that a **foreign key value** in one table **must always refer to an existing primary key value** in another table.
+
+---
+
+### 🧠 **Why It’s Important**
+
+It prevents:
+
+* Orphan records (records pointing to non-existing entries)
+* Broken relationships between tables
+* Data inconsistency
+
+---
+
+### 💡 **Example**
+
+```sql
+CREATE TABLE Customers (
+  customer_id INT PRIMARY KEY,
+  name VARCHAR(50)
+);
+
+CREATE TABLE Orders (
+  order_id INT PRIMARY KEY,
+  customer_id INT,
+  FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+);
+```
+
+#### ✅ Valid Case:
+
+```sql
+INSERT INTO Customers VALUES (1, 'Nikhil');
+INSERT INTO Orders VALUES (101, 1);   -- ✅ Works (Customer 1 exists)
+```
+
+#### ❌ Invalid Case:
+
+```sql
+INSERT INTO Orders VALUES (102, 5);   -- ❌ Error: No customer with ID 5
+```
+
+👉 The second insert fails because **customer_id = 5** doesn’t exist in the `Customers` table — this is **Referential Integrity** in action.
+
+---
+
+### 🧾 **In Short**
+
+| Term                      | Meaning                                              |
+| ------------------------- | ---------------------------------------------------- |
+| **Referential Integrity** | Ensures relationships between tables remain valid    |
+| **Key Used**              | `FOREIGN KEY`                                        |
+| **Purpose**               | Prevents invalid or orphan references between tables |
+
 
 ---
 
 ### ❓ What is an Entity-Relationship Diagram (ERD)?
-An **ERD** visually represents tables (entities), their attributes, and the relationships between them.
+An ERD (Entity Relationship Diagram) is a visual representation of a database structure.
+It shows how tables (entities) are related to each other and what attributes (columns) they contain.
 
 ---
 
 ### ❓ What is an Alternate Key?
-An **Alternate Key** is any candidate key that is not chosen as the primary key.
+An Alternate Key is any candidate key that is not chosen as the Primary Key.
+It can still uniquely identify a record in a table — but it’s not the main (primary) key.
+
+When a table has more than one unique column, one becomes the Primary Key,
+and the others are called Alternate Keys.
+
+```sql
+CREATE TABLE Employees (
+  emp_id INT UNIQUE,
+  email VARCHAR(100) UNIQUE,
+  phone VARCHAR(15) UNIQUE,
+  PRIMARY KEY (emp_id)
+);
+```
+emp_id, email, and phone can uniquely identify an employee.
+We chose emp_id as the Primary Key.
+Therefore, email and phone become Alternate Keys.
+
+| Term              | Description                                                | Example                    |
+| ----------------- | ---------------------------------------------------------- | -------------------------- |
+| **Candidate Key** | A column (or combination) that can uniquely identify a row | `emp_id`, `email`, `phone` |
+| **Primary Key**   | The chosen candidate key to uniquely identify rows         | `emp_id`                   |
+| **Alternate Key** | Other candidate keys not chosen as Primary Key             | `email`, `phone`           |
+
 
 ---
 
