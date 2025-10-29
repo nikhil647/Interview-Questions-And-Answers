@@ -786,7 +786,129 @@ Here:
 ---
 
 ### ❓ What are Constraints?
-Constraints are rules enforced on data columns — such as **NOT NULL**, **UNIQUE**, **CHECK**, **DEFAULT**, **PRIMARY KEY**, and **FOREIGN KEY**.
+
+Sure 👍 Let’s go step-by-step —
+
+---
+
+### 🧩 **What are Constraints in SQL?**
+
+**Constraints** are **rules** applied on columns in a table to ensure **data accuracy and integrity**.
+
+They control what kind of data can go into a table.
+
+---
+
+### ⚙️ **Types of Constraints with Examples**
+
+#### 1. **NOT NULL**
+
+👉 Ensures that a column **cannot have NULL (empty)** values.
+
+```sql
+CREATE TABLE Students (
+  id INT NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  age INT
+);
+```
+
+✅ Here, both `id` and `name` **must have a value** when inserting a record.
+
+---
+
+#### 2. **UNIQUE**
+
+👉 Ensures that **all values in a column are different** (no duplicates).
+
+```sql
+CREATE TABLE Employees (
+  emp_id INT UNIQUE,
+  email VARCHAR(100) UNIQUE,
+  name VARCHAR(50)
+);
+```
+
+✅ Each `emp_id` and `email` must be **unique** in the table.
+
+---
+
+#### 3. **PRIMARY KEY**
+
+👉 Combines **NOT NULL + UNIQUE**.
+It **uniquely identifies each record** in a table.
+
+```sql
+CREATE TABLE Customers (
+  customer_id INT PRIMARY KEY,
+  name VARCHAR(50),
+  city VARCHAR(50)
+);
+```
+
+✅ `customer_id` must be unique and cannot be NULL.
+
+---
+
+#### 4. **FOREIGN KEY**
+
+👉 Used to **link two tables**.
+It ensures that the value in one table **exists in another** (referential integrity).
+
+```sql
+CREATE TABLE Orders (
+  order_id INT PRIMARY KEY,
+  customer_id INT,
+  FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+);
+```
+
+✅ You cannot insert an order for a customer that doesn’t exist in the `Customers` table.
+
+---
+
+#### 5. **CHECK**
+
+👉 Ensures that the value in a column **meets a specific condition**.
+
+```sql
+CREATE TABLE Products (
+  id INT PRIMARY KEY,
+  name VARCHAR(50),
+  price DECIMAL(10,2) CHECK (price > 0)
+);
+```
+
+✅ Prevents inserting a product with a `price ≤ 0`.
+
+---
+
+#### 6. **DEFAULT**
+
+👉 Assigns a **default value** if no value is provided.
+
+```sql
+CREATE TABLE Users (
+  id INT PRIMARY KEY,
+  name VARCHAR(50),
+  country VARCHAR(50) DEFAULT 'India'
+);
+```
+
+✅ If you don’t specify `country`, it automatically becomes `'India'`.
+
+---
+
+### ✅ Example Summary
+
+| Constraint      | Purpose                              | Example                                          |
+| --------------- | ------------------------------------ | ------------------------------------------------ |
+| **NOT NULL**    | Value must not be NULL               | `name VARCHAR(50) NOT NULL`                      |
+| **UNIQUE**      | No duplicate values                  | `email VARCHAR(100) UNIQUE`                      |
+| **PRIMARY KEY** | Uniquely identifies each row         | `id INT PRIMARY KEY`                             |
+| **FOREIGN KEY** | Enforces relationship between tables | `FOREIGN KEY (cust_id) REFERENCES Customers(id)` |
+| **CHECK**       | Validates data based on a condition  | `CHECK (age >= 18)`                              |
+| **DEFAULT**     | Sets default value                   | `DEFAULT 'India'`                                |
 
 ---
 
