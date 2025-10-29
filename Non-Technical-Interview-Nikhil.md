@@ -1,7 +1,7 @@
 # Non-Technical-Interview
 
 **Could you please give us a brief description of yourself?**
-```
+
 Use this structure
 Name
 Qualification & certification
@@ -13,7 +13,7 @@ Hello, my name is Nikhil Patil. I have completed my Engineering in Computer Scie
 I have 6+ years of experience as a MERN Stack Developer, with strong expertise in React.js, Next.js, Node.js, and MongoDB. Currently, I am working at ZORO UK as a MERN Stack Developer, where I contribute to building and maintaining a scalable B2B e-commerce platform with features like complex product catalogues, user authentication, and third-party integrations.
 Previously, I have worked on projects such as a school management system at NeoSOFT and a hotel and travel booking platform at Vernost, which gave me hands-on experience in developing responsive web applications, RESTful APIs, and scalable front-end solutions.
 Apart from my MERN expertise, I am also comfortable working with Redux, Tailwind, Jest, Git, and AWS serverless. I’m passionate about delivering high-quality solutions, learning new technologies, and collaborating with teams to build impactful products. 
-```
+
 
 **Could you please describe some of your recent projects?**
 ```
