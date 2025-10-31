@@ -1338,6 +1338,197 @@ Meanwhile, MySQL performs this aggregation **in compiled C code, in-memory, near
 
 
 - What is a Trigger?
+
+Absolutely 👍 Here’s a **clean, structured, and note-ready version** — formatted perfectly for GitHub or your personal notes.
+It includes clear definitions, examples, and SQL code blocks for all **INSERT**, **UPDATE**, and **DELETE** triggers.
+
+---
+
+## ❓ What is a Trigger?
+
+A **Trigger** is a special kind of stored procedure that runs **automatically** when a specified event occurs on a table (like an `INSERT`, `UPDATE`, or `DELETE`).
+It allows the database to **react to changes** without requiring any manual call from your application.
+
+---
+
+## ⚙️ How It Works
+
+* Triggers are **event-driven** — they fire automatically after or before a DML operation.
+* They can access two pseudo-records:
+
+  | Keyword | Description                                                       |
+  | ------- | ----------------------------------------------------------------- |
+  | `NEW`   | Refers to the new row being inserted or updated                   |
+  | `OLD`   | Refers to the existing row before update or the row being deleted |
+
+---
+
+## 🎯 Real-World Use Case
+
+You want to maintain an **audit trail** for your `Orders` table — every time a record is inserted, updated, or deleted, a corresponding entry should be stored in a `OrderLogs` table automatically.
+
+---
+
+## 🧩 Table Setup
+
+### 1️⃣ Main Table — `Orders`
+
+```sql
+CREATE TABLE Orders (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  customer_id INT NOT NULL,
+  total_amount DECIMAL(10,2) NOT NULL,
+  status VARCHAR(20) DEFAULT 'CREATED',  -- e.g. CREATED, PAID, SHIPPED
+  created_at DATETIME DEFAULT NOW(),
+  updated_at DATETIME DEFAULT NOW() ON UPDATE NOW()
+);
+```
+
+### 2️⃣ Log Table — `OrderLogs`
+
+```sql
+CREATE TABLE OrderLogs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  order_id INT NOT NULL,
+  action VARCHAR(20) NOT NULL,      -- e.g. Inserted / Updated / Deleted
+  old_status VARCHAR(20) NULL,
+  new_status VARCHAR(20) NULL,
+  created_at DATETIME DEFAULT NOW()
+);
+```
+
+---
+
+## 🚀 Triggers Implementation
+
+### 🟢 INSERT Trigger
+
+```sql
+DELIMITER $$
+
+CREATE TRIGGER after_order_insert
+AFTER INSERT ON Orders
+FOR EACH ROW
+BEGIN
+    INSERT INTO OrderLogs (order_id, action, new_status, created_at)
+    VALUES (NEW.id, 'Inserted', NEW.status, NOW());
+END$$
+
+DELIMITER ;
+```
+
+**Purpose:**
+
+* Fires **after a new record** is added to `Orders`
+* Logs the event as `Inserted`
+* Captures the `new_status` from the inserted row
+
+---
+
+### 🟡 UPDATE Trigger
+
+```sql
+DELIMITER $$
+
+CREATE TRIGGER after_order_update
+AFTER UPDATE ON Orders
+FOR EACH ROW
+BEGIN
+    INSERT INTO OrderLogs (order_id, action, old_status, new_status, created_at)
+    VALUES (NEW.id, 'Updated', OLD.status, NEW.status, NOW());
+END$$
+
+DELIMITER ;
+```
+
+**Purpose:**
+
+* Fires **after any update** to `Orders`
+* Logs the event as `Updated`
+* Records both old and new status values
+
+---
+
+### 🔴 DELETE Trigger
+
+```sql
+DELIMITER $$
+
+CREATE TRIGGER after_order_delete
+AFTER DELETE ON Orders
+FOR EACH ROW
+BEGIN
+    INSERT INTO OrderLogs (order_id, action, old_status, created_at)
+    VALUES (OLD.id, 'Deleted', OLD.status, NOW());
+END$$
+
+DELIMITER ;
+```
+
+**Purpose:**
+
+* Fires **after a record is deleted** from `Orders`
+* Logs the event as `Deleted`
+* Captures the status before deletion
+
+---
+
+## ✅ Final Output Example
+
+### When inserting:
+
+```sql
+INSERT INTO Orders (customer_id, total_amount, status)
+VALUES (101, 999.00, 'CREATED');
+```
+
+**OrderLogs**
+
+| id | order_id | action   | old_status | new_status | created_at          |
+| -- | -------- | -------- | ---------- | ---------- | ------------------- |
+| 1  | 1        | Inserted | NULL       | CREATED    | 2025-10-31 16:25:12 |
+
+---
+
+### When updating:
+
+```sql
+UPDATE Orders SET status = 'PAID' WHERE id = 1;
+```
+
+**OrderLogs**
+
+| id | order_id | action  | old_status | new_status | created_at          |
+| -- | -------- | ------- | ---------- | ---------- | ------------------- |
+| 2  | 1        | Updated | CREATED    | PAID       | 2025-10-31 16:30:45 |
+
+---
+
+### When deleting:
+
+```sql
+DELETE FROM Orders WHERE id = 1;
+```
+
+**OrderLogs**
+
+| id | order_id | action  | old_status | new_status | created_at          |
+| -- | -------- | ------- | ---------- | ---------- | ------------------- |
+| 3  | 1        | Deleted | PAID       | NULL       | 2025-10-31 16:40:18 |
+
+---
+
+## 🧠 Key Takeaways
+
+| Concept            | Explanation                                                        |
+| ------------------ | ------------------------------------------------------------------ |
+| **Trigger**        | A special procedure that executes automatically on database events |
+| **Purpose**        | Maintain data integrity, audit logs, or enforce rules              |
+| **`NEW` / `OLD`**  | Access new or previous row values inside trigger                   |
+| **Best Practices** | Keep triggers lightweight, avoid heavy logic inside                |
+| **Common Use**     | Logging, auditing, automatic timestamps, data syncing              |
+
+---
 - What is a Cursor and how is it used?
 - What is a Sub-query? Explain its properties.
 - What is a Nested Trigger?
