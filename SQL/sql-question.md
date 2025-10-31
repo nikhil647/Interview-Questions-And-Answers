@@ -1011,8 +1011,194 @@ Therefore, email and phone become Alternate Keys.
 
 ## 🧠 Intermediate Level
 
-- What is a Stored Procedure?
-- What are the advantages of using Stored Procedures?
+## ❓ What is a Stored Procedure?
+
+A Stored Procedure is a precompiled block of SQL code that you can save and reuse in a database.
+Think of it like a function in programming — it performs a specific task and can take inputs, perform logic or queries, and return outputs.
+
+
+### ⚙️ Scenario 1: Without Stored Procedure
+
+You have a Node.js route to update user balance.
+
+```js
+// updateBalance.js
+app.post("/update-balance", async (req, res) => {
+  const { userId, amount } = req.body;
+
+  const query = `
+    UPDATE users 
+    SET balance = balance + ? 
+    WHERE id = ?;
+  `;
+
+  await db.execute(query, [amount, userId]);
+
+  res.send("Balance updated!");
+});
+```
+
+✅ Works fine, right?
+
+But imagine your business rule grows:
+
+* If balance < 0, reject.
+* Log every transaction.
+* Update last modified date.
+* Call 3 queries together (transaction).
+
+Your Node.js code becomes a **mess of SQL statements** and transaction management.
+
+---
+
+### ⚙️ Scenario 2: With Stored Procedure
+
+You move the logic to the database once.
+
+```sql
+CREATE PROCEDURE UpdateUserBalance(
+  IN userId INT,
+  IN amount DECIMAL(10,2)
+)
+BEGIN
+  DECLARE newBalance DECIMAL(10,2);
+
+  SELECT balance INTO newBalance FROM users WHERE id = userId;
+
+  IF newBalance + amount < 0 THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Insufficient balance';
+  ELSE
+    UPDATE users SET balance = newBalance + amount, updated_at = NOW() WHERE id = userId;
+    INSERT INTO transactions (user_id, amount, created_at) VALUES (userId, amount, NOW());
+  END IF;
+END;
+```
+
+Now in Node.js:
+
+```js
+app.post("/update-balance", async (req, res) => {
+  const { userId, amount } = req.body;
+
+  try {
+    await db.query("CALL UpdateUserBalance(?, ?)", [userId, amount]);
+    res.send("Balance updated successfully!");
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+});
+```
+
+---
+
+### 🚀 Why You’d Use It (as a Node.js Dev)
+
+| Benefit                         | Meaning in Real Life                                                                      |
+| ------------------------------- | ----------------------------------------------------------------------------------------- |
+| 🧩 **Keeps Node.js code clean** | Your backend logic becomes shorter; database rules live in one place.                     |
+| ⚡ **Faster execution**          | DB compiles it once — executes faster than sending multiple queries each time.            |
+| 🔒 **Security**                 | App users can only `CALL` procedure — not mess with raw SQL or table structure.           |
+| 🧠 **Consistent logic**         | If multiple services use the same DB, they all share the same rules (no duplicate logic). |
+| 💾 **Transaction-safe**         | Procedures handle commits/rollbacks inside — less headache in app layer.                  |
+
+---
+
+### 💡 Real Example (Production Use)
+
+Imagine a company with:
+
+* Admin dashboard (React + Node.js)
+* Mobile app (API)
+* Backend cron jobs
+
+All these need to:
+👉 Add order
+👉 Deduct stock
+👉 Update total sales
+👉 Record audit logs
+
+Instead of writing that logic in **3 Node.js services**, you make **one stored procedure**:
+
+```sql
+CALL CreateNewOrder(userId, productId, quantity);
+```
+
+Now all clients just call this — less duplication, more consistency.
+
+---
+
+## ⚠️ When You *Shouldn’t* Use Them
+
+* For **simple CRUD apps** — plain SQL in Node is fine
+* When your logic changes *frequently* — editing stored procedures is slower than code deployment
+* When your team prefers everything in **code-based logic** (and DB is just data store)
+---
+
+## ❓ What are the advantages of using Stored Procedures?
+
+⚡ Better Performance - why? Instead of sending 5 separate INSERT statements from Node.js → DB 5 times,
+you can call one procedure that loops internally.
+
+🔒 Improved Security
+You can restrict users to only execute stored procedures — not direct SQL queries.
+The app doesn’t need INSERT, UPDATE, or DELETE permissions — only EXECUTE.
+Helps prevent SQL injection since inputs are handled as parameters.
+
+🧠 Code Reusability & Centralized Logic
+All your business logic related to the database lives inside the DB, reusable across
+Node.js backend
+Admin panel
+Mobile API
+Internal scripts
+
+🔁 Transaction Handling
+Stored procedures can handle BEGIN, COMMIT, and ROLLBACK internally.
+
+```sql
+CREATE PROCEDURE TransferFunds(...)
+BEGIN
+  START TRANSACTION;
+  -- debit user A, credit user B
+  COMMIT;
+END;
+```
+
+6. 🧰 Easier Maintenance
+Why:
+Change logic in one place (inside DB) → no need to redeploy Node.js app
+Useful when DB logic is shared across multiple backends
+
+Example:
+Need to update a business rule?
+Just modify the procedure in MySQL, not your codebase
+
+7. 💪 Encapsulation
+
+Why:
+You hide the database structure and logic behind a procedure.
+The caller doesn’t need to know what tables or joins are inside.
+
+Example:
+Instead of letting the API call:
+```sql
+SELECT u.name, o.amount, p.status FROM users u JOIN orders o JOIN payments p;
+```
+
+You expose:
+```
+  CALL GetUserOrderDetails(userId);
+```
+→ less risk, more abstraction.
+
+8. 📈 Scalability for Complex Systems
+When you have:
+
+Multiple microservices accessing the same DB
+Heavy reports, analytics, or workflows
+
+You can shift that load to stored procedures — freeing Node.js servers from doing heavy joins and loops.
+
+
 - What is the difference between Function and Stored Procedure?
 - What is a Trigger?
 - What is a Cursor and how is it used?
@@ -1033,8 +1219,6 @@ Therefore, email and phone become Alternate Keys.
 - What is RDBMS and what are its features?
 
 ---
-
-## 🚀 Advanced Level
 
 - What is a Data Warehouse?
 - What are Dimension and Fact Tables?
