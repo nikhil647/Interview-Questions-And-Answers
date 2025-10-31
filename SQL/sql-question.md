@@ -1127,7 +1127,7 @@ Now all clients just call this — less duplication, more consistency.
 
 ---
 
-## ⚠️ When You *Shouldn’t* Use Them
+### ⚠️ When You *Shouldn’t* Use Them
 
 * For **simple CRUD apps** — plain SQL in Node is fine
 * When your logic changes *frequently* — editing stored procedures is slower than code deployment
@@ -1199,7 +1199,8 @@ Heavy reports, analytics, or workflows
 You can shift that load to stored procedures — freeing Node.js servers from doing heavy joins and loops.
 
 
-- What is the difference between Function and Stored Procedure?
+## ❓ What is the difference between Function and Stored Procedure?
+
 - What is a Trigger?
 - What is a Cursor and how is it used?
 - What is a Sub-query? Explain its properties.
