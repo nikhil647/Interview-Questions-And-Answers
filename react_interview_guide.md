@@ -1816,11 +1816,11 @@ It’s a **directive-based system** — you can mix and match rules.
 | -------------------- | -------------------------------------------------------------------------------------------- |
 | `public`             | The response can be cached by **anyone** (browser, CDN, proxy).                              |
 | `private`            | The response is for a **single user**; only the browser should cache it (not shared caches). |
-| `no-cache`           | Must **revalidate** with the server before using from cache.                                 |
+| `no-cache`           | Browser can store the response but must revalidate it with the server (using ETag or Last-Modified) before every use.                                 |
 | `no-store`           | **Do not cache** at all (used for sensitive data like banking).                              |
 | `max-age=<seconds>`  | Cache is valid for this many seconds.                                                        |
 | `s-maxage=<seconds>` | Like `max-age`, but for **CDN/shared caches**.                                               |
-| `must-revalidate`    | Once expired, **must check with server** before reuse.                                       |
+| `must-revalidate`    | After the cache expires, the browser must revalidate with the server; stale data is never allowed.(Browser do use expired data sometime in case of Server unreachable or browser is offline)                                       |
 
 ---
 
