@@ -1530,8 +1530,65 @@ DELETE FROM Orders WHERE id = 1;
 
 ---
 - What is a Cursor and how is it used?
+
+A cursor acts like a pointer that goes through the result of a SQL query one row at a time.
+
+sometimes you need to process each row individually, for example:
+Logging or auditing each row separately.
+Performing calculations that depend on previous rows.
+Calling stored procedures per row.
+
+eg calculating credit score for each user.
+we might need to call take help from multiple table (transaction, loans etc) and to get updated value.
+
+simple curser example 
+```sql
+-- 1. Declare the cursor.
+DECLARE employee_cursor CURSOR FOR
+SELECT name FROM Employees;
+
+-- 2. Open the cursor.
+OPEN employee_cursor;
+
+-- 3. Fetch rows from the cursor.
+DECLARE @employee_name NVARCHAR(100);
+
+FETCH NEXT FROM employee_cursor INTO @employee_name;
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    PRINT @employee_name;  -- process each row
+    FETCH NEXT FROM employee_cursor INTO @employee_name;
+END;
+
+-- 4. Close and deallocate
+CLOSE employee_cursor;
+DEALLOCATE employee_cursor;
+```
+
 - What is a Sub-query? Explain its properties.
+
+A subquery (also called an inner query or nested query) is a query inside another SQL query.
+It is used to fetch data that will be used by the main query.
+
+```sql
+SELECT name, salary
+FROM employees
+WHERE salary > (
+    SELECT AVG(salary)
+    FROM employees
+);
+```
+
+
 - What is a Nested Trigger?
+
+A Nested Trigger is a trigger that fires another trigger — meaning one trigger’s action causes another trigger to execute automatically.
+
+Avoid deep nesting — it makes debugging and performance tuning hard.
+Always ensure no cyclic dependency (trigger A → B → A)
+
+
+
 - What is a Linked Server?
 - What is Collation?
 - What is a CTE (Common Table Expression)?
