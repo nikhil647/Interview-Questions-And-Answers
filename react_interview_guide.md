@@ -1495,7 +1495,7 @@ Keep dependencies updated
 
 ## What are Preload, Reconnect, Prefetch, and Prerender?
 
-## 🧩 1. **Preload**
+### 🧩 1. **Preload**
 
 ### 🔹 Definition
 
@@ -1520,7 +1520,7 @@ Used when a critical resource (like a font, CSS, or script) is needed soon but n
 
 ---
 
-## 🔄 2. **Prefetch**
+### 🔄 2. **Prefetch**
 
 ### 🔹 Definition
 
@@ -1544,9 +1544,9 @@ Used for **predictive loading** — for example, preloading assets for the next 
 
 ---
 
-## 🌐 3. **Preconnect**
+### 🌐 3. **Preconnect**
 
-### 🔹 Definition
+🔹 Definition
 
 `<link rel="preconnect">` establishes **early connections** (DNS lookup, TCP handshake, TLS negotiation) to another domain **before** a request is actually made.
 
@@ -1593,7 +1593,7 @@ Used for **instant page transitions** — the page is fully rendered before the 
 
 ---
 
-## 📊 Summary Table
+### 📊 Summary Table
 
 | Hint Type      | Purpose                        | Priority  | Typical Use            | Example                                          |
 | -------------- | ------------------------------ | --------- | ---------------------- | ------------------------------------------------ |
@@ -1604,9 +1604,6 @@ Used for **instant page transitions** — the page is fully rendered before the 
 
 ---
 
-Here’s a **clear, interview-ready note** on caching for your website development notes (perfect for GitHub too 👇):
-
----
 
 ## 🧠 What is Caching?
 
@@ -1707,6 +1704,192 @@ Zustand with persistence - Global state with caching
 | Client   | Service Worker         |
 
 ---
+
+Let’s break down **`ETag`**, **`Cache-Control`**, and **Document Fragment** — three important web concepts — in detail.
+They deal with **caching**, **HTTP performance**, and **DOM manipulation**, respectively.
+
+---
+## 🧱 3. **What are Elag, Cache-Control, and Document Fragment?**
+
+### 🧩 1. **ETag (Entity Tag)**
+
+An **ETag** is a unique identifier (a hash or version tag) assigned by a web server to a specific version of a resource (like an HTML page, image, or CSS file).
+
+It helps the browser and server determine if a resource has changed since the last time it was fetched — so the browser can **avoid re-downloading unchanged files**.
+
+---
+
+### 🔹 How it works:
+
+1. **Server generates an ETag** when sending a resource:
+
+   ```http
+   HTTP/1.1 200 OK
+   ETag: "abc123"
+   ```
+
+2. **Browser caches** the resource along with the ETag.
+
+3. **Next request** — the browser sends the ETag back to the server using:
+
+   ```http
+   If-None-Match: "abc123"
+   ```
+
+4. **Server compares** the ETag with the current version:
+
+   * If **unchanged** → responds `304 Not Modified` (browser uses cache).
+   * If **changed** → sends the new version with a new ETag.
+
+---
+
+### 🔹 Example Flow:
+
+```text
+Client: GET /profile.html
+Server: 200 OK
+        ETag: "v1"
+
+Client (later): GET /profile.html
+                If-None-Match: "v1"
+Server: 304 Not Modified
+```
+
+✅ **Result:** No data re-downloaded, faster load.
+
+---
+
+### 🔹 Why ETag is useful:
+
+* Saves bandwidth (no need to resend full files)
+* Keeps cached data up-to-date
+* Supports fine-grained cache validation (even if the cache time expires)
+
+---
+
+## ⚙️ 2. **Cache-Control**
+
+### 🔹 What it is:
+
+The **Cache-Control** HTTP header tells browsers (and proxies/CDNs) **how to cache** a response — for how long, and under what conditions.
+
+It’s a **directive-based system** — you can mix and match rules.
+
+---
+
+### 🔹 Common Directives:
+
+| Directive            | Description                                                                                  |
+| -------------------- | -------------------------------------------------------------------------------------------- |
+| `public`             | The response can be cached by **anyone** (browser, CDN, proxy).                              |
+| `private`            | The response is for a **single user**; only the browser should cache it (not shared caches). |
+| `no-cache`           | Must **revalidate** with the server before using from cache.                                 |
+| `no-store`           | **Do not cache** at all (used for sensitive data like banking).                              |
+| `max-age=<seconds>`  | Cache is valid for this many seconds.                                                        |
+| `s-maxage=<seconds>` | Like `max-age`, but for **CDN/shared caches**.                                               |
+| `must-revalidate`    | Once expired, **must check with server** before reuse.                                       |
+
+---
+
+### 🔹 Example:
+
+```http
+Cache-Control: public, max-age=3600
+```
+
+👉 Cache publicly for **1 hour**.
+
+```http
+Cache-Control: private, no-store
+```
+
+👉 Don’t cache or store the response.
+
+---
+
+### 🔹 Example Use Case:
+
+If you cache a profile page for 1 hour:
+
+```http
+Cache-Control: private, max-age=3600
+```
+
+✅ Browser can use cache for 1 hour.
+❌ CDN or proxy won’t cache it (because it’s `private`).
+
+But if **user’s wallet balance changes in 30 minutes**, the change **won’t reflect** until cache expires (1 hour).
+Unless you use **ETag** to revalidate before using cached data.
+
+---
+
+### 🔹 Relationship between `Cache-Control` & `ETag`
+
+They **work together**:
+
+| Header          | Purpose                                                  |
+| --------------- | -------------------------------------------------------- |
+| `Cache-Control` | Defines *how long* to keep cache before checking.        |
+| `ETag`          | Defines *how to check* if cached version is still valid. |
+
+---
+
+### 🔹 What it is:
+
+A **DocumentFragment** is a lightweight, invisible **container** for DOM nodes.
+
+Think of it as a **temporary mini-DOM** that lives in memory — not rendered directly on the page — used to **build DOM structures efficiently** before adding them to the real DOM.
+
+---
+
+### 🔹 Why use it:
+
+When you add multiple elements to the DOM one by one, each insertion triggers **layout and repaint operations** → expensive.
+
+By using a `DocumentFragment`, you can:
+
+* Add multiple nodes **in memory first**
+* Insert them **all at once**
+  → improving performance.
+
+---
+
+### 🔹 Example:
+
+```javascript
+// Create a fragment
+const fragment = document.createDocumentFragment();
+
+for (let i = 0; i < 5; i++) {
+  const li = document.createElement('li');
+  li.textContent = `Item ${i}`;
+  fragment.appendChild(li);
+}
+
+// Append fragment once
+document.getElementById('list').appendChild(fragment);
+```
+
+✅ The browser performs **only one reflow/repaint** instead of 5.
+
+---
+
+### 🔹 Key Points:
+
+* Doesn’t exist in the rendered DOM tree.
+* When appended, its **children** move to the real DOM.
+* Common in **virtual DOM**, **template rendering**, and **React internals**.
+
+---
+
+## 🧠 Summary Table
+
+| Concept               | Category    | Purpose                                      | Example                               |
+| --------------------- | ----------- | -------------------------------------------- | ------------------------------------- |
+| **ETag**              | HTTP Header | Detect if cached resource is outdated        | `ETag: "abc123"`                      |
+| **Cache-Control**     | HTTP Header | Control how/where resource is cached         | `Cache-Control: public, max-age=3600` |
+| **Document Fragment** | DOM API     | Efficiently build & insert multiple elements | `document.createDocumentFragment()`   |
+
 
 ## 💬 Common Interview Questions
 
