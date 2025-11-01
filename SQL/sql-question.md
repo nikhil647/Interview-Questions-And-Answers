@@ -1587,7 +1587,10 @@ A Nested Trigger is a trigger that fires another trigger — meaning one trigger
 Avoid deep nesting — it makes debugging and performance tuning hard.
 Always ensure no cyclic dependency (trigger A → B → A)
 
-
+- How to implement One-to-One, One-to-Many, and Many-to-Many relationships?
+```
+https://chatgpt.com/c/690614b4-37ec-8321-b177-08e1e67ced43
+```
 
 - What is a Linked Server?
 - What is Collation?
