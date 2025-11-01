@@ -1767,6 +1767,39 @@ Server: 304 Not Modified
 
 ---
 
+```javascript
+import express from 'express';
+import crypto from 'crypto';
+
+const app = express();
+
+// Simulated DB data
+let user = { id: 1, name: "Nikhil", wallet: 500 };
+
+app.get('/api/user', (req, res) => {
+  // Generate a content hash as ETag
+  const body = JSON.stringify(user);
+  const etag = crypto.createHash('md5').update(body).digest('hex');
+
+  // Compare with client's ETag
+  if (req.headers['if-none-match'] === etag) {
+    console.log('✅ Cache valid, sending 304');
+    return res.status(304).end();
+  }
+
+  console.log('🚀 Sending new data');
+  res.setHeader('ETag', etag);
+  res.json(user);
+});
+
+// Simulate data change
+setInterval(() => {
+  user.wallet += 10; // new wallet value every 30s
+}, 30000);
+
+app.listen(3000, () => console.log('API running on port 3000'));
+```
+
 ## ⚙️ 2. **Cache-Control**
 
 ### 🔹 What it is:
