@@ -107,3 +107,4 @@ Each PWA:
 | **Updates**         | Auto-updates when service worker changes  |
 | **Uninstall**       | Same as uninstalling a native app         |
 
+---
