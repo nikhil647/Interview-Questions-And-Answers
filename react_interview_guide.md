@@ -2049,10 +2049,48 @@ You accidentally keep references to objects you no longer need.
 | 🧭 Closures                    | Inner functions capture variables that stay in memory          |
 | 🧠 **Caches**         | Data stored for quick access but never deleted, causing memory to grow over time |
 | 🧩 **DOM References** | JS still points to removed HTML elements, so memory can’t be freed               |
-
+---
 ## If a user clicks a button multiple times to fetch data, how to cancel old API calls and use only the latest result?
 
 Simply disable the button after first click.
+---
+## Does React use Promise.allSettled() for parallel API calls? How does that work internally?
+
+✅ Answer:
+
+No, React doesn’t handle parallel API calls — the browser does.
+When we call multiple fetch() or Axios requests, the browser runs them concurrently, and we can group them using Promise.all() or Promise.allSettled().
+React just re-renders once we update the state with the results.
+
+## Q: What algorithm does Array.prototype.sort() use? output of [1, null, 5, 2, undefined].sort()
+
+Modern JavaScript engines (like V8 used in Chrome & Node.js) use Timsort — a hybrid of Merge Sort and Insertion Sort.
+
+JS sorts lexicographically (as strings), not numerically.
+
+[1, null, 5, 2, undefined]
+↓
+["1", "null", "5", "2", "undefined"]
+
+"1"  → 49
+"2"  → 50
+"5"  → 53
+"null" → 110
+"undefined" → 117
+
+"1" < "2" < "5" < "null" < "undefined"
+
+| Range   | Category           | Example             |
+| ------- | ------------------ | ------------------- |
+| 0–31    | Control characters | (non-printable)     |
+| 32–47   | Punctuation        | space, !, " # ... / |
+| 48–57   | Digits             | 0–9                 |
+| 58–64   | Symbols            | : ; < = > ? @       |
+| 65–90   | Uppercase letters  | A–Z                 |
+| 91–96   | Brackets + accent  | [ \ ] ^ _ `         |
+| 97–122  | Lowercase letters  | a–z                 |
+| 123–126 | More punctuation   | { | } ~             |
+
 
 
 ## 💬 Common Interview Questions
