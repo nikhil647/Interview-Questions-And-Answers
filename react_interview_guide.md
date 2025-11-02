@@ -1923,6 +1923,137 @@ document.getElementById('list').appendChild(fragment);
 | **Cache-Control**     | HTTP Header | Control how/where resource is cached         | `Cache-Control: public, max-age=3600` |
 | **Document Fragment** | DOM API     | Efficiently build & insert multiple elements | `document.createDocumentFragment()`   |
 
+## How do you optimize assets? What is image compressions
+
+Let’s break this down clearly 👇
+
+---
+
+## 🧩 **What does “optimizing assets” mean?
+
+**Assets** = all the static files your app or website uses — images, fonts, CSS, JS, videos, icons, etc.
+**Optimizing assets** means **reducing their size and improving how they’re loaded** so your app loads faster and uses less bandwidth.
+
+## ⚙️ **Ways to Optimize Assets**
+
+### 1. **Image Optimization**
+
+* Use correct **formats**:
+
+  * `.webp` or `.avif` → modern, smaller, same quality
+  * `.jpg` → for photos
+  * `.png` → for transparent images
+  * `.svg` → for icons, logos, vector shapes
+
+* Use **compression** (explained below)
+* Use **responsive images** (`srcset` / different sizes for mobile vs desktop)
+* Use **lazy loading** → load images only when user scrolls near them
+* Use **CDN** (Content Delivery Network) → serve images faster globally
+
+### 2. **JavaScript & CSS Optimization**
+
+* **Minify** → remove spaces, comments, shorten variable names
+* **Bundle** → combine small files to reduce HTTP requests
+* **Tree-shaking** → remove unused code
+* **Code-splitting** → load only what’s needed for each page
+* **Use caching** → browser stores frequently used assets
+
+---
+
+### 3. **Font Optimization**
+
+* Only load required font weights/styles
+* Use `font-display: swap`
+* Host fonts locally or use a CDN
+* Convert to `.woff2` (best compressed format)
+
+---
+
+### 4. **Video Optimization**
+
+* Use adaptive streaming (HLS or DASH)
+* Use modern codecs (like H.265, VP9)
+* Compress or lower resolution for smaller screens
+
+---
+
+### 5. **Caching & Delivery**
+
+* Set **Cache-Control headers**
+* Use a **CDN**
+* Use **gzip** or **Brotli** compression for text assets (CSS, JS, HTML)
+
+---
+
+## 🖼️ **What is Image Compression?**
+
+**Image Compression** = Reducing image file size **without (or with minimal) loss in quality**.
+
+### 🔸 Types:
+
+1. **Lossless Compression**
+
+   * Keeps all original data
+   * Slightly smaller file size
+   * Example: PNG, WebP(lossless), SVG
+   * Tools: `pngquant`, `OptiPNG`
+
+2. **Lossy Compression**
+
+   * Removes some data for smaller file size
+   * Some quality loss (often not noticeable)
+   * Example: JPEG, WebP(lossy), AVIF
+   * Tools: `TinyPNG`, `ImageOptim`, `Squoosh`
+
+---
+
+### 📉 Example:
+
+| Image         | Format | Size Before | Size After    | Visual Difference |
+| ------------- | ------ | ----------- | ------------- | ----------------- |
+| Hero Banner   | PNG    | 2.4 MB      | 380 KB (WebP) | None              |
+| Product Photo | JPG    | 1.2 MB      | 180 KB (WebP) | Slight            |
+| Icon          | SVG    | 12 KB       | 8 KB          | None              |
+
+---
+
+### 🧠 Why It Matters:
+
+* Faster loading pages → better UX
+* Lower bandwidth → cheaper hosting
+* Better SEO → Google ranks faster sites higher
+* Improved Core Web Vitals (especially LCP and FID)
+
+## 🧠 What is memory leak 
+
+A memory leak happens when your program keeps using memory that it no longer needs,
+and never releases it back to the system.
+
+Over time, the app consumes more and more RAM, which can cause:
+
+Slower performance
+Crashes
+“Out of memory” errors
+
+Normally Garbage Collector Handles It
+
+Languages like JavaScript, Java, and Python use Garbage Collection (GC) —
+it automatically frees memory if an object isn’t referenced anywhere.
+But leaks happen when:
+You accidentally keep references to objects you no longer need.
+
+| Cause                          | Example                                                        |
+| :----------------------------- | :------------------------------------------------------------- |
+| 🪣 Global variables            | You store data globally and never clear it                     |
+| 🔁 Event listeners not removed | `element.addEventListener()` but never `removeEventListener()` |
+| 🧭 Closures                    | Inner functions capture variables that stay in memory          |
+| 🧠 **Caches**         | Data stored for quick access but never deleted, causing memory to grow over time |
+| 🧩 **DOM References** | JS still points to removed HTML elements, so memory can’t be freed               |
+
+## If a user clicks a button multiple times to fetch data, how to cancel old API calls and use only the latest result?
+
+Simply disable the button after first click.
+
 
 ## 💬 Common Interview Questions
 
