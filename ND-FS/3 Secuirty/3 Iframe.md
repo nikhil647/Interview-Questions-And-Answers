@@ -71,56 +71,100 @@ res.setHeader('Content-Security-Policy', "frame-ancestors 'none'");
 > `CSP frame-ancestors` gives finer control.
 
 ---
+Here you go — clean, crisp, developer-friendly notes + perfect examples, formatted like something you’d put in a security handbook or your internal wiki.
 
-## 2. Data Theft via JavaScript / postMessage
+⸻
 
-### ⚠️ What Happens
+2. Data Theft via JavaScript / postMessage
 
-Even if your page is iframed, the parent page might try to **communicate with it** using `window.postMessage()`.
-If your code accepts or responds to messages from any origin, attackers can trick your page into leaking data.
+When your page is embedded inside an iframe or interacts with other windows, window.postMessage() is used for communication.
+If you don’t validate who you’re talking to, attackers can steal sensitive data.
 
----
+⸻
 
-### 💣 Vulnerable Example
+🔥 What’s the Risk?
 
-```js
-// BAD: listens to all origins
+If your code:
+	•	Accepts messages from any origin, or
+	•	Sends responses to * (all origins),
+
+then a malicious site can embed your page in an iframe, send fake messages, and trick your page into leaking data such as:
+	•	usernames
+	•	tokens
+	•	session details
+	•	internal state
+
+This becomes a data-theft attack using JavaScript, not “traditional XSS” — but still a high-severity vulnerability.
+
+⸻
+
+💣 Vulnerable Example (Bad Code)
+
+❌ Problem:
+	•	Accepts messages from any origin
+	•	Replies to everyone by using '*'
+
+// BAD: listens to ALL origins
 window.addEventListener('message', (event) => {
   if (event.data.action === 'getUser') {
-    event.source.postMessage({ user: 'admin' }, '*'); // sends to ANYONE
+    // Sends sensitive info to ANY origin
+    event.source.postMessage({ user: 'admin' }, '*');
   }
 });
-```
 
-### ✅ Secure Version
+⚡ How an attacker abuses this
 
-```js
+Attacker’s page does:
+
+// Attacker website
+iframe.contentWindow.postMessage({ action: 'getUser' }, '*');
+
+window.addEventListener('message', (e) => {
+  console.log("Stolen data:", e.data); // gets your 'admin'
+});
+
+The attacker receives your user data.
+
+⸻
+
+✅ Secure Version (Good Code)
+
+✔️ Fix:
+	•	Allow only trusted origins
+	•	Respond only to that origin
+	•	Reject everything else
+
+// GOOD: only accepts messages from your own trusted domain
 window.addEventListener('message', (event) => {
   if (event.origin !== 'https://yourdomain.com') return;
+
   if (event.data.action === 'getUser') {
     event.source.postMessage({ user: 'admin' }, event.origin);
   }
 });
-```
 
-> Always check `event.origin`.
-> Never use `'*'` as target unless you 100% trust all origins (which you don’t).
 
----
+⸻
 
-### 🧱 Same-Origin Policy Refresher
+🧠 Why This Works
+	•	event.origin guarantees where the message came from.
+	•	Comparing it with your allowed domain ensures:
+✔️ only your site can request data
+✔️ attacker pages (example: hxxp://evil.com) get ignored
+	•	Responding back to event.origin prevents broadcasting secrets to unknown listeners.
 
-| Type         | Example             | Can Parent Access iframe? |
-| ------------ | ------------------- | ------------------------- |
-| Same-origin  | bank.com → bank.com | ✅ Yes                     |
-| Cross-origin | evil.com → bank.com | ❌ No (blocked by browser) |
+⸻
 
-So:
+🔐 Best Practices
 
-* SOP stops direct DOM access.
-* But `postMessage` is your responsibility — **you must validate** origins manually.
+Rule	Explanation
+Never trust '*' as targetOrigin	It means “send secrets to everyone”.
+Always validate event.origin	The #1 rule of postMessage security.
+Keep allowlist short	Prefer 1–2 trusted domains max.
+Check event.data schema	Validate action names & expected fields.
+Don’t send sensitive data unless required	Minimize data exposed via postMessage.
 
----
+
 
 ## 3. Session & Cookie Theft
 
