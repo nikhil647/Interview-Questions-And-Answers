@@ -263,7 +263,6 @@ XSS is when an attacker injects JavaScript into your website and it executes ins
 What we can do from FRONTEND
 	•	Use textContent instead of innerHTML
 	•	Sanitize HTML with DOMPurify
-	•	Avoid inline event handlers (onclick="")
 	•	Never expose privileged global JS functions
 	•	Use frameworks (React, Vue, Svelte) which escape by default
 
