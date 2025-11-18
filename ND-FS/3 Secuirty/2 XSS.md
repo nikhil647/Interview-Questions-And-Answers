@@ -211,14 +211,7 @@ This bypasses React's escaping. Use it only with a sanitizer:
 ---
 
 
-Got you.
-Here is a clean, combined CSP + Nonce explanation, keeping your earlier “beautiful CSP section” style — but now merged with the nonce clarification.
-
-Perfect for your notes.
-
-⸻
-
-4) Content Security Policy (CSP)
+### 4) Content Security Policy (CSP)
 
 A CSP reduces the impact of XSS by controlling what resources the browser is allowed to load and execute.
 
