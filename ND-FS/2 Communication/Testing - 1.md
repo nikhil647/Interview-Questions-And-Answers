@@ -92,3 +92,51 @@ Useful for optimization and conversion improvement.
 Write tests **before** writing code.  
 Helps build cleaner and bug-free features from start.  
 **Tool Example:** Jest + Cypress workflow
+
+
+# 🔥 Frontend Testing Summary (Based on Q/A)
+
+### 1. Why Integration, Functional & E2E can't be used interchangeably
+They test different scopes and purposes:
+- **Integration** → tests how modules work together
+- **Functional** → tests behavior meets requirements
+- **E2E** → tests complete user journey end-to-end
+
+---
+
+### 2. Why "Login → Checkout" is not Integration or Functional only
+- It involves multiple features, services, and systems.
+- Scope is **too large** for integration or single-feature functional tests.
+- Therefore, it becomes **E2E testing**.
+
+---
+
+### 3. Are Integration, Functional, and E2E language-specific?
+❌ No — they are **language agnostic**.  
+These are **testing concepts**, not tied to React, Angular, Vue, Python, etc.  
+Only tools change, not the meaning.
+
+---
+
+### 4. Where does Functional Testing fit in scope?
+Functional != Scope  
+Instead, functional testing checks if features work as expected.
+
+Functional testing can exist at **any level**:
+
+| Scope | Example of Functional Test |
+|---|---|
+| Unit | Password must be 8+ chars |
+| Integration | API → UI → Display result |
+| E2E | Login → Add to cart → Checkout |
+
+---
+
+### 5. So, are Unit + Integration + E2E part of Functional Testing?
+❌ No.  
+But **Functional tests can exist inside all three** depending on what is being validated.
+
+✔ Many E2E tests are functional  
+✔ Some integration tests are functional  
+✔ Some unit tests can also be functional  
+❗ But they are not automatically functional.
