@@ -42,3 +42,14 @@ Containerization is the process of packaging an application and its dependencies
 
 - **Docker**
 - **Kubernetes** (for orchestration)
+
+| **Feature**         | **Virtual Machine (VM)**                                         | **Container**                                                          |
+| ------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| **OS Architecture** | Each VM runs its **own full OS (Guest OS)**.                     | Containers **share the host OS kernel**.                               |
+| **Performance**     | **Slower** — heavy, more overhead due to full OS.                | **Faster** — lightweight, minimal overhead.                            |
+| **Isolation Level** | **Strong isolation** (hardware-level via hypervisor).            | **Moderate isolation** (process-level).                                |
+| **Boot Time**       | **Minutes** — must boot a full OS.                               | **Seconds** — only app + runtime starts.                               |
+| **Resource Usage**  | **High** — requires separate OS + dedicated RAM/CPU.             | **Low** — shares resources, very efficient.                            |
+| **Portability**     | **Less portable** — large VM images, tied to hypervisors.        | **Highly portable** — small images, run anywhere Docker works.         |
+| **Use Cases**       | Legacy apps, monolithic apps, multi-OS support, strong security. | Microservices, cloud-native apps, CI/CD pipelines, scalable workloads. |
+
