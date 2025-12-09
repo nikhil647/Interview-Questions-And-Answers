@@ -43,6 +43,11 @@ Containerization is the process of packaging an application and its dependencies
 - **Docker**
 - **Kubernetes** (for orchestration)
 
+---
+**Virtual Machine**
+A Virtual Machine (VM) is an emulation of a physical computer.
+It runs a full OS (Guest OS) on top of virtualized hardware that is controlled by a hypervisor.
+
 | **Feature**         | **Virtual Machine (VM)**                                         | **Container**                                                          |
 | ------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | **OS Architecture** | Each VM runs its **own full OS (Guest OS)**.                     | Containers **share the host OS kernel**.                               |
@@ -52,4 +57,5 @@ Containerization is the process of packaging an application and its dependencies
 | **Resource Usage**  | **High** — requires separate OS + dedicated RAM/CPU.             | **Low** — shares resources, very efficient.                            |
 | **Portability**     | **Less portable** — large VM images, tied to hypervisors.        | **Highly portable** — small images, run anywhere Docker works.         |
 | **Use Cases**       | Legacy apps, monolithic apps, multi-OS support, strong security. | Microservices, cloud-native apps, CI/CD pipelines, scalable workloads. |
+
 
