@@ -187,3 +187,12 @@ Here are **clean, simple, exam-ready Markdown notes** for **AWS ECS**, with a **
 * ECS supports mixing both in same cluster
 
 
+| Feature                   | **Amazon ECS**                                          | **Kubernetes**                                      | **Docker Swarm**                            |
+| ------------------------- | ------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------- |
+| **Provider**              | AWS                                                     | Open-Source (CNCF), cloud-agnostic                  | Docker Inc                                  |
+| **Management**            | Fully managed (with Fargate or EC2)                     | Self-managed or managed (EKS, GKE, AKS)             | Self-managed                                |
+| **Scalability**           | High (AWS Auto Scaling integration)                     | Very high (designed for massive scale)              | Moderate                                    |
+| **Community & Ecosystem** | AWS ecosystem tools                                     | Very large community, rich 3rd-party tooling        | Smaller community                           |
+| **Vendor Lock-in**        | Yes (AWS-specific)                                      | No (multi-cloud & hybrid supported)                 | No                                          |
+| **Use Case Fit**          | AWS-native workloads, simpler operations, rapid scaling | Enterprise multi-cloud, complex distributed systems | Simple apps, small teams needing fast setup |
+
