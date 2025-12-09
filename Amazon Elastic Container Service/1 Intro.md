@@ -186,6 +186,9 @@ Here are **clean, simple, exam-ready Markdown notes** for **AWS ECS**, with a **
 * Run cost-sensitive workloads on EC2
 * ECS supports mixing both in same cluster
 
+  ---
+  ## Amazon ECS vs Kubernetes vs Docker Swarm
+
 
 | Feature                   | **Amazon ECS**                                          | **Kubernetes**                                      | **Docker Swarm**                            |
 | ------------------------- | ------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------- |
@@ -195,4 +198,5 @@ Here are **clean, simple, exam-ready Markdown notes** for **AWS ECS**, with a **
 | **Community & Ecosystem** | AWS ecosystem tools                                     | Very large community, rich 3rd-party tooling        | Smaller community                           |
 | **Vendor Lock-in**        | Yes (AWS-specific)                                      | No (multi-cloud & hybrid supported)                 | No                                          |
 | **Use Case Fit**          | AWS-native workloads, simpler operations, rapid scaling | Enterprise multi-cloud, complex distributed systems | Simple apps, small teams needing fast setup |
+
 
