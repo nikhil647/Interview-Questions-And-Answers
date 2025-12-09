@@ -199,4 +199,62 @@ Here are **clean, simple, exam-ready Markdown notes** for **AWS ECS**, with a **
 | **Vendor Lock-in**        | Yes (AWS-specific)                                      | No (multi-cloud & hybrid supported)                 | No                                          |
 | **Use Case Fit**          | AWS-native workloads, simpler operations, rapid scaling | Enterprise multi-cloud, complex distributed systems | Simple apps, small teams needing fast setup |
 
+---
+<img width="467" height="325" alt="image" src="https://github.com/user-attachments/assets/1d2123f9-6067-4d23-bf05-1d076e2bfb4e" />
+
+# 🔹 **Amazon ECS — Ultra Simple Notes**
+
+## **Cluster**
+
+* Group of compute resources (EC2 or Fargate).
+* ECS runs tasks **inside** a cluster.
+  (Think: a folder where tasks live)
+
+---
+
+## **Task Definition**
+
+A JSON **blueprint** that describes:
+
+* Container image
+* CPU / Memory
+* Ports
+* Environment variables
+* Volumes
+
+Reusable → You can create many tasks/services from the same definition.
+
+---
+
+## **Task**
+
+* **Actual running instance** of a task definition.
+* Contains **one or more containers** defined in the task definition.
+
+---
+
+## **Service**
+
+* Keeps a fixed number of tasks running.
+* Auto-replaces failed tasks.
+* Handles scaling.
+
+(Think: guarantees uptime)
+
+---
+
+## **Container**
+
+* The actual **Docker container** running inside a task.
+
+---
+
+## **Launch Types**
+
+How ECS runs your containers:
+
+* **EC2** → You manage EC2 instances.
+* **Fargate** → Serverless, AWS manages compute. (Very important)
+
+---
 
