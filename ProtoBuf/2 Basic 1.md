@@ -350,3 +350,88 @@ const account: Account = {
   phones: ["+91-9876543210", "+91-9123456789"],
 };
 ```
+# Enums in Protocol Buffers (Proto3)
+
+## Definition
+
+Enums represent a set of predefined constant values.
+
+### Syntax
+
+```
+enum <Name> {
+  <CONST_NAME> = <tag>;
+}
+```
+
+### Characteristics
+
+* **Keyword:** `enum`
+* **Default value:** The **first value** in the enum.
+* **Tag rule:**
+
+  * The **first tag must be 0** (required in proto3).
+  * This rule is **specific to enums**; other fields start from tag 1.
+
+---
+
+## Example: Adding Eye Color
+
+### Enum Definition
+
+```proto
+syntax = "proto3";
+
+enum EyeColor {
+  EYE_COLOR_UNSPECIFIED = 0;
+  EYE_COLOR_GREEN = 1;
+  EYE_COLOR_BLUE = 2;
+  EYE_COLOR_BROWN = 3;
+}
+```
+
+### Message Using the Enum
+
+```proto
+message Account {
+  uint32 id = 1;
+  string name = 2;
+
+  repeated string phones = 6;
+  EyeColor eye_color = 7;
+}
+```
+
+---
+
+## JSON Example (for debugging or gateway outputs)
+
+```json
+{
+  "id": 101,
+  "name": "Nikhil",
+  "phones": ["+91-9876543210"],
+  "eyeColor": "EYE_COLOR_GREEN"
+}
+```
+
+If no value is provided:
+
+```json
+{
+  "eyeColor": "EYE_COLOR_UNSPECIFIED"
+}
+```
+
+---
+
+## TypeScript Example
+
+```ts
+const account: Account = {
+  id: 101,
+  name: "Nikhil",
+  phones: ["+91-9876543210"],
+  eyeColor: EyeColor.EYE_COLOR_BLUE
+};
+```
