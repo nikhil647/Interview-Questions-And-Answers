@@ -245,6 +245,15 @@ debug info, experimental flags, internal tracking.
 you may safely assign **all fields** tag numbers in **1–15**
 because there is no downside and it maximizes efficiency.
 
+### **Critical Rule: Never Renumber Tags**
+
+Once a field has a tag number and is used in production, **you must never change, move, or reuse that tag**.
+You may **only add new fields with new tag numbers**.
+This preserves backward and forward compatibility.
+
+---
+If you want it even shorter:
+**After release: tags are permanent; only add new ones.**
 ---
 
 ## 3. Example (10 fields, all assigned 1–10)
