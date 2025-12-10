@@ -279,5 +279,74 @@ message User {
 * Recommended when schema is small and stable
 ---
 
+# Repeated Fields in Protocol Buffers (Proto3)
 
+## Definition
 
+A **repeated field** represents a list of values of the same type.
+
+### Syntax
+
+```
+repeated <type> <name> = <tag>;
+```
+
+### Characteristics
+
+* **Value:** Can store 0 or more elements.
+* **Default value:** Empty list `[]`.
+* **Ordering:** Order is preserved.
+
+---
+
+## Example: Adding Phone Numbers
+
+### Proto Definition
+
+```proto
+syntax = "proto3";
+
+message Account {
+  uint32 id = 1;
+  string name = 2;
+
+  repeated string phones = 6;
+}
+```
+
+---
+
+## JSON Example (e.g., gRPC-Gateway or debugging)
+
+```json
+{
+  "id": 101,
+  "name": "Nikhil",
+  "phones": [
+    "+91-9876543210",
+    "+91-9123456789"
+  ]
+}
+```
+
+If no phone numbers are provided:
+
+```json
+{
+  "id": 101,
+  "name": "Nikhil",
+  "phones": []
+}
+```
+
+---
+
+## TypeScript Example
+
+```ts
+const account: Account = {
+  id: 101,
+  name: "Nikhil",
+  phones: ["+91-9876543210", "+91-9123456789"],
+};
+```
