@@ -205,5 +205,70 @@ You wasted **10 MB** just because of a poor tag assignment.
   * 1–15 → 1 byte
   * 16–2047 → 2 bytes
 * Optimise based on how often a field appears in real data.
+---
+
+Here is a **clean, minimal, production-ready summary** you can put directly in your notes, including the last example as a reference.
 
 ---
+
+# ProtoBuf Tag Numbering – Thumb Rules
+
+## 1. Tag size logic (practical view)
+
+* Tags **1–15** always produce the **smallest encoded size (1 byte)**.
+* Tags **16–2047** produce **2-byte** keys.
+* Tags **2048+** produce **3+ byte** keys.
+
+Smaller tag numbers → smaller payload.
+
+---
+
+## 2. Thumb Rules for Choosing Tag Numbers
+
+### Rule 1 — Put the **most frequently sent fields** in **1–15**
+
+Examples:
+id, name, email, timestamps, status, type.
+
+### Rule 2 — Put regular/medium-frequency fields in **16–2047**
+
+Examples:
+address, description, metadata, price.
+
+### Rule 3 — Put rarely-used or optional fields in **2048+**
+
+Examples:
+debug info, experimental flags, internal tracking.
+
+### Rule 4 — If your entire message has **≤ 15 fields**,
+
+you may safely assign **all fields** tag numbers in **1–15**
+because there is no downside and it maximizes efficiency.
+
+---
+
+## 3. Example (10 fields, all assigned 1–10)
+
+```
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string avatar = 4;
+  string country = 5;
+  string city = 6;
+  string bio = 7;
+  int32 followers = 8;
+  int32 following = 9;
+  bool isPremium = 10;
+}
+```
+
+* Total fields: 10
+* All fit within **1–15**
+* All get the **1-byte tag cost**, which is optimal
+* Recommended when schema is small and stable
+---
+
+
+
