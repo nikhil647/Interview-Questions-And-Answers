@@ -435,3 +435,37 @@ const account: Account = {
   eyeColor: EyeColor.EYE_COLOR_BLUE
 };
 ```
+
+# Comments in Protocol Buffers
+
+## Types of Comments
+
+### Single-line Comment
+
+Use `//` for short, one-line explanations.
+
+```proto
+// This is a single-line comment
+string name = 1;
+```
+
+### Multi-line Comment
+
+Use `/* ... */` for longer descriptions.
+
+```proto
+/*
+ Multi-line comments are useful
+ when providing detailed explanations.
+*/
+uint32 id = 1;
+```
+
+---
+
+## Important Notes
+
+* Comments help document your schema and make messages easier to understand.
+* Comments placed **above fields, enums, or messages** are also used by tooling to generate documentation.
+* Both comment types are ignored by the compiler.
+
