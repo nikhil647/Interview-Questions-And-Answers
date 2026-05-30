@@ -1,0 +1,94 @@
+# ☁️ What is the Cloud?
+
+---
+
+## ⚡ Analogy: Electricity Revolution
+
+### 🕰️ 100 Years Ago
+- Large enterprises built their own **power plants** near factories
+- Managed electricity generation themselves
+
+---
+
+### 🏙️ Today
+- We don’t build power plants anymore
+- We simply:
+  - Plug devices into sockets
+  - Consume electricity from the **power grid**
+
+---
+
+## 💡 Key Insight
+
+> Cloud computing brings the **same revolution to IT infrastructure** as electricity did to power.
+
+---
+
+## ❓ Key Question
+
+> Why buy infrastructure when you can rent it?
+
+---
+
+# ☁️ What is Cloud Computing?
+
+> Cloud = Renting IT infrastructure (servers, storage, databases) over the internet
+
+---
+
+## 🧠 Simple Definition
+
+> Cloud is **someone else’s infrastructure** that you use when needed.
+
+- You don’t own servers  
+- You don’t maintain them  
+- You just use them  
+
+---
+
+# 🔑 Core Concepts of Cloud
+
+---
+
+## ⚡ 1. On-Demand Access
+
+- Instantly get resources when needed:
+  - Servers
+  - Storage
+  - Databases
+
+✅ No waiting for weeks/months  
+✅ Provision in minutes  
+
+---
+
+## 📈 2. Elasticity
+
+> Scale resources up or down based on demand
+
+- Increase servers during high traffic  
+- Decrease when demand is low  
+
+✅ No over-provisioning  
+✅ No under-provisioning  
+
+---
+
+## 💵 3. Pay-as-you-go
+
+- Pay only for what you use
+- No upfront investment
+
+✅ Similar to electricity billing  
+✅ Cost-efficient  
+
+---
+
+# 📌 Key Takeaway
+
+> Cloud transforms IT infrastructure into a **utility service**:
+- Just like electricity ⚡
+- Available on demand
+- Paid based on usage
+
+---
